@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'marmut_app',
+    'marmut_playlist',
+    'marmut_podcast',
+    'marmut_album',
+    'marmut_paket_download_song',
 ]
 
 MIDDLEWARE = [
