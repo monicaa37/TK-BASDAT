@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>CREATE PODCAST</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+<!-- ##### Header Area Start ##### -->
+<header class="header-area">
+    <!-- Navbar Area -->
+    <div class="oneMusic-main-menu">
+        <div class="classy-nav-container breakpoint-off">
+            <div class="container">
+                <!-- Menu -->
+                <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                    <!-- Nav brand -->
+                    <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler"><span></span><span></span><span></span></span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- Close Button -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul>
+                                <!-- nanti link nya diganti -->
+                                <li><a href="index.html">Dashboard</a></li>
+                                <li><a href="#">Pages</a>
+                                    <ul class="dropdown">
+                                        <li><a href="index.html">Search Bar</a></li>
+                                        <li><a href="albums-store.html">Albums</a></li>
+                                        <li><a href="event.html">Kelola Playlist</a></li>
+                                        <li><a href="blog.html">Langganan Paket</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Kelola</a>
+                                    <ul class="dropdown">
+                                        <li><a href="albums-store.html">Downloaded Songs</a></li>
+                                        <li><a href="event.html">Podcast</a></li>
+                                        <li><a href="blog.html">Album & Songs</a></li>
+                                        <li><a href="contact.html">Album</a></li>
+                                        <li><a href="contact.html">Cek Royalti</a></li>
+                                    </ul>
+                                </li>    
+                            </ul>
+
+                            <!-- Login/Register & Cart Button -->
+                            <div class="login-register-cart-button d-flex align-items-center">
+                                <!-- Login/Register --> 
+                                 <!-- nanti link nya diganti --> 
+                                <div class="login-register-btn mr-50">
+                                    <a href="login.html" id="loginBtn">Logout</a>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                        <!-- Nav End -->
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+        <div class="bradcumbContent">
+            <p>Mari buat Podcast anda!</p>
+            <h2>CREATE PODCAST</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Login Area Start ##### -->
+    <section class="login-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="login-content">
+                        <!-- Login Form -->
+                        <div class="login-form">
+                            <form action="#" method="post">
+                                <div class="form-group">
+                                    <label for="judulInput">Judul:</label>
+                                    <input type="text" class="form-control" id="judulInput" placeholder="Masukkan Judul" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Genre:</label><br>
+
+                                    <input type="checkbox" id="Pop" name="genre" value="Pop">
+                                    <label for="Pop">Pop</label><br>
+                                    
+                                    <input type="checkbox" id="Rock" name="genre" value="Rock">
+                                    <label for="Rock">Rock</label><br>
+                                    
+                                    <input type="checkbox" id="TalkShow" name="genre" value="Talk Show">
+                                    <label for="TalkShow">Talk Show</label><br>
+                                    
+                                    <input type="checkbox" id="Electronic" name="genre" value="Electronic">
+                                    <label for="Electronic">Electronic</label><br>
+                                    
+                                    <input type="checkbox" id="Jazz" name="genre" value="Jazz">
+                                    <label for="Jazz">Jazz</label><br>
+                                    
+                                    <input type="checkbox" id="HipHop" name="genre" value="Hip Hop">
+                                    <label for="HipHop">Hip Hop</label><br>
+                                    
+                                    <input type="checkbox" id="Blues" name="genre" value="Blues">
+                                    <label for="Blues">Blues</label><br>
+                                    
+                                    <input type="checkbox" id="Reggae" name="genre" value="Reggae">
+                                    <label for="Reggae">Reggae</label><br>
+                                    
+                                    <input type="checkbox" id="Country" name="genre" value="Country">
+                                    <label for="Country">Country</label><br>
+                                    
+                                    <input type="checkbox" id="Folk" name="genre" value="Folk">
+                                    <label for="Folk">Folk</label><br>
+                                    
+                                    <input type="checkbox" id="Classical" name="genre" value="Classical">
+                                    <label for="Classical">Classical</label><br>
+                                    
+                                    <input type="checkbox" id="R&B" name="genre" value="R&B">
+                                    <label for="R&B">R&B</label><br>
+                                    
+                                    <input type="checkbox" id="Metal" name="genre" value="Metal">
+                                    <label for="Metal">Metal</label><br>
+                                    
+                                    <input type="checkbox" id="Alternative" name="genre" value="Alternative">
+                                    <label for="Alternative">Alternative</label><br>
+                                    
+                                    <input type="checkbox" id="Indie" name="genre" value="Indie">
+                                    <label for="Indie">Indie</label><br>
+                                    
+                                    <input type="checkbox" id="Soul" name="genre" value="Soul">
+                                    <label for="Soul">Soul</label><br>
+                                    
+                                    <input type="checkbox" id="Funk" name="genre" value="Funk">
+                                    <label for="Funk">Funk</label><br>
+                                    
+                                    <input type="checkbox" id="Gospel" name="genre" value="Gospel">
+                                    <label for="Gospel">Gospel</label><br>
+                                    
+                                    <input type="checkbox" id="Punk" name="genre" value="Punk">
+                                    <label for="Punk">Punk</label><br>
+                                    
+                                    <input type="checkbox" id="Disco" name="genre" value="Disco">
+                                    <label for="Disco">Disco</label><br>
+                                    
+                                    <input type="checkbox" id="Ska" name="genre" value="Ska">
+                                    <label for="Ska">Ska</label><br>
+                                    
+                                    <input type="checkbox" id="Ambient" name="genre" value="Ambient">
+                                    <label for="Ambient">Ambient</label><br>
+                                    
+                                    <input type="checkbox" id="Techno" name="genre" value="Techno">
+                                    <label for="Techno">Techno</label><br>
+                                    
+                                    <input type="checkbox" id="Dubstep" name="genre" value="Dubstep">
+                                    <label for="Dubstep">Dubstep</label><br>
+                                    
+                                    <input type="checkbox" id="House" name="genre" value="House">
+                                    <label for="House">House</label><br>
+                                    
+                                    <input type="checkbox" id="Trance" name="genre" value="Trance">
+                                    <label for="Trance">Trance</label><br>
+                                    
+                                    <input type="checkbox" id="Chillout" name="genre" value="Chillout">
+                                    <label for="Chillout">Chillout</label><br>
+                                    
+                                    <input type="checkbox" id="Psychedelic" name="genre" value="Psychedelic">
+                                    <label for="Psychedelic">Psychedelic</label><br>
+                                    
+                                    <input type="checkbox" id="Progressive" name="genre" value="Progressive">
+                                    <label for="Progressive">Progressive</label><br>
+                                    
+                                    <input type="checkbox" id="Experimental" name="genre" value="Experimental">
+                                    <label for="Experimental">Experimental</label><br>
+                                    
+                                    <input type="checkbox" id="Acoustic" name="genre" value="Acoustic">
+                                    <label for="Acoustic">Acoustic</label><br>
+                                    
+                                    <input type="checkbox" id="Instrumental" name="genre" value="Instrumental">
+                                    <label for="Instrumental">Instrumental</label><br>
+                                    
+                                    <input type="checkbox" id="Latin" name="genre" value="Latin">
+                                    <label for="Latin">Latin</label><br>
+                                    
+                                    <input type="checkbox" id="Samba" name="genre" value="Samba">
+                                    <label for="Samba">Samba</label><br>
+                                    
+                                    <input type="checkbox" id="BossaNova" name="genre" value="Bossa Nova">
+                                    <label for="BossaNova">Bossa Nova</label><br>
+                                    
+                                    <input type="checkbox" id="Flamenco" name="genre" value="Flamenco">
+                                    <label for="Flamenco">Flamenco</label><br>
+                                    
+                                    <input type="checkbox" id="Mariachi" name="genre" value="Mariachi">
+                                    <label for="Mariachi">Mariachi</label><br>
+                                    
+                                    <input type="checkbox" id="Tango" name="genre" value="Tango">
+                                    <label for="Tango">Tango</label><br>
+                                    
+                                    <input type="checkbox" id="Bollywood" name="genre" value="Bollywood">
+                                    <label for="Bollywood">Bollywood</label><br>
+                                    
+                                    <input type="checkbox" id="K-Pop" name="genre" value="K-Pop">
+                                    <label for="K-Pop">K-Pop</label><br>
+                                    
+                                    <input type="checkbox" id="J-Pop" name="genre" value="J-Pop">
+                                    <label for="J-Pop">J-Pop</label><br>
+                                    
+                                    <input type="checkbox" id="Reggaeton" name="genre" value="Reggaeton">
+                                    <label for="Reggaeton">Reggaeton</label><br>
+                                    
+                                    <input type="checkbox" id="Trap" name="genre" value="Trap">
+                                    <label for="Trap">Trap</label><br>
+                                    
+                                    <input type="checkbox" id="DrumAndBass" name="genre" value="Drum and Bass">
+                                    <label for="DrumAndBass">Drum and Bass</label><br>
+                                    
+                                    <input type="checkbox" id="Dub" name="genre" value="Dub">
+                                    <label for="Dub">Dub</label><br>
+                                    
+                                    <input type="checkbox" id="Electroswing" name="genre" value="Electroswing">
+                                    <label for="Electroswing">Electroswing</label><br>
+                                    
+                                    <input type="checkbox" id="Fusion" name="genre" value="Fusion">
+                                    <label for="Fusion">Fusion</label><br>
+                                    
+                                    <input type="checkbox" id="Garage" name="genre" value="Garage">
+                                    <label for="Garage">Garage</label><br>
+                                    
+                                    <input type="checkbox" id="Grime" name="genre" value="Grime">
+                                    <label for="Grime">Grime</label><br>
+                                    
+                                    <input type="checkbox" id="Hardcore" name="genre" value="Hardcore">
+                                    <label for="Hardcore">Hardcore</label><br>
+                                    
+                                    <input type="checkbox" id="Nu-Disco" name="genre" value="Nu-Disco">
+                                    <label for="Nu-Disco">Nu-Disco</label><br>
+                                    
+                                    <input type="checkbox" id="Post-punk" name="genre" value="Post-punk">
+                                    <label for="Post-punk">Post-punk</label><br>
+                                    
+                                    <input type="checkbox" id="Shoegaze" name="genre" value="Shoegaze">
+                                    <label for="Shoegaze">Shoegaze</label><br>
+                                    
+                                    <input type="checkbox" id="Synthwave" name="genre" value="Synthwave">
+                                    <label for="Synthwave">Synthwave</label><br>
+                                    
+                                    <input type="checkbox" id="Vaporwave" name="genre" value="Vaporwave">
+                                    <label for="Vaporwave">Vaporwave</label><br>
+                                    
+                                    <input type="checkbox" id="Bluegrass" name="genre" value="Bluegrass">
+                                    <label for="Bluegrass">Bluegrass</label><br>
+                                    
+                                    <input type="checkbox" id="Celtic" name="genre" value="Celtic">
+                                    <label for="Celtic">Celtic</label><br>
+                                    
+                                    <input type="checkbox" id="Americana" name="genre" value="Americana">
+                                    <label for="Americana">Americana</label><br>
+                                    
+                                    <input type="checkbox" id="WorldMusic" name="genre" value="World Music">
+                                    <label for="WorldMusic">World Music</label><br>
+                                    
+                                    <input type="checkbox" id="NewAge" name="genre" value="New Age">
+                                    <label for="NewAge">New Age</label><br>
+                                    
+                                
+                                    <!-- Add more checkboxes for other genres similarly -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="durasiInput">Durasi:</label>
+                                    <input type="text" class="form-control" id="durasiInput" placeholder="Masukkan Durasi" required>
+                                </div>                    
+                                <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Login Area End ##### -->
+
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/bootstrap/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="js/plugins/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+</body>
+
+</html>
