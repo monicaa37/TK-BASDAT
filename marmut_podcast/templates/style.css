@@ -18,7 +18,18 @@
 body {
   font-family: "Archivo Narrow", sans-serif;
   font-size: 14px; }
+.row {
+    display: flex;
+    align-items: center;
+}
 
+.col-6 {
+    flex: 0 0 50%; /* Each column takes up 50% of the row */
+}
+
+.text-right {
+    text-align: right; /* Align content to the right */
+}
 h1,
 h2,
 h3,
