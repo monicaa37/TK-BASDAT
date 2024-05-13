@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,11 +13,10 @@
     <title>REGISTRATION</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body>
@@ -62,10 +62,10 @@
                                 <!-- Login/Register --> 
                                  <!-- nanti link nya diganti --> 
                                 <div class="login-register-btn mr-50">
-                                    <a href="login.html" id="loginBtn">Login</a>
+                                    <a href="login" id="loginBtn">Login</a>
                                 </div>
                                 <div class="login-register-btn mr-50">
-                                    <a href="registration-page.html" id="loginBtn">Register</a>
+                                    <a href="registration-page" id="loginBtn">Register</a>
                                 </div>  
                             </div>
                         </div>
@@ -80,7 +80,7 @@
 <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
             <p>Registrasi diri anda!</p>
             <h2>Registrasi Pengguna</h2>
@@ -159,15 +159,15 @@
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="{% static 'js/active.js' %}"></script>
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>CREATE EPISODE</title>
+    <title>Create Album</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
@@ -34,9 +35,9 @@
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <!-- Navbar Area -->
-        <div class="oneMusic-main-menu">
+        <div class="oneMusic-main-menu"  style="background-color: black;">
             <div class="classy-nav-container breakpoint-off">
-                <div class="container">
+                <div class="container" >
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
@@ -59,6 +60,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
+                                    <!-- Search Bar -->
                                     <li>
                                         <form class="search-form" action="#" method="get">
                                             <input type="text" name="search" id="search" placeholder="Search...">
@@ -66,14 +68,15 @@
                                         </form>
                                     </li>
                                     <!-- nanti link nya diganti -->
-                                    <li><a href="index.">Dashboard</a></li>
+                                    <li><a href="index.html">Dashboard</a></li>
                                     <li><a href="#">Chart</a>
-                                    <li><a href="kelola_playlist">Manage Playlist</a></li>
-                                    <li><a href="#">Manage Podcast</a>
-                                    <li><a href="#">Premium Plan</a>
-                                    <li><a href="login" id="loginBtn">Logout</a></li>
-                                    </ul>   
-                                </div>
+                                    <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                    <li><a href="#">Manage Song & Album</a>
+                                    <li><a href="#">Royalti</a>
+                                    <li><a href="#">Premium Plan</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                                    
                             </div>
                             <!-- Nav End -->
 
@@ -85,63 +88,62 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-    <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
-        <div class="bradcumbContent">
-            <p>Mari tambahkan episode baru!</p>
-            <h2>CREATE EPISODE</h2>
-        </div>
-    </section>
-    <!-- ##### Breadcumb Area End ##### -->
-
-    <!-- ##### Login Area Start ##### -->
-    <section class="login-area section-padding-100">
+    <!-- ##### Create Album Area ##### -->
+    <section class="login-area mt-70 mb-70" style="width: 100%; max-width: 100%;">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
+                <div class="col-12 col-lg-8 mt-50">
                     <div class="login-content">
+                        <h3>Create Album</h3>
                         <!-- Login Form -->
                         <div class="login-form">
                             <form action="#" method="post">
-                                <div class="form-group">
-                                    <label for="judulInput">Podcast: Podcast1</label>
+                                <div class="form-group" style="margin-bottom: 20px;">
+                                    <h5 for="judul">Judul:</h5>
+                                    <div class="contact-form-area">
+                                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Enter the title" required>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="judulInput">Judul</label>
-                                    <input type="text" class="form-control" id="judulInput" placeholder="Masukkan Judul" required>
+                                    <h5 for="label">Label:</h5>
+                                    <div class="contact-form-area">
+                                        <select class="form-control" id="label" name="label" required>
+                                            <!-- Option 1: Hardcoded Options -->
+                                            <option value="label1">Label 1</option>
+                                            <option value="label2">Label 2</option>
+                                            <option value="label3">Label 3</option>
+                                            <!-- Option 2: Populate from Database (if available) -->
+                                            <!-- <option value="label_id">Label Name</option> -->
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="deskripsiInput">Deskripsi:</label>
-                                    <input type="text" class="form-control" id="deskripsiInput" placeholder="Masukkan Deskripsi" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="durasiInput">Durasi:</label>
-                                    <input type="text" class="form-control" id="durasiInput" placeholder="Masukkan Durasi" required>
-                                </div>                    
                                 <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
                             </form>
                         </div>
-                        
-                        
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ##### Login Area End ##### -->
+    <!-- ##### Create Album Area End ##### -->
 
+    <!-- ##### Footer Area Start ##### -->
+    
+    <!-- ##### Footer Area Start ##### -->
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
     <!-- Popper js -->
-    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
     <!-- All Plugins js -->
-    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
-    <script src="{% static 'js/active.js' %}"></script>
+    <script src="js/active.js"></script>
 </body>
 
 </html>
+
+{% load static %}
