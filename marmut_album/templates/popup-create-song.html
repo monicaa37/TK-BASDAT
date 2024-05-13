@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +14,10 @@
     <title>Create Song</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
@@ -182,3 +184,5 @@
     <!-- multiselect -->
     <script src="multiselect-dropdown.js" ></script>
 </body>
+
+{% load static %}
