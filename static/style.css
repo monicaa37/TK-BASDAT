@@ -18,7 +18,18 @@
 body {
   font-family: "Archivo Narrow", sans-serif;
   font-size: 14px; }
+.row {
+    display: flex;
+    align-items: center;
+}
 
+.col-6 {
+    flex: 0 0 50%; /* Each column takes up 50% of the row */
+}
+
+.text-right {
+    text-align: right; /* Align content to the right */
+}
 h1,
 h2,
 h3,
@@ -60,6 +71,10 @@ img {
   height: auto;
   max-width: 100%; }
 
+  .equal-width {
+    width: 150px; /* Adjust the width as needed */
+    margin-right: 5px; /* Adjust margin between buttons */
+}
 /* :: 3.1.0 Spacing */
 .mt-15 {
   margin-top: 15px !important; }

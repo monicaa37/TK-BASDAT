@@ -12,10 +12,10 @@
     <title>PLAY PODCAST</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
@@ -101,7 +101,7 @@
                         <h2>PODCAST DETAIL</h2>
                     </div>
                     <div class="podcast-image text-center">
-                        <img src="img/core-img/Podcast-blog-6.jpg" alt="Podcast Image" style="max-width: 200px; max-height: 200px;">
+                        <img src="{% static 'img/core-img/Podcast-blog-6.jpg' %}" alt="Podcast Image" style="max-width: 200px; max-height: 200px;">
                     </div>        
                     <div class="podcast-info">
                         <p><strong>Judul:</strong> Podcast1</p>
@@ -164,18 +164,17 @@
     </section>
     <!-- ##### Daftar Episode Area End ##### -->
 
-
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="{% static 'js/active.js' %}"></script>
 </body>
 
 </html>
