@@ -1,0 +1,207 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Marmut</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                        <!-- Nav brand -->
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+                                    <!-- nanti link nya diganti -->
+                                    <li><a href="index.html">Dashboard</a></li>
+                                    <li><a href="#">Chart</a>
+                                    <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                    <li><a href="#">Premium Plan</a>
+                                    <li><a href="#">Logout</a>
+                                </ul>
+
+                                    
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Hero Area Start ##### -->
+    <section class="hero-area" style="height: 600px;">
+        <div class="hero-slides owl-carousel" style="height: 600px;">
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide d-flex align-items-center justify-content-center" style="height: 600px;">
+                <!-- Slide Img -->
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-1.jpg);"></div>
+                <!-- Slide Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hero-slides-content text-center">
+                                <h6 data-animation="fadeInUp" data-delay="100ms">Welcome to</h6>
+                                <h2 data-animation="fadeInUp" data-delay="300ms">MARMUT <span>MARMUT</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide d-flex align-items-center justify-content-center" style="height: 600px;">
+                <!-- Slide Img -->
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-2.jpg);"></div>
+                <!-- Slide Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hero-slides-content text-center">
+                                <h6 data-animation="fadeInUp" data-delay="100ms">Welcome to</h6>
+                                <h2 data-animation="fadeInUp" data-delay="300ms">MARMUT<span>MARMUT</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
+
+    <!-- ##### Profile Area Start ##### -->
+    <section class="latest-albums-area mt-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading style-2" style="margin-bottom: 35px;">
+                        <h2>My Profile</h2>
+                        <h4 style="margin-top:45px;">John Doe - john.doe@example.com</h4>
+                        <h5>Pengguna Biasa</h5>
+                    </div>  
+                    <div class="row justify-content-center">
+                        <div class="">
+                            <div class="ablums-text text-center" style="margin-bottom: 2px;">
+                                <p style="margin-bottom: 2px;">Lives in Jakarta</p>
+                                <p style="margin-bottom: 2px;">Male</p>
+                                <p>Born in Jakarta, 24th May 2000</p>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Profile Area End ##### -->
+
+    <!-- ##### Playlist Area Start ##### -->
+    <section class="miscellaneous-area mt-50">
+        <div class="container">
+
+                <!-- ***** Daftar Playlist ***** -->
+                <div class="mb-50" style="min-width: auto;">
+                    <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                        <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                            <h2>My Playlists</h2>
+                        </div>
+
+                        <!-- Playlist1 -->
+                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                            <div class="first-part d-flex align-items-center">
+                                <div class="content-">
+                                    <h6>Playlist1</h6>
+                                    <p>Pembuat1</p>
+                                </div>
+                            </div>
+                            <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                        </div>
+
+                        <!-- Playlist2 -->
+                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                            <div class="first-part d-flex align-items-center">
+                                <div class="content-">
+                                    <h6>Playlist2</h6>
+                                    <p>Pembuat2</p>
+                                </div>
+                            </div>
+                            <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <!-- ##### Playlist Area End ##### -->
+
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>
