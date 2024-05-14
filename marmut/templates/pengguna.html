@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar - User (Logged In)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome untuk ikon -->
+    <style>
+        /* CSS Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Warna latar belakang */
+        }
+
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border-bottom: 3px solid #666; /* Garis bawah pada Navbar */
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s; /* Efek transisi perubahan warna */
+        }
+
+        nav ul li a:hover {
+            color: #ffd700; /* Warna kuning saat dihover */
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333; /* Warna teks judul */
+        }
+
+        .menu-group {
+            margin-top: 20px;
+        }
+
+        .menu-group h2 {
+            color: #555; /* Warna teks judul submenu */
+            margin-bottom: 10px;
+        }
+
+        .submenu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .submenu li {
+            margin-bottom: 10px;
+        }
+
+        .submenu li a {
+            color: #666; /* Warna teks submenu */
+            text-decoration: none;
+            transition: color 0.3s; /* Efek transisi perubahan warna */
+            display: flex;
+            align-items: center; /* Menyamakan vertikal ikon dan teks */
+        }
+
+        .submenu li a:hover {
+            color: #333; /* Warna teks submenu saat dihover */
+        }
+
+        .submenu li a i {
+            margin-right: 5px; /* Jarak antara ikon dan teks */
+        }
+
+        .logout-btn {
+            background-color: #dc3545; /* Warna merah untuk tombol logout */
+            color: #fff;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Efek transisi perubahan warna latar belakang */
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333; /* Warna merah tua saat tombol logout dihover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    <!-- Content Area -->
+    <div class="container">
+        <h1>Welcome back, User!</h1>
+        <div class="menu-group">
+            <h2>Main Menu</h2>
+            <ul class="submenu">
+                <li><a href="#"><i class="fas fa-chart-line"></i>Chart</a></li>
+                <li><a href="#"><i class="fas fa-search"></i>Search Bar</a></li>
+                <li><a href="#"><i class="fas fa-list-alt"></i>Kelola Playlist</a></li>
+                <li><a href="#"><i class="fas fa-database"></i>Langganan Paket</a></li>
+                <li><a href="#"><i class="fas fa-download"></i>Kelola Downloaded Songs (Premium)</a></li>
+                <li><a href="#"><i class="fas fa-podcast"></i>Kelola Podcast (Podcaster)</a></li>
+                <li><a href="#"><i class="fas fa-music"></i>Kelola Album & Songs (Artist/Songwriter)</a></li>
+                <li><a href="#"><i class="fas fa-compact-disc"></i>Kelola Album (Label)</a></li>
+                <li><a href="#"><i class="fas fa-money-check-alt"></i>Cek Royalti</a></li>
+            </ul>
+        </div>
+        <button class="logout-btn">Logout</button>
+    </div>
+
+</body>
+
+</html>

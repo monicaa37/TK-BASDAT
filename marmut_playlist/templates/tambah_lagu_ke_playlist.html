@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>MARMUT</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/core-img/favicon.ico">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .action-column {
+            text-align: center;
+        }
+
+        .add-to-playlist-form-overlay {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .add-to-playlist-form {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .add-to-playlist-form h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .add-to-playlist-form h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .add-to-playlist-form label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .add-to-playlist-form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-buttons {
+            text-align: center;
+        }
+
+        .form-buttons button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .popup-message-overlay {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .popup-message {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .popup-message h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .popup-message-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .popup-message-buttons button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Navbar Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                        <!-- Nav brand -->
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt=""
+                                style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Menu -->
+                            <div class="classynav">
+                                <!-- Menu -->
+                                <ul>
+                                    <!-- Search Bar -->
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search"
+                                                placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+                                    <!-- nanti link nya diganti -->
+                                    <li><a href="index.html">Dashboard</a></li>
+                                    <li><a href="#">Chart</a>
+                                    <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                    <li><a href="#">Manage Album & Song</a>
+                                    <li><a href="#">Royalti</a>
+                                    <li><a href="#">Premium Plan</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Nav End -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Navbar Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img bg-overlay"
+        style="background-image: url(img/bg-img/breadcumb3.jpg);">
+        <div class="bradcumbContent">
+            <p>See what’s your playlist</p>
+            <h2>SONG DETAIL</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- ##### Song Detail Area Start ##### -->
+    <section class="song-detail-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="song-detail-content">
+                        <!-- Tidak menampilkan judul dan artist -->
+                        <h2>Judul: Song1</h2>
+                        <h3>Genre(s):</h3>
+                        <ul>
+                            <li>Genre1</li>
+                            <li>Genre2</li>
+                        </ul>
+                        <h3>Artist: Artist1</h3>
+                        <h3>Songwriter(s):</h3>
+                        <ul>
+                            <li>Songwriter1</li>
+                            <li>Songwriter2</li>
+                        </ul>
+                        <h3>Durasi: 3 menit</h3>
+                        <h3>Tanggal Rilis: 18/03/24</h3>
+                        <h3>Tahun: 2024</h3>
+                        <h3>Total Play: 0</h3>
+                        <h3>Total Downloads: 0</h3>
+                        <h3>Album: Album1</h3>
+                        <div class="separator">
+                            <hr>
+                            <span>▬▬▬▬▬▬▬▬▬▬▬▬⚫-----------------------------------------</span>
+                            <hr>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn btn-primary" onclick="openAddToPlaylistForm()">Play</button>
+                            <button class="btn btn-primary" onclick="openAddToPlaylistForm()">Add to Playlist</button>
+                            <button class="btn btn-primary" onclick="downloadSong()">Download</button>
+                            <button class="btn btn-primary" onclick="openAddToPlaylistForm()">Kembali</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Song Detail Area End ##### -->
+
+    <!-- Add to Playlist Form Popup -->
+    <div class="add-to-playlist-form-overlay" id="addToPlaylistFormOverlay">
+        <div class="add-to-playlist-form">
+            <h2>ADD SONG TO USER PLAYLIST</h2>
+            <h3>Judul: Song1</h3>
+            <h3>Artist: Artist1</h3>
+            <form action="#" method="post" id="addToPlaylistForm" onsubmit="return addToPlaylist()">
+                <label for="playlist">Playlist:</label>
+                <select name="playlist" id="playlist">
+                    <!-- Populate this dropdown with user playlists -->
+                    <option value="playlist1">Playlist1</option>
+                    <option value="playlist2">Playlist2</option>
+                    <!-- Add more options as needed -->
+                </select>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-success">TAMBAH</button>
+                    <button type="button" class="btn btn-warning" onclick="closeAddToPlaylistForm()">KEMBALI</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup Message -->
+    <div class="popup-message-overlay" id="popupMessageOverlay">
+        <div class="popup-message">
+            <h2>Berhasil menambahkan Lagu dengan judul ‘Song1’ ke ‘Playlist1’!</h2>
+            <div class="popup-message-buttons">
+                <button class="btn btn-primary" onclick="goToPlaylist()">KE PLAYLIST</button>
+                <button class="btn btn-warning" onclick="closePopupMessage()">KEMBALI</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Message Download -->
+    <div class="popup-message-overlay" id="popupMessageOverlayDownload">
+        <div class="popup-message">
+            <h2>Berhasil mengunduh Lagu dengan judul ‘Song1’!</h2>
+            <div class="popup-message-buttons">
+                <button class="btn btn-primary" onclick="goToDownloadList()">Ke Daftar Download</button>
+                <button class="btn btn-warning" onclick="closePopupMessageDownload()">Kembali</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Javascript Script -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/plugins/plugins.js"></script>
+    <script src="js/active.js"></script>
+
+    <script>
+        function openAddToPlaylistForm() {
+            document.getElementById("addToPlaylistFormOverlay").style.display = "block";
+        }
+
+        function closeAddToPlaylistForm() {
+            document.getElementById("addToPlaylistFormOverlay").style.display = "none";
+        }
+
+        function downloadSong() {
+            // Logic untuk mengunduh lagu
+            // Misalnya, Anda dapat mengarahkan pengguna ke tautan unduhan lagu atau mengaktifkan unduhan otomatis.
+            // Di sini, saya hanya menutup pesan popup.
+            document.getElementById("popupMessageOverlayDownload").style.display = "block";
+            return false;
+        }
+
+        function addToPlaylist() {
+            // Logic to add song to playlist
+            // Show success message
+            document.getElementById("popupMessageOverlay").style.display = "block";
+            return false; // Prevent form submission
+        }
+
+        function goToPlaylist() {
+            // Redirect to playlist page
+            // Replace "#" with the actual URL of the playlist page
+            window.location.href = "#";
+        }
+
+        function goToDownloadList() {
+            // Redirect to download list page
+            // Replace "#" with the actual URL of the download list page
+            window.location.href = "#";
+        }
+
+        function closePopupMessage() {
+            document.getElementById("popupMessageOverlay").style.display = "none";
+        }
+
+        function closePopupMessageDownload() {
+            document.getElementById("popupMessageOverlayDownload").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
