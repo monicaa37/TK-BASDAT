@@ -14,7 +14,6 @@ def show_index(request):
         'name': 'Pak Bepe',
         'class': 'PBP A'
     }
-
     return render(request, "index.html", context)
 
 def show_dashboard_pengguna_biasa(request):
