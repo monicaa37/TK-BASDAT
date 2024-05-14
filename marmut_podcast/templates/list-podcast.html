@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>LIST PODCAST</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                        <!-- Nav brand -->
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+                                    <!-- nanti link nya diganti -->
+                                    <li><a href="index">Dashboard</a></li>
+                                    <li><a href="#">Chart</a>
+                                    <li><a href="kelola_playlist">Manage Playlist</a></li>
+                                    <li><a href="#">Manage Podcast</a>
+                                    <li><a href="#">Premium Plan</a>
+                                    <li><a href="login" id="loginBtn">Logout</a></li>
+                                    </ul>   
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
+        <div class="bradcumbContent">
+            <p>Lihat yang terbaru</p>
+            <h2>Podcast</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+    <div style="margin-bottom: 50px;"></div>
+
+    <!-- ##### Daftar Episode Area Start ##### -->
+    <section class="daftar-episode-area section-padding-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="episode-table-content">
+                        <h2>DAFTAR PODCAST MARMUT</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Judul</th>
+                                    <th scope="col">Jumlah Episode</th>
+                                    <th scope="col">Total Durasi</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Podcast1</td>
+                                    <td>0</td>
+                                    <td>0 menit</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Episode Actions">
+                                            <a href="list-episode-podcast" class="btn btn-primary">Lihat Daftar Episode</a>
+                                            <a href="create-episode" class="btn btn-success">Tambah Episode</a>
+                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Podcast2</td>
+                                    <td>2</td>
+                                    <td>4 menit</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Episode Actions">
+                                            <a href="#" class="btn btn-primary">Lihat Daftar Episode</a>
+                                            <a href="#" class="btn btn-success">Tambah Episode</a>
+                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Tambahkan baris lain sesuai kebutuhan -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Daftar Episode Area End ##### -->
+
+    
+    <!-- ##### Buy Now Area End ##### -->
+
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>

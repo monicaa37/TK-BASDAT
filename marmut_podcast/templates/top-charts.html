@@ -1,0 +1,517 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>TOP CHARTS</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                        <!-- Nav brand -->
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <!-- Search Bar -->
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+                                    <!-- nanti link nya diganti -->
+                                    <li><a href="index">Dashboard</a></li>
+                                    <li><a href="#">Chart</a>
+                                    <li><a href="kelola_playlist">Manage Playlist</a></li>
+                                    <li><a href="#">Manage Song & Album</a>
+                                    <li><a href="#">Royalti</a>
+                                    <li><a href="#">Premium Plan</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+
+
+
+
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Breadcumb Area Start ##### -->
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
+        <div class="bradcumbContent">
+            <p>Lihat yang terbaru</p>
+            <h2>CHART LIST</h2>
+        </div>
+    </section>
+    <!-- ##### Breadcumb Area End ##### -->
+
+    <!-- Add space here -->
+    <div style="margin-bottom: 50px;"></div>
+
+    <!-- ##### Add Area Start ##### -->
+    <div class="add-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="adds">
+                        <!-- Text added on top of the image -->
+                        <div class="text-overlay">
+                            <h3>Daily Top 20, Weekly Top 20, Monthly Top 20, Yearly Top 20.</h3>
+                            <p>Lihat lagu favorit kita!</p>
+                        </div>
+                        <!-- Image with link -->
+                        <a href="#"><img src="{% static 'img/bg-img/bg-1.jpg' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Add Area End ##### -->
+
+    <!-- ##### Song Area Start ##### -->
+    <div class="one-music-songs-area mb-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="daily-tab" data-toggle="tab" href="#daily" role="tab" aria-controls="daily" aria-selected="true">Daily Top 20</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="weekly-tab" data-toggle="tab" href="#weekly" role="tab" aria-controls="weekly" aria-selected="false">Weekly Top 20</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="monthly-tab" data-toggle="tab" href="#monthly" role="tab" aria-controls="monthly" aria-selected="false">Monthly Top 20</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="yearly-tab" data-toggle="tab" href="#yearly" role="tab" aria-controls="yearly" aria-selected="false">Yearly Top 20</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="daily" role="tabpanel" aria-labelledby="daily-tab">
+                        <!-- ##### Chart Top ##### -->
+                        <div class="one-music-songs-area mb-70">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <div class="adds">
+                                            <!-- Text added on top of the image -->
+                                            <div class="text-overlay">
+                                                <h3>Daily Top 20</h3>
+                                                <p>Lihat favorit harian!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s1.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Sakit Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s2.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Single Terbaru Rama</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s3.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Penenang Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="text-overlay">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3>Actions:</h3>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <a href="chart-detail" class="btn oneMusic-btn">Lihat Daftar Lagu lainya!<i class="fa fa-angle-double-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ##### Chart Top ##### -->
+
+                        </div>
+                        <div class="tab-pane fade" id="weekly" role="tabpanel" aria-labelledby="weekly-tab">
+                        <!-- ##### Chart Top ##### -->
+                        <div class="one-music-songs-area mb-70">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <div class="adds">
+                                            <!-- Text added on top of the image -->
+                                            <div class="text-overlay">
+                                                <h3>Weekly Top 20</h3>
+                                                <p>Lihat favorit mingguan!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s1.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Sakit Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s2.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Single Terbaru Rama</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s3.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Penenang Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="text-overlay">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3>Actions:</h3>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <a href="chart-detail" class="btn oneMusic-btn">Lihat Daftar Lagu lainya!<i class="fa fa-angle-double-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ##### Chart Top ##### -->
+
+                        </div>
+                        <div class="tab-pane fade" id="monthly" role="tabpanel" aria-labelledby="monthly-tab">
+                        <!-- ##### Chart Top ##### -->
+                        <div class="one-music-songs-area mb-70">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <div class="adds">
+                                            <!-- Text added on top of the image -->
+                                            <div class="text-overlay">
+                                                <h3>Monthly Top 20</h3>
+                                                <p>Lihat favorit bulanan!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s1.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Sakit Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s2.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Single Terbaru Rama</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s3.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Penenang Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12">
+                                        <div class="text-overlay">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3>Actions:</h3>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <a href="chart-detail" class="btn oneMusic-btn">Lihat Daftar Lagu lainya!<i class="fa fa-angle-double-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ##### Chart Top ##### -->
+
+                        </div>
+                        <div class="tab-pane fade" id="yearly" role="tabpanel" aria-labelledby="yearly-tab">
+                        <!-- ##### Chart Top ##### -->
+                        <div class="one-music-songs-area mb-70">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <div class="adds">
+                                            <!-- Text added on top of the image -->
+                                            <div class="text-overlay">
+                                                <h3>Yearly Top 20</h3>
+                                                <p>Lihat favorit tahunan!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s1.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Sakit Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s2.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Single Terbaru Rama</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Song Area -->
+                                    <div class="col-12">
+                                        <div class="single-song-area mb-30 d-flex flex-wrap align-items-end">
+                                            <div class="song-thumbnail">
+                                                <img src="{% static 'img/bg-img/s3.jpg' %}" alt="">
+                                            </div>
+                                            <div class="song-play-area">
+                                                <div class="song-name">
+                                                    <p>Lagu Penenang Hati</p>
+                                                </div>
+                                                <audio preload="auto" controls>
+                                                    <source src="{% static 'audio/dummy-audio.mp3' %}">
+                                                </audio>
+                                            </div>
+                                        </div>
+                                    </div>>
+
+
+                                    <div class="col-12">
+                                        <div class="text-overlay">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h3>Actions:</h3>
+                                                </div>
+                                                <div class="col-6 text-right">
+                                                    <a href="chart-detail" class="btn oneMusic-btn">Lihat Daftar Lagu lainya!<i class="fa fa-angle-double-right"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ##### Chart Top ##### -->
+                    
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Song Area End ##### -->
+
+    <div class="text-center">
+        <a href="#" class="btn oneMusic-btn mt-30">Kembali</a>
+    </div>
+
+    <div style="margin-bottom: 50px;"></div>
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>
