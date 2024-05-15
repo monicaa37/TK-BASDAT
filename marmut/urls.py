@@ -20,7 +20,5 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('marmut_app.urls')),
-    path('', include('marmut_podcast.urls')),
-    path('', include('marmut_playlist.urls')),
-
+    path('', include('marmut_album.urls')),
 ]
