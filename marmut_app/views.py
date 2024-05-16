@@ -85,3 +85,6 @@ def show_dashboard_label(request):
 
 def show_dashboard_podcaster(request):
     return render(request, "dashboard-podcaster.html")
+
+def show_dashboard(request):
+    return render(request, "dashboard.html")
