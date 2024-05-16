@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Values</title>
+</head>
+<body>
+    <h1>Nilai Cookie:</h1>
+    <ul>
+        <li>Nama: {{ request.COOKIES.nama }}</li>
+        <li>Is Authenticated: {{ request.COOKIES.is_authenticated }}</li>
+        <li>Gender: {{ request.COOKIES.gender }}</li>
+        <li>Tempat Lahir: {{ request.COOKIES.tempat_lahir }}</li>
+        <li>Tanggal Lahir: {{ request.COOKIES.tanggal_lahir }}</li>
+        <li>Is Verified: {{ request.COOKIES.is_verified }}</li>
+        <li>Kota Asal: {{ request.COOKIES.kota_asal }}</li>
+
+        {% if request.COOKIES.podcaster %}
+            <li>Role: Podcaster</li>
+        {% endif %}
+        {% if request.COOKIES.artist %}
+            <li>Role: Artist</li>
+        {% endif %}
+        {% if request.COOKIES.songwriter %}
+            <li>Role: Songwriter</li>
+        {% endif %}
+        {% if request.COOKIES.biasa %}
+            <li>Role: Pengguna Biasa</li>
+        {% endif %}
+    </ul>
+
+    <!-- Logout Button Form -->
+    <form action="{% url 'auth:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>
