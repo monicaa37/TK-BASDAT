@@ -31,7 +31,7 @@ def login(request):
             tempat_lahir = data[0][4]
             tanggal_lahir = data[0][5]
             is_verified = data[0][6]
-            kota_asal = data[0][6]
+            kota_asal = data[0][7]
             podcaster = False
             artist = False
             songwriter = False
@@ -61,13 +61,13 @@ def login(request):
 
             # Set role cookies
             if podcaster:
-                response.set_cookie('podcaster', True)
-            if artist:
-                response.set_cookie('artist', True)
-            if songwriter:
-                response.set_cookie('songwriter', True)
-            if not (podcaster or artist or songwriter):
-                response.set_cookie('biasa', True)
+                response.set_cookie('role', 'podcaster')
+            elif artist:
+                response.set_cookie('role', 'artist')
+            elif songwriter:
+                response.set_cookie('role', 'songwriter')
+            else:
+                response.set_cookie('role', 'biasa')
             sleep(1)
             return response
         else:
