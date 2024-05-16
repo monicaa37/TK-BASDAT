@@ -93,9 +93,21 @@
                                         <li><a href="#">Premium Plan</a>
                                         <li><a href="login.html">Logout</a>
                                     {% endif %}
-                                </ul>
 
+                                    {% if request.COOKIES.label %}
+                                    <li><a href="artis-sw">Dashboard</a></li>
+                                    <li><a href="kelola-album-artis-sw">Manage Album</a>
+                                    <li><a href="cek-royalti-artis-sw">Royalti</a>
+                                    <li><a href="login.html">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.premium %}
                                     
+                                    <li><a href="kelola-album-artis-sw">Manage Downloaded Songs</a>
+                                   
+                                    {% endif %}
+                                </ul>
+  
                                 </div>
                             </div>
                             <!-- Nav End -->
