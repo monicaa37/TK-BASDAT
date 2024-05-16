@@ -61,13 +61,13 @@ def login(request):
 
             # Set role cookies
             if podcaster:
-                response.set_cookie('role', 'podcaster')
-            elif artist:
-                response.set_cookie('role', 'artist')
-            elif songwriter:
-                response.set_cookie('role', 'songwriter')
-            else:
-                response.set_cookie('role', 'biasa')
+                response.set_cookie('podcaster', True)
+            if artist:
+                response.set_cookie('artist', True)
+            if songwriter:
+                response.set_cookie('songwriter', True)
+            if not (podcaster or artist or songwriter):
+                response.set_cookie('biasa', True)
             sleep(1)
             return response
         else:

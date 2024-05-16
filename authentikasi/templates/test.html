@@ -1,120 +1,16 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie Values</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
-
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-
 </head>
-
 <body>
-    <!-- Preloader -->
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="lds-ellipsis">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+    
 
-    <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
-        <!-- Navbar Area -->
-        <div class="oneMusic-main-menu">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Menu -->
-                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
-                        <!-- Nav brand -->
-                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
 
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler"><span></span><span></span><span></span></span>
-                        </div>
-
-                        <!-- Menu -->
-                        <div class="classy-menu">
-
-                            <!-- Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                            </div>
-
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                <ul>
-                                    <li>
-                                        <form class="search-form" action="#" method="get">
-                                            <input type="text" name="search" id="search" placeholder="Search...">
-                                            <button type="submit"><i class="fa fa-search"></i></button>
-                                        </form>
-                                    </li>
-                                    <li><a>Dashboard</a></li>
-                                    <li><a href="#">Chart</a></li>
-                                    <li><a>Manage Playlist</a></li>
-                                    {% if request.COOKIES.role == 'podcaster' %}
-                                    <li><a href="#">Manage Podcast</a></li>
-                                    {% elif request.COOKIES.role == 'artist' %}
-                                    <li><a href="#">Manage Artist</a></li>
-                                    {% elif request.COOKIES.role == 'songwriter' %}
-                                    <li><a href="#">Manage Album & Song</a></li>
-                                    {% endif %}
-                                    <li><a href="#">Premium Plan</a></li>
-                                    <li><a>Logout</a></li>
-                                </ul>
-                            </div>
-                            <!-- Nav End -->
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ##### Header Area End ##### -->
-
-    <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
-        <div class="bradcumbContent">
-            <ul>
-                <h1>Nama: {{ request.COOKIES.nama }}</h1>
-                <li>Is Authenticated: {{ request.COOKIES.is_authenticated }}</li>
-                <li>Gender: {{ request.COOKIES.gender }}</li>
-                <li>Tempat Lahir: {{ request.COOKIES.tempat_lahir }}</li>
-                <li>Tanggal Lahir: {{ request.COOKIES.tanggal_lahir }}</li>
-                <li>Is Verified: {{ request.COOKIES.is_verified }}</li>
-                <li>Kota Asal: {{ request.COOKIES.kota_asal }}</li>
-        
-                {% if request.COOKIES.role == 'podcaster' %}
-                    <li>Role: Podcaster</li>
-                {% elif request.COOKIES.role == 'artist' %}
-                    <li>Role: Artist</li>
-                {% elif request.COOKIES.role == 'songwriter' %}
-                    <li>Role: Songwriter</li>
-                {% elif request.COOKIES.role == 'biasa' %}
-                    <li>Role: Pengguna Biasa</li>
-                {% endif %}
-            </ul>
-        </div>
-    </section>
-    <!-- ##### Breadcumb Area End ##### -->
-
-    {% comment %} <h1>Nilai Cookie:</h1>
+    <h1>Nilai Cookie:</h1>
     <ul>
         <li>Nama: {{ request.COOKIES.nama }}</li>
         <li>Is Authenticated: {{ request.COOKIES.is_authenticated }}</li>
@@ -124,34 +20,24 @@
         <li>Is Verified: {{ request.COOKIES.is_verified }}</li>
         <li>Kota Asal: {{ request.COOKIES.kota_asal }}</li>
 
-        {% if request.COOKIES.role == 'podcaster' %}
+        {% if request.COOKIES.podcaster %}
             <li>Role: Podcaster</li>
-        {% elif request.COOKIES.role == 'artist' %}
+        {% endif %}
+        {% if request.COOKIES.artist %}
             <li>Role: Artist</li>
-        {% elif request.COOKIES.role == 'songwriter' %}
+        {% endif %}
+        {% if request.COOKIES.songwriter %}
             <li>Role: Songwriter</li>
-        {% elif request.COOKIES.role == 'biasa' %}
+        {% endif %}
+        {% if request.COOKIES.biasa %}
             <li>Role: Pengguna Biasa</li>
         {% endif %}
-    </ul> {% endcomment %}
+    </ul>
 
     <!-- Logout Button Form -->
-    {% comment %} <form action="{% url 'logout' %}" method="post">
+    <form action="{% url 'auth:logout' %}" method="post">
         {% csrf_token %}
         <button type="submit">Logout</button>
-    </form> {% endcomment %}
-
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
-    <!-- Popper js -->
-    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
-    <!-- Bootstrap js -->
-    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
-    <!-- All Plugins js -->
-    <script src="{% static 'js/plugins/plugins.js' %}"></script>
-    <!-- Active js -->
-    <script src="{% static 'js/active.js' %}"></script>
+    </form>
 </body>
-
 </html>
