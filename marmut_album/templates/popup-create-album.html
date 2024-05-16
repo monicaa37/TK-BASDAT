@@ -67,14 +67,21 @@
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </li>
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="index.html">Dashboard</a></li>
-                                    <li><a href="#">Chart</a>
-                                    <li><a href="kelola_playlist.html">Manage Playlist</a></li>
-                                    <li><a href="#">Manage Song & Album</a>
-                                    <li><a href="#">Royalti</a>
-                                    <li><a href="#">Premium Plan</a></li>
-                                    <li><a href="#">Logout</a></li>
+                                    
+                                    {% if user_type == 'artis_sw' %}
+                                        <li><a href="index.html">Dashboard</a></li>
+                                        <li><a href="#">Chart</a>
+                                        <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                        <li><a href="#">Manage Song & Album</a>
+                                        <li><a href="#">Royalti</a>
+                                        <li><a href="#">Premium Plan</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    {% elif user_type == 'label' %}
+                                        <li><a href="label">Dashboard</a></li>
+                                        <li><a href="kelola-album-label">Manage Album</a>
+                                        <li><a href="cek-royalti-label">Royalti</a>
+                                        <li><a href="" id="loginBtn">Logout</a></li>
+                                    {% endif %}
                                 </ul>
                                     
                             </div>

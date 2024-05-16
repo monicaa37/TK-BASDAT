@@ -69,5 +69,19 @@ def show_label_regist(request):
     context = {
         '': '',
     }
+    return render(request, "index.html", context)
 
-    return render(request, "label-regist.html", context)
+def show_dashboard_pengguna_biasa(request):
+    return render(request, "dashboard-pengguna-biasa.html")
+
+def show_dashboard_pengguna_premium(request):
+    return render(request, "dashboard-pengguna-premium.html")
+
+def show_dashboard_artis_sw(request):
+    return render(request, "dashboard-artis-sw.html")
+
+def show_dashboard_label(request):
+    return render(request, "dashboard-label.html")
+
+def show_dashboard_podcaster(request):
+    return render(request, "dashboard-podcaster.html")
