@@ -1,5 +1,5 @@
 from django.urls import path
-from marmut_app.views import show_main, show_dashboard_pengguna_biasa, show_dashboard_artis_sw, show_dashboard_label, show_dashboard_pengguna_premium, show_dashboard_podcaster
+from marmut_app.views import *
 
 app_name = 'marmut_app'
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path('artis-sw', show_dashboard_artis_sw, name='show_dashboard_artis_sw'),
     path('label', show_dashboard_label, name='show_dashboard_label'),
     path('pengguna-premium', show_dashboard_pengguna_premium, name='show_dashboard_pengguna_premium'),
-    path('podcaster', show_dashboard_podcaster, name="show_dashboard_podcaster")
+    path('podcaster', show_dashboard_podcaster, name="show_dashboard_podcaster"),
+    path('dashboard', show_dashboard, name="show_dashboard")
 ]

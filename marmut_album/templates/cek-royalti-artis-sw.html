@@ -32,6 +32,7 @@
         </div>
     </div>
 
+
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <!-- Navbar Area -->
@@ -67,14 +68,30 @@
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </li>
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="artis-sw">Dashboard</a></li>
-                                    <li><a href="#">Chart</a>
-                                    <li><a href="#">Manage Playlist</a></li>
-                                    <li><a href="kelola-album-artis-sw">Manage Song & Album</a>
-                                    <li><a href="cek-royalti-artis-sw">Royalti</a>
-                                    <li><a href="#">Premium Plan</a></li>
-                                    <li><a href="#">Logout</a></li>
+
+                                    {% if request.COOKIES.podcaster %}
+                                        <li>Role: Podcaster</li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.artist %}
+                                        <li><a href="artis-sw">Dashboard</a></li>
+                                        <li><a href="#">Chart</a>
+                                        <li><a href="#">Manage Playlist</a></li>
+                                        <li><a href="kelola-album-artis-sw">Manage Song & Album</a>
+                                        <li><a href="cek-royalti-artis-sw">Royalti</a>
+                                        <li><a href="#">Premium Plan</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.songwriter %}
+                                        <li><a href="artis-sw">Dashboard</a></li>
+                                        <li><a href="#">Chart</a>
+                                        <li><a href="#">Manage Playlist</a></li>
+                                        <li><a href="kelola-album-artis-sw">Manage Song & Album</a>
+                                        <li><a href="cek-royalti-artis-sw">Royalti</a>
+                                        <li><a href="#">Premium Plan</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    {% endif %}
                                 </ul>
                                 </div>
                             </div>
