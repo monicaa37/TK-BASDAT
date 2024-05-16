@@ -1,5 +1,5 @@
 from django.urls import path
-from marmut_album.views import show_cek_royalti_artis_sw, show_cek_royalti_label, show_lagu_di_album, show_kelola_album_artis_sw, show_kelola_album_label, show_create_album, show_create_song
+from marmut_album.views import show_cek_royalti_artis_sw, show_cek_royalti_label, show_lagu_di_album, show_kelola_album_artis_sw, show_kelola_album_label, show_create_album, show_create_song, test
 
 app_name = 'marmut_app'
 
@@ -10,5 +10,5 @@ urlpatterns = [
     path('kelola-album-artis-sw', show_kelola_album_artis_sw, name="show_kelola_album_artis_sw"),
     path('kelola-album-label', show_kelola_album_label, name="show_kelola_album_label"),
     path('create-album', show_create_album, name="show_create_album"),
-    path('create-song', show_create_song, name="show_create_song")
+    path('create-song', show_create_song, name="show_create_song"),
 ]

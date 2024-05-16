@@ -44,33 +44,6 @@ def show_artist_song(request):
 
     return render(request, "dashboard-artist-songwriter.html", context)
 
-def show_label_regist(request):
-    context = {
-        '': '',
-    }
-
-    return render(request, "label-regist.html", context)
-
-def show_label_regist(request):
-    context = {
-        '': '',
-    }
-
-    return render(request, "label-regist.html", context)
-
-def show_label_regist(request):
-    context = {
-        '': '',
-    }
-
-    return render(request, "label-regist.html", context)
-
-def show_label_regist(request):
-    context = {
-        '': '',
-    }
-    return render(request, "index.html", context)
-
 def show_dashboard_pengguna_biasa(request):
     return render(request, "dashboard-pengguna-biasa.html")
 
@@ -85,3 +58,6 @@ def show_dashboard_label(request):
 
 def show_dashboard_podcaster(request):
     return render(request, "dashboard-podcaster.html")
+
+def show_dashboard(request):
+    return render(request, "dashboard.html")

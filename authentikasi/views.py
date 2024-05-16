@@ -47,7 +47,7 @@ def login(request):
                 if cursor.fetchall():
                     songwriter = True
 
-            response = HttpResponseRedirect(reverse('auth:test'))
+            response = HttpResponseRedirect(reverse('marmut_app:show_dashboard'))
 
             # Set cookies based on roles
             response.set_cookie('email', email)
@@ -95,5 +95,3 @@ def logout(request):
     response.delete_cookie('biasa')
 
     return response
-
-
