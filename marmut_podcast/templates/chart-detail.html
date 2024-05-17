@@ -101,10 +101,10 @@
                 <div class="col-12 col-lg-8">
                     <div class="podcast-detail-content text-center">
                         <h2>CHART DETAIL</h2>
-                        <p>Tipe: Daily Top 20</p>
+                        <p>Tipe: {{ chart_title }}</p>
                     </div>
                     <div class="text-center">
-                        <a href="#" class="btn oneMusic-btn mt-30">Kembali</a>
+                        <a href="{% url 'marmut_podcast:show_top_charts' %}" class="btn oneMusic-btn mt-30">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -130,21 +130,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Song1</td>
-                                    <td>Artist1</td>
-                                    <td>09/03/2024</td>
-                                    <td>21000</td>
-                                    <td><a href="#">Lihat</a></td>
-                                </tr>
-                                <tr>
-                                    <td>Song2</td>
-                                    <td>Artist2</td>
-                                    <td>02/03/2024</td>
-                                    <td>19000</td>
-                                    <td><a href="#">Lihat</a></td>
-                                </tr>
-                                <!-- Tambahkan baris lain sesuai kebutuhan -->
+                                {% for song in chart_data %}
+                                    <tr>
+                                        <td>{{ song.0 }}</td>
+                                        <td>{{ song.1 }}</td>
+                                        <td>{{ song.2 }}</td>
+                                        <td>{{ song.3 }}</td>
+                                        <td><a href="#">Lihat</a></td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
