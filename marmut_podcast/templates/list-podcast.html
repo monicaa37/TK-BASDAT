@@ -111,30 +111,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for podcast in podcasts %}
                                 <tr>
-                                    <td>Podcast1</td>
-                                    <td>0</td>
-                                    <td>0 menit</td>
+                                    <td>{{ podcast.0 }}</td>
+                                    <td>{{ podcast.1 }}</td> <!-- Use dot notation -->
+                                    <td>{{ podcast.2 }} menit</td> <!-- Use dot notation -->
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <a href="list-episode-podcast" class="btn btn-primary">Lihat Daftar Episode</a>
-                                            <a href="create-episode" class="btn btn-success">Tambah Episode</a>
+                                            <a href="{% url 'list-episode-podcast' %}" class="btn btn-primary">Lihat Daftar Episode</a>
+                                            <a href="{% url 'create-episode' %}" class="btn btn-success">Tambah Episode</a>
                                             <a href="#" class="btn btn-danger">Hapus</a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Podcast2</td>
-                                    <td>2</td>
-                                    <td>4 menit</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <a href="#" class="btn btn-primary">Lihat Daftar Episode</a>
-                                            <a href="#" class="btn btn-success">Tambah Episode</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {% endfor %}
                                 <!-- Tambahkan baris lain sesuai kebutuhan -->
                             </tbody>
                         </table>
@@ -143,7 +133,10 @@
             </div>
         </div>
     </section>
+    
     <!-- ##### Daftar Episode Area End ##### -->
+    
+
 
     
     <!-- ##### Buy Now Area End ##### -->

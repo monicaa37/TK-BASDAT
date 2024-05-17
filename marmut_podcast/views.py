@@ -2,81 +2,82 @@ from django.shortcuts import render
 from django.db import connection
 from datetime import datetime, timedelta
 
-def send_id_konten(request):
-    id_konten = '8738b6a1-51ae-4c33-812d-ec8919e60f8d'
-    return show_play_podcast(request, id_konten)
-
-def show_play_podcast(request, id_konten):
-    genres_list = []  # Initialize genres_list outside of the try block
+def show_list_podcast(request):
     try:
+        podcasts = []
+        query = """
+        SELECT 
+            KONTEN.judul AS Judul,
+            COUNT(EPISODE.id_episode) AS "Jumlah Episode",
+            SUM(EPISODE.durasi) AS "Total Durasi"
+        FROM 
+            PODCAST
+        JOIN 
+            KONTEN ON PODCAST.id_konten = KONTEN.id
+        LEFT JOIN 
+            EPISODE ON PODCAST.id_konten = EPISODE.id_konten_podcast
+        GROUP BY 
+            KONTEN.judul
+        """
         with connection.cursor() as cursor:
-            # Mendapatkan detail podcast
-            cursor.execute("""
-                SELECT 
-                    p.id_konten AS id_podcast,
-                    k.judul AS podcast_title,
-                    GROUP_CONCAT(g.genre SEPARATOR ', ') AS genres,
-                    a.nama AS podcaster_name,
-                    SEC_TO_TIME(SUM(e.durasi * 60)) AS total_duration,
-                    DATE_FORMAT(k.tanggal_rilis, '%d/%m/%y') AS release_date,
-                    k.tahun AS release_year
-                FROM 
-                    PODCAST p
-                JOIN 
-                    KONTEN k ON p.id_konten = k.id
-                JOIN 
-                    GENRE g ON k.id = g.id_konten
-                JOIN 
-                    PODCASTER po ON p.email_podcaster = po.email
-                JOIN 
-                    AKUN a ON po.email = a.email
-                JOIN 
-                    EPISODE e ON e.id_konten_podcast = p.id_konten
-                WHERE 
-                    p.id_konten = %s
-                GROUP BY 
-                    p.id_konten, k.judul, a.nama, k.tanggal_rilis, k.tahun;
-            """, [id_konten])
-            podcast_detail = cursor.fetchone()
-
-            if podcast_detail:
-                # Split the genres string into a list
-                genres_list = podcast_detail['genres'].split(', ')
-
-                # Mendapatkan daftar episode untuk podcast tertentu
-                cursor.execute("""
-                    SELECT 
-                        e.judul AS episode_title,
-                        e.deskripsi AS episode_description,
-                        SEC_TO_TIME(e.durasi * 60) AS episode_duration,
-                        DATE_FORMAT(e.tanggal_rilis, '%d/%m/%Y') AS episode_release_date
-                    FROM 
-                        EPISODE e
-                    JOIN 
-                        PODCAST p ON e.id_konten_podcast = p.id_konten
-                    JOIN 
-                        KONTEN k ON p.id_konten = k.id
-                    WHERE 
-                        p.id_konten = %s
-                    ORDER BY 
-                        e.tanggal_rilis;
-                """, [id_konten])
-                episodes = cursor.fetchall()
-            else:
-                episodes = []
-
+            cursor.execute(query)
+            podcasts = cursor.fetchall()
     except Exception as e:
         print("Error:", e)
-        podcast_detail = None
-        episodes = []
+        podcasts = []
+    return render(request, 'list-podcast.html', {"podcasts" : podcasts})
 
-    context = {
-        "podcast_detail": podcast_detail,
-        "genres_list": genres_list,  # Add genres_list to the context
-        "episodes": episodes
-    }
 
-    return render(request, "play-podcast.html", context)
+def play_podcast(request):
+    # Ambil id konten dari parameter URL atau sesuaikan dengan cara Anda
+    id_konten = request.GET.get('id_konten', '')
+
+    # Buat cursor untuk eksekusi query
+    with connection.cursor() as cursor:
+        # Execute SQL untuk mendapatkan detail podcast
+        cursor.execute("""
+            SELECT 
+                k.judul AS "Judul",
+                GROUP_CONCAT(DISTINCT g.genre ORDER BY g.genre SEPARATOR ', ') AS "Genre(s)",
+                a.nama AS "Podcaster",
+                SUM(e.durasi) AS "Total Durasi",
+                k.tanggal_rilis AS "Tanggal Rilis",
+                YEAR(k.tanggal_rilis) AS "Tahun"
+            FROM 
+                PODCAST p
+            JOIN 
+                KONTEN k ON p.id_konten = k.id
+            JOIN 
+                GENRE g ON k.id = g.id_konten
+            JOIN 
+                AKUN a ON p.email_podcaster = a.email
+            LEFT JOIN 
+                EPISODE e ON p.id_konten = e.id_konten_podcast
+            WHERE 
+                p.id_konten = %s
+            GROUP BY 
+                p.id_konten, k.judul, a.nama, k.tanggal_rilis;
+        """, [id_konten])
+        podcast_detail = cursor.fetchone()
+
+        # Execute SQL untuk mendapatkan daftar episode podcast
+        cursor.execute("""
+            SELECT 
+                e.judul AS "Judul Episode",
+                e.deskripsi AS "Deskripsi",
+                e.durasi AS "Durasi",
+                e.tanggal_rilis AS "Tanggal"
+            FROM 
+                EPISODE e
+            WHERE 
+                e.id_konten_podcast = %s
+            ORDER BY 
+                e.tanggal_rilis;
+        """, [id_konten])
+        episodes = cursor.fetchall()
+
+    # Render template dengan data yang diperoleh dari database
+    return render(request, 'play-podcast.html', {'podcast_detail': podcast_detail, 'episodes': episodes})
 
 def show_top_charts(request):
     context = {
