@@ -69,9 +69,9 @@
 
                                     {% if request.COOKIES.role == 'podcaster' %}
                                         <li><a href="dashboard">Dashboard</a></li>
-                                        <li><a href="#">Chart</a>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
                                         <li><a href="kelola_playlist.html">Manage Playlist</a></li>
-                                        <li><a href="#">Manage Podcast</a>
+                                        <li><a href="{% url 'marmut_podcast:show_list_podcast'}">Manage Podcast</a>
                                         <li><a href="#">Premium Plan</a>
                                         <li><a href="logout" id="loginBtn">Logout</a></li>
                                     {% endif %}
