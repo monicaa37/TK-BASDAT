@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseNotAllowed
+from django.shortcuts import redirect, render
 from django.db import connection
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def show_cek_royalti_artis_sw(request):
@@ -120,3 +122,22 @@ def test(request):
         print("Error:", e)
 
     return render(request, "test.html")
+
+
+@csrf_exempt
+def delete_album(request, type):
+    judul_album = type
+    if request.method == 'POST':
+        try:
+            # Delete the podcast and cascade delete episodes
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM ALBUM WHERE judul = %s", [judul_album])
+                connection.commit()
+            
+            return redirect('marmut_album:show_kelola_album_label')
+
+        except Exception as e:
+            connection.rollback()
+            return HttpResponse('Terjadi kesalahan saat menghapus data dari database: {}'.format(str(e)))
+    else:
+        return HttpResponseNotAllowed(['POST'])

@@ -157,7 +157,10 @@
                                 <td>{{ album.2 }} menit</td>
                                 <td>
                                     <button class="small-button" style="margin-bottom: 3px;">Lihat Daftar Lagu</button><br>
-                                    <button class="small-button">Hapus</button>
+                                    <form method="post" action="{% url 'marmut_album:delete_album' type=album.0 %}">
+                                        {% csrf_token %}
+                                        <button class="small-button">Hapus</button>
+                                    </form>
                                 </td>
                             </tr>
                             {% endfor %}
