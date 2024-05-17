@@ -176,7 +176,12 @@ def show_dashboard(request):
 
 
         if 'biasa' in roles or 'premium' in roles:
+            query = """
+                SELECT judul AS playlist_title
+                FROM USER_PLAYLIST
+                WHERE email_pembuat = %s"""
             with connection.cursor() as cursor:
+                cursor.execute(query, [request.COOKIES.get('email')])
                 playlists = cursor.fetchall()
 
         return render(request, "dashboard.html", {"podcasts": podcasts, "songs": songs, "playlists": playlists})
