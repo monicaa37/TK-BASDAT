@@ -137,4 +137,16 @@ def show_dashboard(request):
 
 
     else:     
+        if 'podcaster' in roles:
+            with connection.cursor() as cursor:
+                podcast = cursor.fetchall()
+
+        if 'artist' in roles:
+            with connection.cursor() as cursor:
+                song = cursor.fetchall()
+
+        if ''
+
+            
+
         return render(request, "dashboard.html")

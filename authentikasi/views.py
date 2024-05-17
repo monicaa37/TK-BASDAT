@@ -115,17 +115,25 @@ def logout(request):
     print(request.COOKIES.get('nama'))
 
     # Delete all the cookies
-    response.delete_cookie('email')
-    response.delete_cookie('nama')
-    response.delete_cookie('is_authenticated')
-    response.delete_cookie('gender')
-    response.delete_cookie('tempat_lahir')
-    response.delete_cookie('tanggal_lahir')
-    response.delete_cookie('is_verified')
-    response.delete_cookie('kota_asal')
-    response.delete_cookie('podcaster')
-    response.delete_cookie('artist')
-    response.delete_cookie('songwriter')
-    response.delete_cookie('biasa')
+    if (request.COOKIES.get('role') == 'label'):
+        response.delete_cookie('id', id)
+        response.delete_cookie('nama')
+        response.delete_cookie('is_authenticated')
+        response.delete_cookie('kontak')
+        response.delete_cookie('id_pemilik_hak_cipta')
+        response.delete_cookie('label')
+    else:
+        response.delete_cookie('email')
+        response.delete_cookie('nama')
+        response.delete_cookie('is_authenticated')
+        response.delete_cookie('gender')
+        response.delete_cookie('tempat_lahir')
+        response.delete_cookie('tanggal_lahir')
+        response.delete_cookie('is_verified')
+        response.delete_cookie('kota_asal')
+        response.delete_cookie('podcaster')
+        response.delete_cookie('artist')
+        response.delete_cookie('songwriter')
+        response.delete_cookie('biasa')
 
     return response
