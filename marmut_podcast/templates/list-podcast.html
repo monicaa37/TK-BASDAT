@@ -111,39 +111,38 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for podcast in podcasts %}
                                 <tr>
-                                    <td>Podcast1</td>
-                                    <td>0</td>
-                                    <td>0 menit</td>
+                                    <td><a href="{% url 'marmut_podcast:play_podcast' type=podcast.0 %}">{{ podcast.1 }}</a></td>
+                                    <td>{{ podcast.2 }}</td>
+                                    <td>{{ podcast.3|default_if_none:"0" }} menit</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <a href="list-episode-podcast" class="btn btn-primary">Lihat Daftar Episode</a>
-                                            <a href="create-episode" class="btn btn-success">Tambah Episode</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                            <a href="{% url 'marmut_podcast:show_list_episode_podcast' type=podcast.0 %}" class="btn btn-primary">Lihat Daftar Episode</a>
+                                            <a href="{% url 'marmut_podcast:show_create_episode' type=podcast.0 %}" class="btn btn-success">Tambah Episode</a>
+                                            <form method="post" action="{% url 'marmut_podcast:delete_podcast' type=podcast.0 %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Podcast2</td>
-                                    <td>2</td>
-                                    <td>4 menit</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <a href="#" class="btn btn-primary">Lihat Daftar Episode</a>
-                                            <a href="#" class="btn btn-success">Tambah Episode</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {% endfor %}                
                                 <!-- Tambahkan baris lain sesuai kebutuhan -->
                             </tbody>
                         </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'marmut_podcast:show_create_podcast' %}" class="btn oneMusic-btn mt-30">Tambah Podcast</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
     <!-- ##### Daftar Episode Area End ##### -->
+    
+
 
     
     <!-- ##### Buy Now Area End ##### -->
