@@ -120,9 +120,10 @@
                                         <td>{{ episode.Durasi }} menit</td>
                                         <td>{{ episode.Tanggal|date:"d/m/Y" }}</td>
                                         <td>
-                                            <div class="btn-group" role="group" aria-label="Episode Actions">
-                                                <button type="button" class="btn btn-danger">Hapus</button>
-                                            </div>
+                                            <form method="post" action="{% url 'marmut_podcast:delete_episode' type=episode.Id_Episode %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>                                    
                                         </td>
                                     </tr>
                                     {% endfor %}

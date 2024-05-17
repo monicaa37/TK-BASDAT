@@ -113,18 +113,21 @@
                             <tbody>
                                 {% for podcast in podcasts %}
                                 <tr>
-                                    <td>{{ podcast.1 }}</td>
+                                    <td><a href="{% url 'marmut_podcast:play_podcast' type=podcast.0 %}">{{ podcast.1 }}</a></td>
                                     <td>{{ podcast.2 }}</td>
-                                    <td>{{ podcast.3 }} menit</td>
+                                    <td>{{ podcast.3|default_if_none:"0" }} menit</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Episode Actions">
                                             <a href="{% url 'marmut_podcast:show_list_episode_podcast' type=podcast.0 %}" class="btn btn-primary">Lihat Daftar Episode</a>
                                             <a href="{% url 'marmut_podcast:show_create_episode' type=podcast.0 %}" class="btn btn-success">Tambah Episode</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                            <form method="post" action="{% url 'marmut_podcast:delete_podcast' type=podcast.0 %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
-                                {% endfor %}                                
+                                {% endfor %}                
                                 <!-- Tambahkan baris lain sesuai kebutuhan -->
                             </tbody>
                         </table>

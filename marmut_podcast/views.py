@@ -1,7 +1,73 @@
 import uuid
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.db import connection
 from datetime import datetime, timedelta, date
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def insert_data(request):
+    if request.method == 'POST':
+        # Mendapatkan nilai judul dari formulir
+        judul = request.POST.get('judulPodcast')
+
+        # Mendapatkan nilai genre dari formulir
+        genres = request.POST.getlist('genre')
+        print(f"Judul: {judul}")
+        print(f"Genre: {', '.join(genres)}")
+        # Mendapatkan email podcaster dari cookie
+        email_podcaster = request.COOKIES.get('email')
+
+        # Mendapatkan tanggal saat ini dan tahun saat ini
+        tanggal_rilis = datetime.now()
+        tahun = tanggal_rilis.year
+
+        try:
+            # Menjalankan kueri untuk menambahkan data ke dalam tabel KONTEN
+            with connection.cursor() as cursor:
+                new_id = uuid.uuid4()
+                cursor.execute("INSERT INTO KONTEN (id, judul, tanggal_rilis, tahun, durasi) VALUES (%s, %s, %s, %s, %s)", [new_id, judul, tanggal_rilis, tahun, 0])
+
+            # Menjalankan kueri untuk menambahkan data ke dalam tabel PODCAST
+            with connection.cursor() as cursor:
+                cursor.execute("INSERT INTO PODCAST (id_konten, email_podcaster) VALUES (%s, %s)", [new_id, email_podcaster])
+
+            # Menjalankan kueri untuk menambahkan data ke dalam tabel GENRE sebanyak genre yang dipilih
+            with connection.cursor() as cursor:
+                for genre in genres:
+                    cursor.execute("INSERT INTO GENRE (id_konten, genre) VALUES (%s, %s)", [new_id, genre])
+
+            # Commit perubahan ke dalam database
+            connection.commit()
+
+            # Memberikan respons berhasil
+            return redirect('marmut_podcast:show_list_podcast')
+
+        except Exception as e:
+            # Rollback jika terjadi kesalahan
+            connection.rollback()
+            return HttpResponse('Terjadi kesalahan saat menambahkan data ke dalam database: {}'.format(str(e)))
+
+    else:
+        return HttpResponse('Metode permintaan tidak diizinkan.')
+
+@csrf_exempt
+def delete_podcast(request, type):
+    podcast_id = type
+    if request.method == 'POST':
+        try:
+            # Delete the podcast and cascade delete episodes
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM PODCAST WHERE id_konten = %s", [podcast_id])
+                connection.commit()
+            
+            return redirect('marmut_podcast:show_list_podcast')
+
+        except Exception as e:
+            connection.rollback()
+            return HttpResponse('Terjadi kesalahan saat menghapus data dari database: {}'.format(str(e)))
+    else:
+        return HttpResponseNotAllowed(['POST'])
 
 def show_list_podcast(request):
     try:
@@ -30,56 +96,10 @@ def show_list_podcast(request):
     return render(request, 'list-podcast.html', {"podcasts" : podcasts})
 
 
-def play_podcast(request):
-    # Ambil id konten dari parameter URL atau sesuaikan dengan cara Anda
-    id_konten = request.GET.get('id_konten', '')
-
+def play_podcast(request, type):
+    id_konten = type
     # Buat cursor untuk eksekusi query
-    with connection.cursor() as cursor:
-        # Execute SQL untuk mendapatkan detail podcast
-        cursor.execute("""
-            SELECT 
-                k.judul AS "Judul",
-                GROUP_CONCAT(DISTINCT g.genre ORDER BY g.genre SEPARATOR ', ') AS "Genre(s)",
-                a.nama AS "Podcaster",
-                SUM(e.durasi) AS "Total Durasi",
-                k.tanggal_rilis AS "Tanggal Rilis",
-                YEAR(k.tanggal_rilis) AS "Tahun"
-            FROM 
-                PODCAST p
-            JOIN 
-                KONTEN k ON p.id_konten = k.id
-            JOIN 
-                GENRE g ON k.id = g.id_konten
-            JOIN 
-                AKUN a ON p.email_podcaster = a.email
-            LEFT JOIN 
-                EPISODE e ON p.id_konten = e.id_konten_podcast
-            WHERE 
-                p.id_konten = %s
-            GROUP BY 
-                p.id_konten, k.judul, a.nama, k.tanggal_rilis;
-        """, [id_konten])
-        podcast_detail = cursor.fetchone()
 
-        # Execute SQL untuk mendapatkan daftar episode podcast
-        cursor.execute("""
-            SELECT 
-                e.judul AS "Judul Episode",
-                e.deskripsi AS "Deskripsi",
-                e.durasi AS "Durasi",
-                e.tanggal_rilis AS "Tanggal"
-            FROM 
-                EPISODE e
-            WHERE 
-                e.id_konten_podcast = %s
-            ORDER BY 
-                e.tanggal_rilis;
-        """, [id_konten])
-        episodes = cursor.fetchall()
-
-    # Render template dengan data yang diperoleh dari database
-    return render(request, 'play-podcast.html', {'podcast_detail': podcast_detail, 'episodes': episodes})
 
 def show_top_charts(request):
     context = {
@@ -104,6 +124,7 @@ def show_list_episode_podcast(request, type):
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT KONTEN.judul AS Judul,
+                   EPISODE.id_episode AS Id_Episode,
                    EPISODE.judul AS Judul_Episode,
                    EPISODE.deskripsi AS Deskripsi,
                    EPISODE.durasi AS Durasi,
@@ -118,7 +139,7 @@ def show_list_episode_podcast(request, type):
         episodes = cursor.fetchall()
 
     # Ubah hasil query menjadi list of dictionaries untuk kemudahan akses di template
-    episodes = [{'Judul': episode[0], 'Judul_Episode': episode[1], 'Deskripsi': episode[2], 'Durasi': episode[3], 'Tanggal': episode[4]} for episode in episodes]
+    episodes = [{'Judul': episode[0], 'Id_Episode': episode[1], 'Judul_Episode': episode[2], 'Deskripsi': episode[3], 'Durasi': episode[4], 'Tanggal': episode[5]} for episode in episodes]
 
     # Ambil detail podcast
     with connection.cursor() as cursor:
@@ -165,7 +186,20 @@ def create_episode(request, type):
 
         return render(request, "create-episode.html", {'podcast_detail': podcast_detail, 'podcast_id':podcast_id})
 
-
+@csrf_exempt
+def delete_episode(request, type):
+    episode_id = type
+    if request.method == 'POST':
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                DELETE FROM EPISODE
+                WHERE id_episode = %s
+            """, [episode_id])
+        
+        # Optionally, you can redirect to the list of episodes or a success page
+        return redirect('marmut_podcast:show_list_podcast')
+    else:
+        return HttpResponseNotAllowed(['POST'])
 
 def chart_detail(request, type):
     try:
