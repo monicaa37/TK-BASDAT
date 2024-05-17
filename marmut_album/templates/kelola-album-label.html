@@ -123,7 +123,7 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
             <h2>Kelola Album & Song</h2>
         </div>
@@ -145,34 +145,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Album1</td>
-                            <td>0</td>
-                            <td>0 menit</td>
-                            <td>
-                                <button class="small-button" style="margin-bottom: 3px;">Lihat Daftar Lagu</button><br>
-                                <button class="small-button">Hapus</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Album2</td>
-                            <td>2</td>
-                            <td>4 menit</td>
-                            <td>
-                                <button class="small-button" style="margin-bottom: 3px;">Lihat Daftar Lagu</button><br>
-                                <button class="small-button">Hapus</button>
-                            </td>
-                        </tr>
+                        {% if not albums %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Album</h5>
+                            </div>
+                        {% else %}
+                            {% for album in albums %}
+                            <tr>
+                                <td>{{ album.0 }}</td>
+                                <td>{{ album.1 }}</td>
+                                <td>{{ album.2 }} menit</td>
+                                <td>
+                                    <button class="small-button" style="margin-bottom: 3px;">Lihat Daftar Lagu</button><br>
+                                    <button class="small-button">Hapus</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn text-center">
-                        <a href="#" class="btn oneMusic-btn">Lihat selengkapnya<i class="fa fa-angle-double-right"></i></a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
