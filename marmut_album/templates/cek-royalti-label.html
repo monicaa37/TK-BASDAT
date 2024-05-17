@@ -60,12 +60,10 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="label">Dashboard</a></li>
+                                    <li><a href="dashboard">Dashboard</a></li>
                                     <li><a href="kelola-album-label">Manage Album</a>
                                     <li><a href="cek-royalti-label">Royalti</a>
-                                    <li><a href="" id="loginBtn">Logout</a></li>
+                                    <li><a href="logout" id="loginBtn">Logout</a></li>
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -80,7 +78,7 @@
 
     
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
             <h2>Cek Royalti</h2>
         </div>
@@ -104,30 +102,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Lagu1</td>
-                            <td>Album1</td>
-                            <td>3</td>
-                            <td>0</td>
-                            <td style="font-weight: 600;">Rp450.000</td>
-                        </tr>
-                        <tr>
-                            <td>Lagu2</td>
-                            <td>Album2</td>
-                            <td>2</td>
-                            <td>2</td>
-                            <td style="font-weight: 600;">Rp520.000</td>
-                        </tr>
+                        {% if not royaltis %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Royalti</h5>
+                            </div>
+                            {% else %}
+                                {% for royalti in royaltis %}
+                                <tr>
+                                    <td>{{ royalti.0 }}</td>
+                                    <td>{{ royalti.1 }}</td>
+                                    <td>{{ royalti.2 }}</td>
+                                    <td>{{ royalti.3 }}</td>
+                                    <td style="font-weight: 600;">Rp{{ royalti.4 }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
                     </tbody>
                 </table>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="load-more-btn text-center mt-15 mb-15">
-                        <a href="#" class="btn oneMusic-btn">Lihat selengkapnya<i class="fa fa-angle-double-right"></i></a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

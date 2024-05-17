@@ -6,7 +6,23 @@ def show_cek_royalti_artis_sw(request):
     return render(request, "cek-royalti-artis-sw.html")
 
 def show_cek_royalti_label(request):
-    return render(request, "cek-royalti-label.html")
+    query = """
+        SELECT K.judul AS judul_lagu,
+               A.judul AS judul_album,
+               S.total_play AS  total_play,
+               S.total_download AS total_download,
+               (R.jumlah * PHC.rate_royalti) AS royalti_didapat
+        FROM KONTEN K
+        JOIN SONG S ON K.id = S.id_konten
+        JOIN ROYALTI R ON S.id_konten = R.id_song
+        JOIN ALBUM A ON S.id_album = A.id
+        JOIN PEMILIK_HAK_CIPTA PHC ON R.id_pemilik_hak_cipta = PHC.id
+        JOIN LABEL L on PHC.id = L.id_pemilik_hak_cipta
+        WHERE L.id = %s"""
+    with connection.cursor() as cursor:
+        cursor.execute(query, [request.COOKIES.get('id')])
+        royaltis = cursor.fetchall()
+    return render(request, "cek-royalti-label.html", {"royaltis": royaltis})
 
 def show_lagu_di_album(request):
     return render(request, "daftar-lagu-di-album.html")
