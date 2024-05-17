@@ -13,7 +13,5 @@ urlpatterns = [
     path('detail-playlist/<uuid:playlist_id>/', get_playlist_detail, name='playlist_detail'),
     path('play-user-playlist/<uuid:playlist_id>/', show_play_user_playlist, name='play-user-playlist'),
     path('detail-song/<uuid:id_konten>/', show_detail_song, name='detail-song'),
-    
-
 
 ]

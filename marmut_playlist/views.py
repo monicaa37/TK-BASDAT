@@ -124,10 +124,6 @@ def show_play_user_playlist(request, playlist_id):
     return render(request, "play_user_playlist.html", context)
 
 
-
-
-
-
 def show_detail_song(request,id_konten):
     query = """
     SELECT 
@@ -178,15 +174,6 @@ GROUP BY
     print("ini data song") 
     print(song_data)
     return render(request, "tambah_lagu_ke_playlist.html", {"song_data": song_data})
-
-
-
-
-
-
-
-
-
 
 def show_kelola_playlist(request):
     query = """
