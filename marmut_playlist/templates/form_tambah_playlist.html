@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,7 +64,7 @@
                                 <!-- nanti link nya diganti -->
                                 <li><a href="index.html">Dashboard</a></li>
                                 <li><a href="#">Chart</a>
-                                <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                <li><a href="kelola-playlist">Manage Playlist</a></li>
                                 <li><a href="#">Manage Album & Song</a>
                                 <li><a href="#">Royalti</a>
                                 <li><a href="#">Premium Plan</a></li>
@@ -100,14 +101,14 @@
                         <div class="playlist-form">
                             <form action="#" method="post">
                                 {% csrf_token %}
-                                <div class="form-group">
+                                {% comment %} <div class="form-group">
                                     <label for="judulPlaylist">Judul</label>
                                     <input type="text" class="form-control" id="judulPlaylist" placeholder="Masukkan judul playlist">
                                 </div>
                                 <div class="form-group">
                                     <label for="deskripsiPlaylist">Deskripsi</label>
                                     <input type="text" class="form-control" id="deskripsiPlaylist" placeholder="Masukkan deskripsi playlist">
-                                </div>
+                                </div> {% endcomment %}
                                 {{ form.as_p }}
                                 <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
                             </form>

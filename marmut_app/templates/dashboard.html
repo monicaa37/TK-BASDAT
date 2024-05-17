@@ -70,44 +70,32 @@
                                     {% if request.COOKIES.podcaster %}
                                         <li><a href="podcaster">Dashboard</a></li>
                                         <li><a href="#">Chart</a>
-                                        <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                        <li><a href="kelola-playlist">Manage Playlist</a></li>
                                         <li><a href="#">Manage Podcast</a>
                                         <li><a href="#">Premium Plan</a>
-                                        <li><a href="#" id="loginBtn">Logout</a></li>
+                                        <li><a href="main" id="loginBtn">Logout</a></li>
                                     {% endif %}
 
                                     {% if request.COOKIES.artist or request.COOKIES.songwriter %}
                                         <li><a href="artis-sw">Dashboard</a></li>
                                         <li><a href="#">Chart</a>
-                                        <li><a href="#">Manage Playlist</a></li>
+                                        <li><a href="kelola-playlist">Manage Playlist</a></li>
                                         <li><a href="kelola-album-artis-sw">Manage Song & Album</a>
                                         <li><a href="cek-royalti-artis-sw">Royalti</a>
                                         <li><a href="#">Premium Plan</a></li>
-                                        <li><a href="#">Logout</a></li>
+                                        <li><a href="main">Logout</a></li>
                                     {% endif %}
 
                                     {% if request.COOKIES.biasa %}
                                         <li><a href="pengguna-biasa">Dashboard</a></li>
                                         <li><a href="#">Chart</a>
-                                        <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                        <li><a href="kelola-playlist">Manage Playlist</a></li>
                                         <li><a href="#">Premium Plan</a>
-                                        <li><a href="login.html">Logout</a>
-                                    {% endif %}
-
-                                    {% if request.COOKIES.label %}
-                                    <li><a href="artis-sw">Dashboard</a></li>
-                                    <li><a href="kelola-album-artis-sw">Manage Album</a>
-                                    <li><a href="cek-royalti-artis-sw">Royalti</a>
-                                    <li><a href="login.html">Logout</a></li>
-                                    {% endif %}
-
-                                    {% if request.COOKIES.premium %}
-                                    
-                                    <li><a href="kelola-album-artis-sw">Manage Downloaded Songs</a>
-                                   
+                                        <li><a href="main">Logout</a>
                                     {% endif %}
                                 </ul>
-  
+
+                                    
                                 </div>
                             </div>
                             <!-- Nav End -->

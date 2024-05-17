@@ -5,6 +5,7 @@ app_name = 'marmut_app'
 
 urlpatterns = [
     path('', show_main, name='show_main'),
+    path('main', show_main_asli, name='show_main'),
     path('pengguna-biasa', show_dashboard_pengguna_biasa, name='show_dashboard_pengguna_biasa'),
     path('artis-sw', show_dashboard_artis_sw, name='show_dashboard_artis_sw'),
     path('label', show_dashboard_label, name='show_dashboard_label'),

@@ -125,24 +125,18 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for song in song_data %}
                                 <tr>
-                                    <td>Song1</td>
-                                    <td>Artist1</td>
-                                    <td>2 menit</td>
+                                    <td>{{song.0}}</td>
+                                    <td>{{song.1}}</td>
+                                    <td>{{song.2}}</td>
+                                    <td>{{song.3}}</td>
                                     <td>
                                         <button class="btn btn-primary">Lihat</button>
                                         <button class="btn btn-primary">Play</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Song2</td>
-                                    <td>Artist2</td>
-                                    <td>3 menit</td>
-                                    <td>
-                                        <button class="btn btn-primary">Lihat</button>
-                                        <button class="btn btn-primary">Play</button>
-                                    </td>
-                                </tr>
+                                {% endfor%}
                                 <!-- Add more songs as needed -->
                             </tbody>
                         </table>
