@@ -3,7 +3,50 @@ from django.db import connection
 
 # Create your views here.
 def show_cek_royalti_artis_sw(request):
-    return render(request, "cek-royalti-artis-sw.html")
+    roles = request.COOKIES.get('role')
+    royaltis = []
+
+    if 'artist' in roles:
+        query_artist = """
+            SELECT K.judul AS judul_lagu,
+                A.judul AS judul_album,
+                S.total_play AS  total_play,
+                S.total_download AS total_download,
+                (S.total_play * PHC.rate_royalti) AS royalti_didapat
+            FROM KONTEN K
+            JOIN SONG S ON K.id = S.id_konten
+            JOIN ROYALTI R ON S.id_konten = R.id_song
+            JOIN ALBUM A ON S.id_album = A.id
+            JOIN PEMILIK_HAK_CIPTA PHC ON R.id_pemilik_hak_cipta = PHC.id
+            JOIN ARTIST AR on PHC.id = AR.id_pemilik_hak_cipta
+            WHERE AR.email_akun = %s"""
+        with connection.cursor() as cursor:
+            cursor.execute(query_artist, [request.COOKIES.get('email')])
+            royalti_artist = cursor.fetchall()
+        royaltis.extend(royalti_artist)
+
+    if 'songwriter' in roles:
+        print(request.COOKIES.get('email'))
+        query_sw = """
+            SELECT K.judul AS judul_lagu,
+                A.judul AS judul_album,
+                S.total_play AS  total_play,
+                S.total_download AS total_download,
+                (S.total_play * PHC.rate_royalti) AS royalti_didapat
+            FROM KONTEN K
+            JOIN SONG S ON K.id = S.id_konten
+            JOIN ROYALTI R ON S.id_konten = R.id_song
+            JOIN ALBUM A ON S.id_album = A.id
+            JOIN PEMILIK_HAK_CIPTA PHC ON R.id_pemilik_hak_cipta = PHC.id
+            JOIN SONGWRITER SW on PHC.id = SW.id_pemilik_hak_cipta
+            WHERE SW.email_akun = %s"""
+        with connection.cursor() as cursor:
+            cursor.execute(query_sw, [request.COOKIES.get('email')])
+            royalti_sw = cursor.fetchall()
+        royaltis.extend(royalti_sw)
+
+    return render(request, "cek-royalti-artis-sw.html", {"royaltis": royaltis})
+
 
 def show_cek_royalti_label(request):
     query = """
@@ -11,7 +54,7 @@ def show_cek_royalti_label(request):
                A.judul AS judul_album,
                S.total_play AS  total_play,
                S.total_download AS total_download,
-               (R.jumlah * PHC.rate_royalti) AS royalti_didapat
+               (S.total_play * PHC.rate_royalti) AS royalti_didapat
         FROM KONTEN K
         JOIN SONG S ON K.id = S.id_konten
         JOIN ROYALTI R ON S.id_konten = R.id_song
@@ -23,6 +66,7 @@ def show_cek_royalti_label(request):
         cursor.execute(query, [request.COOKIES.get('id')])
         royaltis = cursor.fetchall()
     return render(request, "cek-royalti-label.html", {"royaltis": royaltis})
+
 
 def show_lagu_di_album(request):
     return render(request, "daftar-lagu-di-album.html")
