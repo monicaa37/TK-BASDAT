@@ -102,7 +102,7 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
                     <div class="user-playlist-detail-content mb-50">
-                        <h4>Judul: Playlist1</h4>
+                        <p><strong>Judul:</strong> {{ playlist_detail.playlist_title }}</p>
                         <p>Pembuat: Pembuat1</p>
                         <p>Jumlah Lagu: 12</p>
                         <p>Total Durasi: 8 jam 20 menit</p>
@@ -125,18 +125,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for song in song_data %}
-                                <tr>
-                                    <td>{{song.0}}</td>
-                                    <td>{{song.1}}</td>
-                                    <td>{{song.2}}</td>
-                                    <td>{{song.3}}</td>
-                                    <td>
-                                        <button class="btn btn-primary">Lihat</button>
-                                        <button class="btn btn-primary">Play</button>
-                                    </td>
-                                </tr>
-                                {% endfor%}
+                                {% for song in songs %}
+                                    <tr>
+                                        <td>{{ song.judul }}</td>
+                                        <td>{{ song.oleh }}</td>
+                                        <td>{{ song.total_durasi }}</td>
+                                        <td>
+                                            <button class="btn btn-primary" onclick="playSong('{{ song.judul}}')">Play</button>
+                                            <button class="btn btn-secondary" onclick="viewSong('{{ song.judul }}')">Lihat</button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
                                 <!-- Add more songs as needed -->
                             </tbody>
                         </table>

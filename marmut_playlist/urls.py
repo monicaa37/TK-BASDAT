@@ -11,8 +11,8 @@ urlpatterns = [
     path('form-tambah-playlist', show_form_tambah_playlist, name='form-tambah-playlist'),
     path('tambah_playlist/', tambah_playlist, name='tambah_playlist'),
     path('detail-playlist/<uuid:playlist_id>/', get_playlist_detail, name='playlist_detail'),
-    path('play-user-playlist', show_play_user_playlist, name='play-user-playlist'),
-    path('detail-song', show_detail_song, name='detail-song'),
+    path('play-user-playlist/<uuid:playlist_id>/', show_play_user_playlist, name='play-user-playlist'),
+    path('detail-song/<uuid:id_konten>/', show_detail_song, name='detail-song'),
     
 
 
