@@ -71,15 +71,17 @@ def login(request):
             response.set_cookie('kota_asal', kota_asal)
 
             # Set role cookies
+            roles = []
             if podcaster:
-                response.set_cookie('role', 'podcaster')
-            elif artist:
-                response.set_cookie('role', 'artist')
-            elif songwriter:
-                response.set_cookie('role', 'songwriter')
-            else:
-                response.set_cookie('role', 'biasa')
+                roles.append('podcaster')
+            if artist:
+                roles.append('artist')
+            if songwriter:
+                roles.append('songwriter')
+            if not podcaster and not artist and not songwriter:
+                roles.append('biasa')
             sleep(1)
+            response.set_cookie('role', ','.join(roles).replace(',', ', '))
             return response
         
         

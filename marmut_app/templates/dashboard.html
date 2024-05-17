@@ -183,21 +183,7 @@
                         <div class="section-heading style-2" style="margin-bottom: 35px;">
                             <h2>My Profile</h2>
                             <h4 style="margin-top:45px;">{{ request.COOKIES.nama }} - {{ request.COOKIES.email }}</h4>
-                            {% if request.COOKIES.role == 'podcaster' %}
-                                <h5>Podcaster</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'artist' %}
-                                <h5>Artist</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'songwriter' %}
-                                <h5>Songwriter</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'biasa' %}
-                                <h5>Pengguna Biasa</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'premium' %}
-                                <h5>Pengguna Premium</h5>
-                            {% endif %}
+                            <h5>{{ request.COOKIES.role }}</h5>
                         </div>
                         <div class="row justify-content-center">
                             <div class="">
@@ -267,7 +253,7 @@
     {% endif %}
 
 
-    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+    {% if 'artist' in request.COOKIES.role or 'songwriter' in request.COOKIES.role %}
         <!-- ##### Song Area Start ##### -->
         <section class="miscellaneous-area mt-50">
             <div class="container">
@@ -308,7 +294,7 @@
     {% endif %}
 
 
-    {% if request.COOKIES.role == 'biasa' or request.COOKIES.role == 'premium' %}
+    {% if 'biasa' in request.COOKIES.role or 'premium' in request.COOKIES.role %}
         <!-- ##### Playlist Area Start ##### -->
         <section class="miscellaneous-area mt-50">
             <div class="container">
@@ -348,7 +334,7 @@
         <!-- ##### Playlist Area End ##### -->         
     {% endif %}
 
-    {% if request.COOKIES.role == 'podcaster' %}
+    {% if 'podcaster' in request.COOKIES.role %}
         <!-- ##### Podcast Area Start ##### -->
         <section class="miscellaneous-area mt-50">
             <div class="container">
