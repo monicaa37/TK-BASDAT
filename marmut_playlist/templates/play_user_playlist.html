@@ -7,7 +7,6 @@
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
     <title>MARMUT</title>
@@ -37,77 +36,63 @@
         </div>
     </div>
 
-     <!-- ##### Navbar Area Start ##### -->
-     <header class="header-area">
-        <!-- Navbar Area -->
+    <!-- Navbar Area Start -->
+    <header class="header-area">
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
-                    <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
-
-                        <!-- Nav brand -->
                         <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
-
-                       <!-- Navbar Toggler -->
-                       <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-                    <!-- Menu -->
-                    <div class="classy-menu">
-                        <!-- Menu -->
-                        <div class="classynav">
-                            <!-- Menu -->
-                            <ul>
-                                <!-- Search Bar -->
-                                <li>
-                                    <form class="search-form" action="#" method="get">
-                                        <input type="text" name="search" id="search"
-                                            placeholder="Search...">
-                                        <button type="submit"><i class="fa fa-search"></i></button>
-                                    </form>
-                                </li>
-                                <!-- nanti link nya diganti -->
-                                <li><a href="index.html">Dashboard</a></li>
-                                <li><a href="#">Chart</a>
-                                <li><a href="kelola_playlist.html">Manage Playlist</a></li>
-                                <li><a href="#">Manage Album & Song</a>
-                                <li><a href="#">Royalti</a>
-                                <li><a href="#">Premium Plan</a></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-                    </div>
-                    <!-- Nav End -->
+                        <div class="classy-menu">
+                            <div class="classynav">
+                                <ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+                                    <li><a href="index.html">Dashboard</a></li>
+                                    <li><a href="#">Chart</a></li>
+                                    <li><a href="kelola_playlist.html">Manage Playlist</a></li>
+                                    <li><a href="#">Manage Album & Song</a></li>
+                                    <li><a href="#">Royalti</a></li>
+                                    <li><a href="#">Premium Plan</a></li>
+                                    <li><a href="#">Logout</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ##### Navbar Area End ##### -->
+    <!-- Navbar Area End -->
 
-    <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
+    <!-- Breadcumb Area Start -->
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/breadcumb3.jpg' %});">
         <div class="bradcumbContent">
             <p>See what’s new</p>
             <h2>USER PLAYLIST DETAIL</h2>
         </div>
     </section>
-    <!-- ##### Breadcumb Area End ##### -->
+    <!-- Breadcumb Area End -->
 
-    <!-- ##### User Playlist Detail Area Start ##### -->
+    <!-- User Playlist Detail Area Start -->
     <section class="user-playlist-detail-area section-padding-100">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
                     <div class="user-playlist-detail-content mb-50">
-                        <p><strong>Judul:</strong> {{ playlist_detail.playlist_title }}</p>
-                        <p>Pembuat: Pembuat1</p>
-                        <p>Jumlah Lagu: 12</p>
-                        <p>Total Durasi: 8 jam 20 menit</p>
-                        <p>Tanggal Dibuat: 18/03/24</p>
-                        <p>Deskripsi: ini playlist pertam</p>
+                        <p><strong>Judul:</strong> {{ playlist_detail.judul }}</p>
+                        <p><strong>Pembuat:</strong> {{ playlist_detail.pembuat }}</p>
+                        <p><strong>Jumlah Lagu:</strong> {{ playlist_detail.jumlah_lagu }}</p>
+                        <p><strong>Total Durasi:</strong> {{ playlist_detail.total_durasi }}</p>
+                        <p><strong>Tanggal Dibuat:</strong> {{ playlist_detail.tanggal_dibuat }}</p>
+                        <p><strong>Deskripsi:</strong> {{ playlist_detail.deskripsi }}</p>
                         <button class="btn btn-primary">Shuffle Play</button>
                         <button class="btn btn-primary">Kembali</button>
                     </div>
@@ -115,7 +100,7 @@
                     <!-- Song List -->
                     <div class="song-list">
                         <h4>DAFTAR LAGU</h4>
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>Judul Lagu</th>
@@ -129,39 +114,41 @@
                                     <tr>
                                         <td>{{ song.judul }}</td>
                                         <td>{{ song.oleh }}</td>
-                                        <td>{{ song.total_durasi }}</td>
-                                        <td>
-                                            <button class="btn btn-primary" onclick="playSong('{{ song.judul}}')">Play</button>
+                                        <td>{{ song.durasi }}</td>
+                                        <td class="action-column">
+                                            <button class="btn btn-primary" onclick="playSong('{{ song.judul }}')">Play</button>
                                             <button class="btn btn-secondary" onclick="viewSong('{{ song.judul }}')">Lihat</button>
                                         </td>
                                     </tr>
                                 {% endfor %}
-                                <!-- Add more songs as needed -->
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-success">Tambah Lagu</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ##### User Playlist Detail Area End ##### -->
+    <!-- User Playlist Detail Area End -->
 
-    <!-- ##### Header Area Start ##### -->
-   
-    <!-- ##### Header Area End ##### -->
-
-    <!-- ##### All Javascript Script ##### -->
-    <!-- jQuery-2.2.4 js -->
+    <!-- All Javascript Script -->
     <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
-    <!-- Popper js -->
     <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
-    <!-- Bootstrap js -->
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
-    <!-- All Plugins js -->
     <script src="{% static 'js/plugins/plugins.js' %}"></script>
-    <!-- Active js -->
     <script src="{% static 'js/active.js' %}"></script>
+
+    <!-- Custom Script -->
+    <script>
+        function playSong(judul) {
+            // Add logic to play the song
+            alert('Playing song: ' + judul);
+        }
+
+        function viewSong(judul) {
+            // Add logic to view song details
+            alert('Viewing details for song: ' + judul);
+        }
+    </script>
 </body>
 
 </html>

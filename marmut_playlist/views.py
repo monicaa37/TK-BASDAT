@@ -5,7 +5,7 @@ from .forms import TambahPlaylistForm
 from django.utils import timezone
 from uuid import UUID
 from django.db import connection
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 
 # Create your views here.
 def show_main(request):
@@ -53,41 +53,75 @@ from django.db import connection
 from django.shortcuts import render
 
 def show_play_user_playlist(request, playlist_id):
+    playlist_detail = {}
     songs = []
+
     try:
         with connection.cursor() as cursor:
-            # Mendapatkan detail lagu
+            # Query for playlist details
             cursor.execute("""
-            SELECT SONG.id_konten, KONTEN.judul, AKUN.nama AS artist, KONTEN.durasi
-            FROM PLAYLIST_SONG
-            JOIN SONG ON PLAYLIST_SONG.id_song = SONG.id_konten
-            JOIN KONTEN ON SONG.id_konten = KONTEN.id
-            JOIN ARTIST ON SONG.id_artist = ARTIST.id
-            JOIN AKUN ON ARTIST.email_akun = AKUN.email
-            WHERE PLAYLIST_SONG.id_playlist = %s
+                SELECT
+                    UP.judul AS playlist_title,
+                    AK.nama AS creator,
+                    UP.jumlah_lagu AS song_count,
+                    CONCAT(UP.total_durasi, ' menit') AS total_duration,
+                    TO_CHAR(UP.tanggal_dibuat, 'DD/MM/YYYY') AS created_date,
+                    UP.deskripsi AS description
+                FROM
+                    USER_PLAYLIST UP
+                JOIN
+                    AKUN AK ON UP.email_pembuat = AK.email
+                WHERE
+                    UP.id_user_playlist = %s;
+            """, [playlist_id])
+            playlist_detail_result = cursor.fetchone()
+            if playlist_detail_result:
+                playlist_detail = {
+                    'judul': playlist_detail_result[0],
+                    'pembuat': playlist_detail_result[1],
+                    'jumlah_lagu': playlist_detail_result[2],
+                    'total_durasi': playlist_detail_result[3],
+                    'tanggal_dibuat': playlist_detail_result[4],
+                    'deskripsi': playlist_detail_result[5]
+                }
+
+            # Query for songs in the playlist
+            cursor.execute("""
+                SELECT
+                    KONTEN.judul AS song_title,
+                    ARTIST.nama AS artist_name,
+                    CONCAT(KONTEN.durasi, ' menit') AS duration
+                FROM
+                    PLAYLIST_SONG PS
+                JOIN
+                    SONG S ON PS.id_song = S.id_konten
+                JOIN
+                    KONTEN ON S.id_konten = KONTEN.id
+                JOIN
+                    ARTIST ON S.id_artist = ARTIST.id
+                WHERE
+                    PS.id_playlist = %s;
             """, [playlist_id])
             songs_results = cursor.fetchall()
             for song_result in songs_results:
                 song = {
-                    'id': song_result[0],
-                    'judul': song_result[1],
-                    'oleh': song_result[2],
-                    'total_durasi': song_result[4]
+                    'judul': song_result[0],
+                    'oleh': song_result[1],
+                    'durasi': song_result[2]
                 }
                 songs.append(song)
-            
+
     except Exception as e:
         print("Error:", e)
+        playlist_detail = {}
         songs = []
-    print("halooo")
-    print(songs)
+    print("halo")
     context = {
+        "playlist_detail": playlist_detail,
         "songs": songs
     }
 
     return render(request, "play_user_playlist.html", context)
-
-
 
 
 
