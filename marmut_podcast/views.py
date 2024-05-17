@@ -110,9 +110,6 @@ def show_create_episode(request):
 
     return render(request, "create-episode.html", context)
 
-from django.shortcuts import render
-from django.db import connection
-from datetime import datetime, timedelta
 
 def chart_detail(request, type):
     try:

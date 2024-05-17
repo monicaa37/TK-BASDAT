@@ -15,16 +15,27 @@ def login(request):
         email = request.POST.get("email")
         password = request.POST.get("password")
 
+        account = False
+        label = False
+
         try:
             with connection.cursor() as cursor:
                 cursor.execute(f"SELECT * FROM akun WHERE email = '{email}' AND password = '{password}'")
                 data = cursor.fetchall()
+                account = True
+
+                if not data:
+                    cursor.execute(f"SELECT * FROM label WHERE email = '{email}' AND password = '{password}'")
+                    data = cursor.fetchall()
+                    account = False
+                    label = True
+
         except Exception as e:
             print(e)
             context = {"is_error": True}
             return render(request, 'test.html', context)
 
-        if len(data) != 0:
+        if account and not label:
             email = data[0][0]
             nama = data[0][2]
             gender = data[0][3]
@@ -70,6 +81,27 @@ def login(request):
                 response.set_cookie('role', 'biasa')
             sleep(1)
             return response
+        
+        
+        elif not account and label:
+            id = data[0][0]
+            nama = data[0][1]
+            email = data[0][2]
+            kontak = data[0][4]
+            id_pemilik_hak_cipta = data[0][5]
+
+            response = HttpResponseRedirect(reverse('marmut_app:show_dashboard'))
+
+            # Set cookies based on roles
+            response.set_cookie('id', id)
+            response.set_cookie('nama', nama)
+            response.set_cookie('is_authenticated', True)
+            response.set_cookie('kontak', kontak)
+            response.set_cookie('id_pemilik_hak_cipta', id_pemilik_hak_cipta)
+            response.set_cookie('role','label')
+            return response
+
+
         else:
             context = {"is_error": True}
 

@@ -1,4 +1,73 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.db import connection, transaction
+from datetime import datetime
+import uuid
+
+def insert_label(request):
+    if request.method == 'POST':
+        id = uuid.uuid4()
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        nama = request.POST.get('nama')
+        kontak = request.POST.get('kontak')
+
+        with connection.cursor() as cursor:
+            try:
+                cursor.execute("INSERT INTO LABEL (id, nama, email, password, kontak, id_pemilik_hak_cipta) VALUES (%s, %s, %s, %s, %s, NULL)", [id, nama, email, password, kontak])
+            except Exception as e:
+                return HttpResponse("Error: {}".format(str(e)))
+
+        return HttpResponse("Label successfully registered.")
+    else:
+        return HttpResponse("Invalid request method.")
+    
+def register(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        name = request.POST.get('name')
+        gender = int(request.POST.get('gender'))
+        place_of_birth = request.POST.get('place_of_birth')
+        date_of_birth = request.POST.get('date_of_birth')
+        city = request.POST.get('city')
+        roles = request.POST.getlist('roles[]')
+
+        try:
+            with transaction.atomic():
+                with connection.cursor() as cursor:
+                    cursor.execute("""
+                        INSERT INTO AKUN (email, password, nama, gender, tempat_lahir, tanggal_lahir, is_verified, kota_asal) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                    """, [email, password, name, gender, place_of_birth, date_of_birth, False, city])
+
+                    for role in roles:
+                        if role == "podcaster":
+                            cursor.execute("""
+                                INSERT INTO PODCASTER (email)
+                                VALUES (%s)
+                            """, [email])
+                        elif role == "artist":
+                            artist_id = uuid.uuid4()
+                            cursor.execute("""
+                                INSERT INTO ARTIST (id, email_akun, id_pemilik_hak_cipta)
+                                VALUES (%s, %s, NULL)
+                            """, [artist_id, email])
+                        elif role == "songwriter":
+                            songwriter_id = uuid.uuid4()
+                            cursor.execute("""
+                                INSERT INTO SONGWRITER (id, email_akun, id_pemilik_hak_cipta)
+                                VALUES (%s, %s, NULL)
+                            """, [songwriter_id, email])
+
+            return redirect('marmut_podcast:show_list_podcast')
+        except Exception as e:
+            print("Error:", e)
+            # Handle error, for example, show an error message
+            return render(request, 'user-regist.html', {'error_message': 'Registration failed, please try again.'})
+
+    return HttpResponse("User successfully registered.")
+
 
 # Create your views here.
 def show_main(request):
@@ -43,21 +112,6 @@ def show_artist_song(request):
     }
 
     return render(request, "dashboard-artist-songwriter.html", context)
-
-def show_dashboard_pengguna_biasa(request):
-    return render(request, "dashboard-pengguna-biasa.html")
-
-def show_dashboard_pengguna_premium(request):
-    return render(request, "dashboard-pengguna-premium.html")
-
-def show_dashboard_artis_sw(request):
-    return render(request, "dashboard-artis-sw.html")
-
-def show_dashboard_label(request):
-    return render(request, "dashboard-label.html")
-
-def show_dashboard_podcaster(request):
-    return render(request, "dashboard-podcaster.html")
 
 def show_dashboard(request):
     return render(request, "dashboard.html")
