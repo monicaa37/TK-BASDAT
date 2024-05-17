@@ -129,3 +129,9 @@ def shuffle_play(request, playlist_id):
             """, [user_email, song_id[0], current_time])
 
     return redirect('playlist_detail', playlist_id=playlist_id)
+
+def show_play_user_playlist(request):
+    return render(request, "play_user_playlist.html")
+
+def show_detail_song(request):
+    return render(request, "tambah_lagu_ke_playlist.html")
