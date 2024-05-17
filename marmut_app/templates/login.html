@@ -42,8 +42,8 @@
                             <!-- Menu -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="#">Login</a></li>
-                                    <li><a href="#">Register</a></li>
+                                    <li><a href="{% url 'auth:login' %}">Login</a></li>
+                                    <li><a href="{% url 'marmut_app:show_registerpage' %}">Register</a></li>
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -54,6 +54,7 @@
         </div>
     </header>
     <!-- ##### Navbar Area End ##### -->
+
 
     <!-- Preloader -->
     <div class="preloader d-flex align-items-center justify-content-center">

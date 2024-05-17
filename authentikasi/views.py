@@ -137,4 +137,4 @@ def logout(request):
         response.delete_cookie('songwriter')
         response.delete_cookie('biasa')
 
-    return render(request, 'auth_login.html')
+    return response
