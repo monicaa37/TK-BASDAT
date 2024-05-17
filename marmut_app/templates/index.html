@@ -41,7 +41,7 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="index.html" class="nav-brand"><img src="{% static 'img/core-img/logo.png' %}" alt=""></a>
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -59,52 +59,56 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="albums-store.html">Albums</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="albums-store.html">Albums</a></li>
-                                            <li><a href="event.html">Events</a></li>
-                                            <li><a href="blog.html">News</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                            <li><a href="elements.html">Elements</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="#">Dropdown</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                    <li><a href="#">Even Dropdown</a>
-                                                        <ul class="dropdown">
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                            <li><a href="#">Deeply Dropdown</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a href="#">Even Dropdown</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
                                     </li>
-                                    <li><a href="event.html">Events</a></li>
-                                    <li><a href="blog.html">News</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+
+                                    {% if request.COOKIES.role == 'podcaster' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}" id="loginBtn">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        <li><a href="#">Premium Plan</a></li>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'premium' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'biasa' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% endif %}
+
                                 </ul>
-
-                                <!-- Login/Register & Cart Button -->
-                                <div class="login-register-cart-button d-flex align-items-center">
-                                    <!-- Login/Register -->
-                                    <div class="login-register-btn mr-50">
-                                        <a href="login.html" id="loginBtn">Login / Register</a>
-                                    </div>
-
-                                    <!-- Cart Button -->
-                                    <div class="cart-btn">
-                                        <p><span class="icon-shopping-cart"></span> <span class="quantity">1</span></p>
-                                    </div>
                                 </div>
                             </div>
                             <!-- Nav End -->

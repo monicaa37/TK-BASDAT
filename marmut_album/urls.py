@@ -1,7 +1,7 @@
 from django.urls import path
 from marmut_album.views import show_cek_royalti_artis_sw, show_cek_royalti_label, show_lagu_di_album, show_kelola_album_artis_sw, show_kelola_album_label, show_create_album, show_create_song, test
 
-app_name = 'marmut_app'
+app_name = 'marmut_album'
 
 urlpatterns = [
     path('cek-royalti-artis-sw', show_cek_royalti_artis_sw, name="show_cek_royalti_artis_sw"),

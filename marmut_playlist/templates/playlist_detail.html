@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,8 +37,8 @@
         </div>
     </div>
 
-     <!-- ##### Navbar Area Start ##### -->
-     <header class="header-area">
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
         <!-- Navbar Area -->
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">
@@ -52,41 +53,69 @@
                         <div class="classy-navbar-toggler">
                             <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-                      
+
                         <!-- Menu -->
                         <div class="classy-menu">
-                            <!-- Menu -->
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
                             <div class="classynav">
-
                                 <ul>
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="index.html">Dashboard</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Search Bar</a></li>
-                                            <li><a href="albums-store.html">Albums</a></li>
-                                            <li><a href="event.html">Kelola Playlist</a></li>
-                                            <li><a href="blog.html">Langganan Paket</a></li>
-                                        </ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
                                     </li>
-                                    <li><a href="#">Kelola</a>
-                                        <ul class="dropdown">
-                                            <li><a href="albums-store.html">Downloaded Songs</a></li>
-                                            <li><a href="event.html">Podcast</a></li>
-                                            <li><a href="blog.html">Album & Songs</a></li>
-                                            <li><a href="contact.html">Album</a></li>
-                                            <li><a href="contact.html">Cek Royalti</a></li>
-                                        </ul>
-                                    </li>    
-                                </ul>
 
-                                <!-- Login/Register & Cart Button -->
-                                <div class="login-register-cart-button d-flex align-items-center">
-                                    <!-- Login/Register --> 
-                                     <!-- nanti link nya diganti --> 
-                                    <div class="login-register-btn mr-50">
-                                        <a href="login.html" id="loginBtn">Logout</a>
-                                    </div>
+                                    {% if request.COOKIES.role == 'podcaster' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}" id="loginBtn">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        <li><a href="#">Premium Plan</a></li>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'premium' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'biasa' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% endif %}
+
+                                </ul>
+                                </div>
                             </div>
                             <!-- Nav End -->
 
@@ -96,7 +125,7 @@
             </div>
         </div>
     </header>
-    <!-- ##### Navbar Area End ##### -->
+    <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">

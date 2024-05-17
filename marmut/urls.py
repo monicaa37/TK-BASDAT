@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('marmut_album.urls')),
     path('', include('authentikasi.urls')),
     path('', include('marmut_podcast.urls')),
+    path('', include('marmut_playlist.urls')),
 ]

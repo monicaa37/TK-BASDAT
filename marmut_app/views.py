@@ -77,6 +77,9 @@ def show_main(request):
 
     return render(request, "main.html", context)
 
+def show_main_asli(request):
+    return render(request, "main.html")
+
 def show_registerpage(request):
     context = {
         '': '',

@@ -64,14 +64,50 @@
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </li>
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="index">Dashboard</a></li>
-                                    <li><a href="#">Chart</a>
-                                    <li><a href="kelola_playlist">Manage Playlist</a></li>
-                                    <li><a href="#">Manage Podcast</a>
-                                    <li><a href="#">Premium Plan</a>
-                                    <li><a href="login" id="loginBtn">Logout</a></li>
-                                    </ul>   
+
+                                    {% if request.COOKIES.role == 'podcaster' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}" id="loginBtn">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        <li><a href="#">Premium Plan</a></li>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'premium' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'biasa' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% endif %}
+
+                                </ul>
                                 </div>
                             </div>
                             <!-- Nav End -->
@@ -111,39 +147,38 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for podcast in podcasts %}
                                 <tr>
-                                    <td>Podcast1</td>
-                                    <td>0</td>
-                                    <td>0 menit</td>
+                                    <td><a href="{% url 'marmut_podcast:play_podcast' type=podcast.0 %}">{{ podcast.1 }}</a></td>
+                                    <td>{{ podcast.2 }}</td>
+                                    <td>{{ podcast.3|default_if_none:"0" }} menit</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <a href="list-episode-podcast" class="btn btn-primary">Lihat Daftar Episode</a>
-                                            <a href="create-episode" class="btn btn-success">Tambah Episode</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
+                                            <a href="{% url 'marmut_podcast:show_list_episode_podcast' type=podcast.0 %}" class="btn btn-primary">Lihat Daftar Episode</a>
+                                            <a href="{% url 'marmut_podcast:show_create_episode' type=podcast.0 %}" class="btn btn-success">Tambah Episode</a>
+                                            <form method="post" action="{% url 'marmut_podcast:delete_podcast' type=podcast.0 %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Podcast2</td>
-                                    <td>2</td>
-                                    <td>4 menit</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <a href="#" class="btn btn-primary">Lihat Daftar Episode</a>
-                                            <a href="#" class="btn btn-success">Tambah Episode</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {% endfor %}                
                                 <!-- Tambahkan baris lain sesuai kebutuhan -->
                             </tbody>
                         </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'marmut_podcast:show_create_podcast' %}" class="btn oneMusic-btn mt-30">Tambah Podcast</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    
     <!-- ##### Daftar Episode Area End ##### -->
+    
+
 
     
     <!-- ##### Buy Now Area End ##### -->

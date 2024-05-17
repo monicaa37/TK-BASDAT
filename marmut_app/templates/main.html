@@ -33,19 +33,18 @@
                         <!-- Nav brand -->
                         <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
 
-
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
                             <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-
                         <!-- Menu -->
                         <div class="classy-menu">
                             <!-- Menu -->
                             <div class="classynav">
-                               
-                                
-
+                                <ul>
+                                    <li><a href="{% url 'auth:login' %}">Login</a></li>
+                                    <li><a href="{% url 'marmut_app:show_registerpage' %}">Register</a></li>
+                                </ul>
                             </div>
                             <!-- Nav End -->
                         </div>
