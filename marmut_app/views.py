@@ -114,4 +114,27 @@ def show_artist_song(request):
     return render(request, "dashboard-artist-songwriter.html", context)
 
 def show_dashboard(request):
-    return render(request, "dashboard.html")
+    roles = request.COOKIES.get('role')
+    print(roles)
+    
+    if 'label' in roles:
+        query = """
+            SELECT 
+                A.judul AS "Judul Album",
+                A.jumlah_lagu AS "Jumlah Lagu di Album"
+            FROM 
+                ALBUM A
+            JOIN 
+                LABEL L ON A.id_label = L.id
+            WHERE 
+                L.id = %s
+        """
+        
+        with connection.cursor() as cursor:
+            cursor.execute(query, [request.COOKIES.get('id')])
+            albums = cursor.fetchall()
+        return render(request, "dashboard.html", {"albums": albums})
+
+
+    else:     
+        return render(request, "dashboard.html")
