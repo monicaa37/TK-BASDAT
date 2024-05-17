@@ -30,54 +30,39 @@
         </div>
     </div>
 
-<!-- ##### Header Area Start ##### -->
-<header class="header-area">
-    <!-- Navbar Area -->
-    <div class="oneMusic-main-menu">
-        <div class="classy-nav-container breakpoint-off">
-            <div class="container">
-                <!-- Menu -->
-                <nav class="classy-navbar justify-content-between" id="oneMusicNav">
-
-                    <!-- Nav brand -->
-                    <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
-
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
+    <!-- ##### Navbar Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
                     <!-- Menu -->
-                    <div class="classy-menu">
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
-                        <!-- Close Button -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        <!-- Nav brand -->
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
-
-                        <!-- Nav Start -->
-                        <div class="classynav">
-                            <!-- Login/Register & Cart Button -->
-                            <div class="login-register-cart-button d-flex align-items-center">
-                                <!-- Login/Register --> 
-                                 <!-- nanti link nya diganti --> 
-                                <div class="login-register-btn mr-50">
-                                    <a href="login" id="loginBtn">Login</a>
-                                </div>
-                                <div class="login-register-btn mr-50">
-                                    <a href="registration-page" id="loginBtn">Register</a>
-                                </div>  
+                        <!-- Menu -->
+                        <div class="classy-menu">
+                            <!-- Menu -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="{% url 'auth:login' %}">Login</a></li>
+                                    <li><a href="{% url 'marmut_app:show_registerpage' %}">Register</a></li>
+                                </ul>
                             </div>
+                            <!-- Nav End -->
                         </div>
-                        <!-- Nav End -->
-
-                    </div>
-                </nav>
+                    </nav>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-<!-- ##### Header Area End ##### -->
+    </header>
+    <!-- ##### Navbar Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">

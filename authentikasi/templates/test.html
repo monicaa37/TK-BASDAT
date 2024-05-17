@@ -85,16 +85,8 @@
                 <li>Tanggal Lahir: {{ request.COOKIES.tanggal_lahir }}</li>
                 <li>Is Verified: {{ request.COOKIES.is_verified }}</li>
                 <li>Kota Asal: {{ request.COOKIES.kota_asal }}</li>
+                <li>Role: {{ request.COOKIES.role }}</li>
         
-                {% if request.COOKIES.role == 'podcaster' %}
-                    <li>Role: Podcaster</li>
-                {% elif request.COOKIES.role == 'artist' %}
-                    <li>Role: Artist</li>
-                {% elif request.COOKIES.role == 'songwriter' %}
-                    <li>Role: Songwriter</li>
-                {% elif request.COOKIES.role == 'biasa' %}
-                    <li>Role: Pengguna Biasa</li>
-                {% endif %}
             </ul>
         </div>
     </section>

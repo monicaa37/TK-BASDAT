@@ -117,4 +117,74 @@ def show_artist_song(request):
     return render(request, "dashboard-artist-songwriter.html", context)
 
 def show_dashboard(request):
-    return render(request, "dashboard.html")
+    roles = request.COOKIES.get('role')
+    print(roles)
+    
+    if 'label' in roles:
+        query = """
+            SELECT A.judul AS "Judul Album",
+                   A.jumlah_lagu AS "Jumlah Lagu di Album"
+            FROM ALBUM A
+            JOIN LABEL L ON A.id_label = L.id
+            WHERE L.id = %s"""
+        with connection.cursor() as cursor:
+            cursor.execute(query, [request.COOKIES.get('id')])
+            albums = cursor.fetchall()
+        return render(request, "dashboard.html", {"albums": albums})
+
+
+    else:
+        podcasts = None
+        songs = None
+        playlists = None
+
+        if 'podcaster' in roles:
+            query = """
+                SELECT K.judul AS podcast_title
+                FROM KONTEN K
+                JOIN PODCAST P ON K.id = P.id_konten
+                JOIN PODCASTER PR ON P.email_podcaster = PR.email
+                WHERE PR.email = %s"""
+            with connection.cursor() as cursor:
+                cursor.execute(query, [request.COOKIES.get('email')])
+                podcasts = cursor.fetchall()
+
+
+        if 'artist' in roles or 'songwriter' in roles:
+            songs = []
+            if 'artist' in roles:
+                query_artist = """
+                    SELECT K.judul AS song_title
+                    FROM KONTEN K
+                    JOIN SONG S ON K.id = S.id_konten
+                    JOIN ARTIST A ON S.id_artist = A.id
+                    WHERE A.email_akun = %s"""
+                with connection.cursor() as cursor:
+                    cursor.execute(query_artist, [request.COOKIES.get('email')])
+                    artist_songs = cursor.fetchall()
+                songs.extend(artist_songs)
+
+            if 'songwriter' in roles:
+                print(request.COOKIES.get('email'))
+                query_sw = """
+                    SELECT K.judul AS song_title
+                    FROM KONTEN K
+                    JOIN SONGWRITER_WRITE_SONG SWS ON K.id = SWS.id_song
+                    JOIN SONGWRITER SW ON SWS.id_songwriter = SW.id
+                    WHERE SW.email_akun = %s"""
+                with connection.cursor() as cursor:
+                    cursor.execute(query_sw, [request.COOKIES.get('email')])
+                    sw_songs = cursor.fetchall()
+                songs.extend(sw_songs)
+
+
+        if 'biasa' in roles or 'premium' in roles:
+            query = """
+                SELECT judul AS playlist_title
+                FROM USER_PLAYLIST
+                WHERE email_pembuat = %s"""
+            with connection.cursor() as cursor:
+                cursor.execute(query, [request.COOKIES.get('email')])
+                playlists = cursor.fetchall()
+
+        return render(request, "dashboard.html", {"podcasts": podcasts, "songs": songs, "playlists": playlists})

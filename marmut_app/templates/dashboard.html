@@ -68,30 +68,45 @@
                                     </li>
 
                                     {% if request.COOKIES.role == 'podcaster' %}
-                                        <li><a href="dashboard">Dashboard</a></li>
-                                        <li><a href="#">Chart</a>
-                                        <li><a href="kelola-playlist">Manage Playlist</a></li>
-                                        <li><a href="#">Manage Podcast</a>
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
                                         <li><a href="#">Premium Plan</a>
-                                        <li><a href="main" id="loginBtn">Logout</a></li>
+                                        <li><a href="{% url 'auth:logout' %}" id="loginBtn">Logout</a></li>
                                     {% endif %}
 
                                     {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
-                                        <li><a href="dashboard">Dashboard</a></li>
-                                        <li><a href="#">Chart</a>
-                                        <li><a href="kelola-playlist">Manage Playlist</a></li>
-                                        <li><a href="kelola-album-artis-sw">Manage Song & Album</a>
-                                        <li><a href="cek-royalti-artis-sw">Royalti</a>
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
                                         <li><a href="#">Premium Plan</a></li>
-                                        <li><a href="main">Logout</a></li>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
                                     {% endif %}
 
-                                    {% if request.COOKIES.biasa %}
-                                        <li><a href="pengguna-biasa">Dashboard</a></li>
-                                        <li><a href="#">Chart</a>
-                                        <li><a href="kelola-playlist">Manage Playlist</a></li>
+                                    {% if request.COOKIES.role == 'premium' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
                                         <li><a href="#">Premium Plan</a>
-                                        <li><a href="main">Logout</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'biasa' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
                                     {% endif %}
 
                                 </ul>
@@ -165,20 +180,12 @@
                         <div class="section-heading style-2" style="margin-bottom: 35px;">
                             <h2>My Profile</h2>
                             <h4 style="margin-top:45px;">{{ request.COOKIES.nama }} - {{ request.COOKIES.email }}</h4>
-                            {% if request.COOKIES.role == 'podcaster' %}
-                                <h5>Podcaster</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'artist' %}
-                                <h5>Artist</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'songwriter' %}
-                                <h5>Songwriter</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'biasa' %}
-                                <h5>Pengguna Biasa</h5>
-                            {% endif %}
-                            {% if request.COOKIES.role == 'premium' %}
-                                <h5>Pengguna Premium</h5>
+                            {% if 'biasa' in request.COOKIES.role %}
+                                <h5>Pengguna biasa</h5>
+                            {% elif 'premium' in request.COOKIES.role %}
+                                <h5>Pengguna premium</h5>
+                            {% else %}
+                                <h5>{{ request.COOKIES.role }}</h5>
                             {% endif %}
                         </div>
                         <div class="row justify-content-center">
@@ -216,31 +223,23 @@
                                 <h2>Albums</h2>
                             </div>
 
+                            {% if not albums %}
                             <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
                                 <h5>Belum Memproduksi Album</h5>
                             </div>
-
-                            <!-- Album1 -->
-                            <!-- <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Playlist1</h6>
-                                        <p>Pembuat1</p>
+                            {% else %}
+                                {% for album in albums %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ album.0 }}</h6>
+                                                <p>{{ album.1 }} lagu</p>
+                                            </div>
+                                        </div>
+                                        <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
                                     </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div> -->
-
-                            <!-- Album2 -->
-                            <!-- <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Playlist2</h6>
-                                        <p>Pembuat2</p>
-                                    </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div> -->
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
             </div>
@@ -249,7 +248,7 @@
     {% endif %}
 
 
-    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+    {% if 'artist' in request.COOKIES.role or 'songwriter' in request.COOKIES.role %}
         <!-- ##### Song Area Start ##### -->
         <section class="miscellaneous-area mt-50">
             <div class="container">
@@ -261,27 +260,22 @@
                                 <h2>My Songs</h2>
                             </div>
 
-                            <!-- Song1 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Song1</h6>
-                                        <p>Artist1</p>
-                                    </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            {% if not songs %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Lagu</h5>
                             </div>
-
-                            <!-- Song2 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Song2</h6>
-                                        <p>Artist2</p>
+                            {% else %}
+                                {% for song in songs %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ song.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
                                     </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
             </div>
@@ -290,7 +284,7 @@
     {% endif %}
 
 
-    {% if request.COOKIES.role == 'biasa' or request.COOKIES.role == 'premium' %}
+    {% if 'biasa' in request.COOKIES.role or 'premium' in request.COOKIES.role %}
         <!-- ##### Playlist Area Start ##### -->
         <section class="miscellaneous-area mt-50">
             <div class="container">
@@ -302,27 +296,22 @@
                                 <h2>My Playlists</h2>
                             </div>
 
-                            <!-- Playlist1 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Playlist1</h6>
-                                        <p>Pembuat1</p>
-                                    </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            {% if not playlists %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Playlist</h5>
                             </div>
-
-                            <!-- Playlist2 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Playlist2</h6>
-                                        <p>Pembuat2</p>
+                            {% else %}
+                                {% for playlist in playlists %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ playlist.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
                                     </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
             </div>
@@ -330,7 +319,7 @@
         <!-- ##### Playlist Area End ##### -->         
     {% endif %}
 
-    {% if request.COOKIES.role == 'podcaster' %}
+    {% if 'podcaster' in request.COOKIES.role %}
         <!-- ##### Podcast Area Start ##### -->
         <section class="miscellaneous-area mt-50">
             <div class="container">
@@ -342,27 +331,22 @@
                                 <h2>My Podcasts</h2>
                             </div>
 
-                            <!-- Podcast1 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Podcast1</h6>
-                                        <p>1 Episode</p>
-                                    </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            {% if not podcasts %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Podcast</h5>
                             </div>
-
-                            <!-- Podcast2 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Podcast2</h6>
-                                        <p>5 Episodes</p>
+                            {% else %}
+                                {% for podcast in podcasts %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ podcast.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
                                     </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
             </div>

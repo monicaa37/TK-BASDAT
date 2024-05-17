@@ -20,22 +20,23 @@ def login(request):
 
         try:
             with connection.cursor() as cursor:
-                cursor.execute(f"SELECT * FROM akun WHERE email = '{email}' AND password = '{password}'")
+                cursor.execute("SELECT * FROM akun WHERE email = %s AND password = %s", [email, password])
                 data = cursor.fetchall()
-                account = True
 
-                if not data:
-                    cursor.execute(f"SELECT * FROM label WHERE email = '{email}' AND password = '{password}'")
+                if data:
+                    account = True
+                else:
+                    cursor.execute("SELECT * FROM label WHERE email = %s AND password = %s", [email, password])
                     data = cursor.fetchall()
-                    account = False
-                    label = True
+                    if data:
+                        label = True
 
         except Exception as e:
             print(e)
             context = {"is_error": True}
             return render(request, 'test.html', context)
 
-        if account and not label:
+        if account:
             email = data[0][0]
             nama = data[0][2]
             gender = data[0][3]
@@ -48,13 +49,13 @@ def login(request):
             songwriter = False
 
             with connection.cursor() as cursor:
-                cursor.execute(f"SELECT * FROM podcaster WHERE email = '{email}'")
+                cursor.execute("SELECT * FROM podcaster WHERE email = %s", [email])
                 if cursor.fetchall():
                     podcaster = True
-                cursor.execute(f"SELECT * FROM artist WHERE email_akun = '{email}'")
+                cursor.execute("SELECT * FROM artist WHERE email_akun = %s", [email])
                 if cursor.fetchall():
                     artist = True
-                cursor.execute(f"SELECT * FROM songwriter WHERE email_akun = '{email}'")
+                cursor.execute("SELECT * FROM songwriter WHERE email_akun = %s", [email])
                 if cursor.fetchall():
                     songwriter = True
 
@@ -71,19 +72,20 @@ def login(request):
             response.set_cookie('kota_asal', kota_asal)
 
             # Set role cookies
+            roles = []
             if podcaster:
-                response.set_cookie('podcaster', True)
+                roles.append('podcaster')
             if artist:
-                response.set_cookie('artist', True)
+                roles.append('artist')
             if songwriter:
-                response.set_cookie('songwriter', True)
-            if not (podcaster or artist or songwriter):
-                response.set_cookie('biasa', True)
+                roles.append('songwriter')
+            if not podcaster and not artist and not songwriter:
+                roles.append('biasa')
             sleep(1)
+            response.set_cookie('role', ', '.join(roles))
             return response
-        
-        
-        elif not account and label:
+
+        elif label:
             id = data[0][0]
             nama = data[0][1]
             email = data[0][2]
@@ -98,32 +100,41 @@ def login(request):
             response.set_cookie('is_authenticated', True)
             response.set_cookie('kontak', kontak)
             response.set_cookie('id_pemilik_hak_cipta', id_pemilik_hak_cipta)
-            response.set_cookie('role','label')
+            response.set_cookie('role', 'label')
             return response
-
 
         else:
             context = {"is_error": True}
 
     return render(request, 'auth_login.html', context)
 
+
+
 def logout(request):
     # Create a redirect response to the main page
-    response = render(request, "auth_login.html")
+    response = render(request, "main.html")
     print(request.COOKIES.get('nama'))
 
     # Delete all the cookies
-    response.delete_cookie('email')
-    response.delete_cookie('nama')
-    response.delete_cookie('is_authenticated')
-    response.delete_cookie('gender')
-    response.delete_cookie('tempat_lahir')
-    response.delete_cookie('tanggal_lahir')
-    response.delete_cookie('is_verified')
-    response.delete_cookie('kota_asal')
-    response.delete_cookie('podcaster')
-    response.delete_cookie('artist')
-    response.delete_cookie('songwriter')
-    response.delete_cookie('biasa')
+    if (request.COOKIES.get('role') == 'label'):
+        response.delete_cookie('id', id)
+        response.delete_cookie('nama')
+        response.delete_cookie('is_authenticated')
+        response.delete_cookie('kontak')
+        response.delete_cookie('id_pemilik_hak_cipta')
+        response.delete_cookie('label')
+    else:
+        response.delete_cookie('email')
+        response.delete_cookie('nama')
+        response.delete_cookie('is_authenticated')
+        response.delete_cookie('gender')
+        response.delete_cookie('tempat_lahir')
+        response.delete_cookie('tanggal_lahir')
+        response.delete_cookie('is_verified')
+        response.delete_cookie('kota_asal')
+        response.delete_cookie('podcaster')
+        response.delete_cookie('artist')
+        response.delete_cookie('songwriter')
+        response.delete_cookie('biasa')
 
     return response

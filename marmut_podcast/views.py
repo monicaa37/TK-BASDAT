@@ -13,10 +13,11 @@ def insert_data(request):
 
         # Mendapatkan nilai genre dari formulir
         genres = request.POST.getlist('genre')
-        print(f"Judul: {judul}")
-        print(f"Genre: {', '.join(genres)}")
         # Mendapatkan email podcaster dari cookie
         email_podcaster = request.COOKIES.get('email')
+        print(f"Judul: {judul}")
+        print(f"Genre: {', '.join(genres)}")
+        print(f"email: {email_podcaster}")
 
         # Mendapatkan tanggal saat ini dan tahun saat ini
         tanggal_rilis = datetime.now()
