@@ -66,12 +66,12 @@
                                         </form>
                                     </li>
                                     <!-- nanti link nya diganti -->
-                                    <li><a href="index">Dashboard</a></li>
-                                    <li><a href="#">Chart</a>
+                                    <li><a href="#">Dashboard</a></li>
+                                    <li><a href="top-charts">Chart</a>
                                     <li><a href="kelola_playlist">Manage Playlist</a></li>
-                                    <li><a href="#">Manage Podcast</a>
+                                    <li><a href="list-podcast">Manage Podcast</a>
                                     <li><a href="#">Premium Plan</a>
-                                    <li><a href="login" id="loginBtn">Logout</a></li>
+                                    <li><a href="main" id="loginBtn">Logout</a></li>
                                     </ul>   
                                 </div>
                             </div>
@@ -102,19 +102,23 @@
                         <h2>PODCAST DETAIL</h2>
                     </div>
                     <div class="podcast-image text-center">
+                        <!-- Ganti sumber gambar dengan data yang diterima dari view -->
                         <img src="{% static 'img/core-img/Podcast-blog-6.jpg' %}" alt="Podcast Image" style="max-width: 200px; max-height: 200px;">
                     </div>        
                     <div class="podcast-info">
-                        <p><strong>Judul:</strong> Podcast1</p>
+                        <!-- Ganti konten dengan data yang diterima dari view -->
+                        <p><strong>Judul:</strong> {{ podcast_detail.podcast_title }}</p>
                         <p><strong>Genre(s):</strong></p>
                         <ul>
-                            <li>Genre1</li>
-                            <li>Genre2</li>
+                            <!-- Loop untuk menampilkan genre -->
+                            {% for genre in genres_list %}
+                                <li>{{ genre }}</li>
+                            {% endfor %}
                         </ul>
-                        <p><strong>Podcaster:</strong> Artist1</p>
-                        <p><strong>Total Durasi:</strong> 8 jam 20 menit</p>
-                        <p><strong>Tanggal Rilis:</strong> 18/03/24</p>
-                        <p><strong>Tahun:</strong> 2024</p>
+                        <p><strong>Podcaster:</strong> {{ podcast_detail.podcaster_name }}</p>
+                        <p><strong>Total Durasi:</strong> {{ podcast_detail.total_duration }}</p>
+                        <p><strong>Tanggal Rilis:</strong> {{ podcast_detail.release_date }}</p>
+                        <p><strong>Tahun:</strong> {{ podcast_detail.release_year }}</p>
                     </div>
                     <div class="text-center">
                         <a href="#" class="btn oneMusic-btn mt-30">Kembali</a>
@@ -143,19 +147,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>SubJudul1</td>
-                                    <td>Lorem Ipsum ....</td>
-                                    <td>59 menit</td>
-                                    <td>18/03/2024</td>
-                                </tr>
-                                <tr>
-                                    <td>SubJudul2</td>
-                                    <td>Lorem Ipsum ....</td>
-                                    <td>1 jam 2 menit</td>
-                                    <td>25/03/2024</td>
-                                </tr>
-                                <!-- Tambahkan baris lain sesuai kebutuhan -->
+                                <!-- Loop untuk menampilkan daftar episode -->
+                                {% for episode in episodes %}
+                                    <tr>
+                                        <td>{{ episode.episode_title }}</td>
+                                        <td>{{ episode.episode_description }}</td>
+                                        <td>{{ episode.episode_duration }}</td>
+                                        <td>{{ episode.episode_release_date }}</td>
+                                    </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>

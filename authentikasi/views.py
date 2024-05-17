@@ -127,5 +127,3 @@ def logout(request):
     response.delete_cookie('biasa')
 
     return response
-
-
