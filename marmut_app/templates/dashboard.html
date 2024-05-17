@@ -257,27 +257,22 @@
                                 <h2>My Songs</h2>
                             </div>
 
-                            <!-- Song1 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Song1</h6>
-                                        <p>Artist1</p>
-                                    </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            {% if not songs %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Lagu</h5>
                             </div>
-
-                            <!-- Song2 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Song2</h6>
-                                        <p>Artist2</p>
+                            {% else %}
+                                {% for song in songs %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ song.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
                                     </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
             </div>
@@ -338,27 +333,22 @@
                                 <h2>My Podcasts</h2>
                             </div>
 
-                            <!-- Podcast1 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Podcast1</h6>
-                                        <p>1 Episode</p>
-                                    </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            {% if not podcasts %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Podcast</h5>
                             </div>
-
-                            <!-- Podcast2 -->
-                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                                <div class="first-part d-flex align-items-center">
-                                    <div class="content-">
-                                        <h6>Podcast2</h6>
-                                        <p>5 Episodes</p>
+                            {% else %}
+                                {% for podcast in podcasts %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ podcast.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
                                     </div>
-                                </div>
-                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                            </div>
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     </div>
             </div>
