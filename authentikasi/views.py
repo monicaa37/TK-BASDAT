@@ -112,7 +112,7 @@ def login(request):
 
 def logout(request):
     # Create a redirect response to the main page
-    response = render(request, "auth_login.html")
+    response = render(request, "main.html")
     print(request.COOKIES.get('nama'))
 
     # Delete all the cookies
