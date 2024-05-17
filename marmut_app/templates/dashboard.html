@@ -67,8 +67,8 @@
                                         </form>
                                     </li>
 
-                                    {% if request.COOKIES.podcaster %}
-                                        <li><a href="podcaster">Dashboard</a></li>
+                                    {% if request.COOKIES.role == 'podcaster' %}
+                                        <li><a href="dashboard">Dashboard</a></li>
                                         <li><a href="#">Chart</a>
                                         <li><a href="kelola_playlist.html">Manage Playlist</a></li>
                                         <li><a href="#">Manage Podcast</a>
@@ -76,8 +76,8 @@
                                         <li><a href="#" id="loginBtn">Logout</a></li>
                                     {% endif %}
 
-                                    {% if request.COOKIES.artist or request.COOKIES.songwriter %}
-                                        <li><a href="artis-sw">Dashboard</a></li>
+                                    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                        <li><a href="dashboard">Dashboard</a></li>
                                         <li><a href="#">Chart</a>
                                         <li><a href="#">Manage Playlist</a></li>
                                         <li><a href="kelola-album-artis-sw">Manage Song & Album</a>
@@ -86,13 +86,30 @@
                                         <li><a href="#">Logout</a></li>
                                     {% endif %}
 
-                                    {% if request.COOKIES.biasa %}
-                                        <li><a href="pengguna-biasa">Dashboard</a></li>
+                                    {% if request.COOKIES.role == 'premium' %}
+                                        <li><a href="index.html">Dashboard</a></li>
+                                        <li><a href="#">Chart</a>
+                                        <li><a href="#">Manage Playlist</a></li>
+                                        <li><a href="#">Downloaded Songs</a>
+                                        <li><a href="#">Premium Plan</a>
+                                        <li><a href="#">Logout</a>
+                                    {% endif %}
+
+                                    {% if request.COOKIES.role == 'biasa' %}
+                                        <li><a href="dashboard">Dashboard</a></li>
                                         <li><a href="#">Chart</a>
                                         <li><a href="kelola_playlist.html">Manage Playlist</a></li>
                                         <li><a href="#">Premium Plan</a>
-                                        <li><a href="login.html">Logout</a>
+                                        <li><a href="#">Logout</a>
                                     {% endif %}
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="dashboard">Dashboard</a></li>
+                                        <li><a href="kelola-album-label">Manage Album</a>
+                                        <li><a href="cek-royalti-label">Royalti</a>
+                                        <li><a href="#">Logout</a></li>
+                                    {% endif %}
+
                                 </ul>
 
                                     
@@ -153,79 +170,223 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="section-heading style-2" style="margin-bottom: 35px;">
-                        <h2>My Profile</h2>
-                        <h4 style="margin-top:45px;">{{ request.COOKIES.nama }} - {{ request.COOKIES.email }}</h4>
-                        {% if request.COOKIES.podcaster %}
-                            <h5>Podcaster</h5>
-                        {% endif %}
-                        {% if request.COOKIES.artist %}
-                            <h5>Artist</h5>
-                        {% endif %}
-                        {% if request.COOKIES.songwriter %}
-                            <h5>Songwriter</h5>
-                        {% endif %}
-                        {% if request.COOKIES.biasa %}
-                            <h5>Pengguna Biasa</h5>
-                        {% endif %}
-                    </div>  
-                    <div class="row justify-content-center">
-                        <div class="">
-                            <div class="ablums-text text-center" style="margin-bottom: 2px;">
-                                <p style="margin-bottom: 2px;">Lives in {{ request.COOKIES.kota_asal }}</p>
-                                {% if request.COOKIES.gender == "0" %}
-                                    <p style="margin-bottom: 2px;">Female</p>
-                                {% endif %}
-                                {% if request.COOKIES.gender == "1" %}
-                                    <p style="margin-bottom: 2px;">Male</p>
-                                {% endif %}
-                                <p>Born in {{ request.COOKIES.tempat_lahir }}, {{ request.COOKIES.tanggal_lahir }}</p>
-                            </div>
+
+                    {% if request.COOKIES.role == 'label' %}
+                        <div class="section-heading style-2" style="margin-bottom: 35px;">
+                            <h2>Label Profile</h2>
+                            <h4 style="margin-top:45px;">{{ request.COOKIES.nama }}</h4>
+                            <h6>{{ request.COOKIES.email }}</h6>
+                            <h6>{{ request.COOKIES.kontak }}</h6>
+                        </div> 
+
+                    {% else %}
+                        <div class="section-heading style-2" style="margin-bottom: 35px;">
+                            <h2>My Profile</h2>
+                            <h4 style="margin-top:45px;">{{ request.COOKIES.nama }} - {{ request.COOKIES.email }}</h4>
+                            {% if request.COOKIES.role == 'podcaster' %}
+                                <h5>Podcaster</h5>
+                            {% endif %}
+                            {% if request.COOKIES.role == 'artist' %}
+                                <h5>Artist</h5>
+                            {% endif %}
+                            {% if request.COOKIES.role == 'songwriter' %}
+                                <h5>Songwriter</h5>
+                            {% endif %}
+                            {% if request.COOKIES.role == 'biasa' %}
+                                <h5>Pengguna Biasa</h5>
+                            {% endif %}
+                            {% if request.COOKIES.role == 'premium' %}
+                                <h5>Pengguna Premium</h5>
+                            {% endif %}
                         </div>
-                    </div>   
+                        <div class="row justify-content-center">
+                            <div class="">
+                                <div class="ablums-text text-center" style="margin-bottom: 2px;">
+                                    <p style="margin-bottom: 2px;">Lives in {{ request.COOKIES.kota_asal }}</p>
+                                    {% if request.COOKIES.gender == "0" %}
+                                        <p style="margin-bottom: 2px;">Female</p>
+                                    {% endif %}
+                                    {% if request.COOKIES.gender == "1" %}
+                                        <p style="margin-bottom: 2px;">Male</p>
+                                    {% endif %}
+                                    <p>Born in {{ request.COOKIES.tempat_lahir }}, {{ request.COOKIES.tanggal_lahir }}</p>
+                                </div>
+                            </div>
+                        </div> 
+                    {% endif %} 
+
                 </div>
             </div>
         </div>
     </section>
     <!-- ##### Profile Area End ##### -->
 
-    <!-- ##### Playlist Area Start ##### -->
-    <section class="miscellaneous-area mt-50">
-        <div class="container">
 
-                <!-- ***** Daftar Playlist ***** -->
-                <div class="mb-50" style="min-width: auto;">
-                    <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
-                        <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
-                            <h2>My Playlists</h2>
-                        </div>
+    {% if request.COOKIES.role == 'label' %}
+        <!-- ##### Album Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
 
-                        <!-- Playlist1 -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="content-">
-                                    <h6>Playlist1</h6>
-                                    <p>Pembuat1</p>
-                                </div>
+                    <!-- ***** Daftar Album ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>Albums</h2>
                             </div>
-                            <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
-                        </div>
 
-                        <!-- Playlist2 -->
-                        <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
-                            <div class="first-part d-flex align-items-center">
-                                <div class="content-">
-                                    <h6>Playlist2</h6>
-                                    <p>Pembuat2</p>
-                                </div>
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memproduksi Album</h5>
                             </div>
-                            <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+
+                            <!-- Album1 -->
+                            <!-- <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Playlist1</h6>
+                                        <p>Pembuat1</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div> -->
+
+                            <!-- Album2 -->
+                            <!-- <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Playlist2</h6>
+                                        <p>Pembuat2</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div> -->
                         </div>
                     </div>
-                </div>
-        </div>
-    </section>
-    <!-- ##### Playlist Area End ##### -->
+            </div>
+        </section>
+        <!-- ##### Album Area End ##### -->
+    {% endif %}
+
+
+    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+        <!-- ##### Song Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Song ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>My Songs</h2>
+                            </div>
+
+                            <!-- Song1 -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Song1</h6>
+                                        <p>Artist1</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div>
+
+                            <!-- Song2 -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Song2</h6>
+                                        <p>Artist2</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Song Area End ##### -->
+    {% endif %}
+
+
+    {% if request.COOKIES.role == 'biasa' or request.COOKIES.role == 'premium' %}
+        <!-- ##### Playlist Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Playlist ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>My Playlists</h2>
+                            </div>
+
+                            <!-- Playlist1 -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Playlist1</h6>
+                                        <p>Pembuat1</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div>
+
+                            <!-- Playlist2 -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Playlist2</h6>
+                                        <p>Pembuat2</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Playlist Area End ##### -->         
+    {% endif %}
+
+    {% if request.COOKIES.role == 'podcaster' %}
+        <!-- ##### Podcast Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Podcast ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>My Podcasts</h2>
+                            </div>
+
+                            <!-- Podcast1 -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Podcast1</h6>
+                                        <p>1 Episode</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div>
+
+                            <!-- Podcast2 -->
+                            <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                <div class="first-part d-flex align-items-center">
+                                    <div class="content-">
+                                        <h6>Podcast2</h6>
+                                        <p>5 Episodes</p>
+                                    </div>
+                                </div>
+                                <button class="small-button" preload="auto" style="font-weight: 500;">Detail</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Podcast Area End ##### -->
+    {% endif %}
 
 
     <!-- ##### All Javascript Script ##### -->
