@@ -95,57 +95,50 @@
     </section>
     <!-- ##### Breadcumb Area End ##### -->
     <div style="margin-bottom: 50px;"></div>
-
-    <!-- ##### Daftar Episode Area Start ##### -->
-    <section class="daftar-episode-area section-padding-100">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
-                    <div class="episode-table-content">
-                        <h2>DAFTAR EPISODE PADA PODCAST1</h2>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Judul Episode</th>
-                                    <th scope="col">Deskripsi</th>
-                                    <th scope="col">Durasi</th>
-                                    <th scope="col">Tanggal</th>
-                                    <th scope="col">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>SubJudul1</td>
-                                    <td>Lorem Ipsum ....</td>
-                                    <td>59 menit</td>
-                                    <td>18/03/2024</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <button type="button" class="btn btn-danger">Hapus</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>SubJudul2</td>
-                                    <td>Lorem Ipsum ....</td>
-                                    <td>1 jam 2 menit</td>
-                                    <td>25/03/2024</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="Episode Actions">
-                                            <button type="button" class="btn btn-danger">Hapus</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- Tambahkan baris lain sesuai kebutuhan -->
-                            </tbody>
-                        </table>
+        <!-- ##### Daftar Episode Area Start ##### -->
+        <section class="daftar-episode-area section-padding-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <div class="episode-table-content">
+                            <h2>DAFTAR EPISODE PADA {{ podcast_detail.0 }}</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Judul Episode</th>
+                                        <th scope="col">Deskripsi</th>
+                                        <th scope="col">Durasi</th>
+                                        <th scope="col">Tanggal</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for episode in episodes %}
+                                    <tr>
+                                        <td>{{ episode.Judul_Episode }}</td>
+                                        <td>{{ episode.Deskripsi }}</td>
+                                        <td>{{ episode.Durasi }} menit</td>
+                                        <td>{{ episode.Tanggal|date:"d/m/Y" }}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="Episode Actions">
+                                                <button type="button" class="btn btn-danger">Hapus</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center">
+                            <a href="{% url 'marmut_podcast:show_list_podcast' %}" class="btn oneMusic-btn mt-30">Kembali</a>
+                        </div>
                     </div>
-                    
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- ##### Daftar Episode Area End ##### -->
+        </section>
+        <!-- ##### Daftar Episode Area End ##### -->
+
+
 
     
     <!-- ##### Buy Now Area End ##### -->

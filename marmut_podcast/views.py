@@ -1,23 +1,25 @@
-from django.shortcuts import render
+import uuid
+from django.shortcuts import redirect, render
 from django.db import connection
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 def show_list_podcast(request):
     try:
         podcasts = []
         query = """
-        SELECT 
-            KONTEN.judul AS Judul,
-            COUNT(EPISODE.id_episode) AS "Jumlah Episode",
-            SUM(EPISODE.durasi) AS "Total Durasi"
-        FROM 
-            PODCAST
-        JOIN 
-            KONTEN ON PODCAST.id_konten = KONTEN.id
-        LEFT JOIN 
-            EPISODE ON PODCAST.id_konten = EPISODE.id_konten_podcast
-        GROUP BY 
-            KONTEN.judul
+        SELECT
+            P.id_konten AS id,
+            K.judul AS Judul,
+            COUNT(E.id_episode) AS "Jumlah Episode",
+            SUM(E.durasi) AS "Total Durasi"
+        FROM
+            PODCAST P
+        JOIN
+            KONTEN K ON P.id_konten = K.id
+        LEFT JOIN
+            EPISODE E ON P.id_konten = E.id_konten_podcast
+        GROUP BY
+            P.id_konten, K.judul;
         """
         with connection.cursor() as cursor:
             cursor.execute(query)
@@ -86,30 +88,83 @@ def show_top_charts(request):
 
     return render(request, "top-charts.html", context)
 
-def show_list_podcast(request):
-    context = {
-        '':''
-    }
-
-    return render(request, "list-podcast.html", context)
-def show_list_episode_podcast(request):
-    context = {
-        '':''
-    }
-
-    return render(request, "list-episode-podcast.html", context)
 def show_create_podcast(request):
     context = {
         '':''
     }
 
     return render(request, "create-podcast.html", context)
-def show_create_episode(request):
-    context = {
-        '':''
-    }
 
-    return render(request, "create-episode.html", context)
+
+def show_list_episode_podcast(request, type):
+    # Dapatkan id_konten dari URL
+    id_konten = type
+
+    # Eksekusi query SQL
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT KONTEN.judul AS Judul,
+                   EPISODE.judul AS Judul_Episode,
+                   EPISODE.deskripsi AS Deskripsi,
+                   EPISODE.durasi AS Durasi,
+                   EPISODE.tanggal_rilis AS Tanggal
+            FROM PODCAST
+            JOIN KONTEN ON PODCAST.id_konten = KONTEN.id
+            JOIN EPISODE ON PODCAST.id_konten = EPISODE.id_konten_podcast
+            WHERE PODCAST.id_konten = %s
+        """, [id_konten])
+
+        # Ambil semua baris hasil query
+        episodes = cursor.fetchall()
+
+    # Ubah hasil query menjadi list of dictionaries untuk kemudahan akses di template
+    episodes = [{'Judul': episode[0], 'Judul_Episode': episode[1], 'Deskripsi': episode[2], 'Durasi': episode[3], 'Tanggal': episode[4]} for episode in episodes]
+
+    # Ambil detail podcast
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT KONTEN.judul AS Judul
+            FROM KONTEN
+            WHERE KONTEN.id = %s
+        """, [id_konten])
+
+        # Ambil detail podcast
+        podcast_detail = cursor.fetchone()
+
+    # Render template dengan data yang sudah diambil
+    return render(request, 'list-episode-podcast.html', {'episodes': episodes, 'podcast_detail': podcast_detail})
+
+def create_episode(request, type):
+    if request.method == 'POST':
+        id_konten = type
+        # Generate UUID for id_episode
+        id_episode = uuid.uuid4()
+        judul = request.POST.get('judulInput')
+        deskripsi = request.POST.get('deskripsiInput')
+        durasi = request.POST.get('durasiInput')
+        tanggal_rilis = date.today()
+
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                INSERT INTO EPISODE (id_episode, id_konten_podcast, judul, deskripsi, durasi, tanggal_rilis)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, [id_episode,id_konten, judul, deskripsi, durasi, tanggal_rilis])
+
+        return redirect('marmut_podcast:show_list_episode_podcast', type=id_konten)
+    else:
+        # Jika bukan request POST, tampilkan form kosong
+        id_konten = type
+        with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT KONTEN.judul AS Judul
+                FROM KONTEN
+                WHERE KONTEN.id = %s
+            """, [id_konten])
+            podcast_detail = cursor.fetchone()
+            podcast_id = id_konten
+
+        return render(request, "create-episode.html", {'podcast_detail': podcast_detail, 'podcast_id':podcast_id})
+
 
 
 def chart_detail(request, type):
