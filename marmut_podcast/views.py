@@ -66,7 +66,7 @@ def delete_podcast(request, type):
 
         except Exception as e:
             connection.rollback()
-            return HttpResponse('Terjadi kesalahan saat menghapus data dari database: {}'.format(str(e)))
+            return HttpResponse('Podcast tidak berhasil di delete karena terdapat episode, hapuslah episode terlebih dahulu!')
     else:
         return HttpResponseNotAllowed(['POST'])
 
