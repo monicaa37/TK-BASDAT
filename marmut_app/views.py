@@ -140,7 +140,8 @@ def show_dashboard(request):
 
         if 'podcaster' in roles:
             query = """
-                SELECT K.judul AS podcast_title
+                SELECT K.judul AS podcast_title,
+                       K.id AS podcast_id
                 FROM KONTEN K
                 JOIN PODCAST P ON K.id = P.id_konten
                 JOIN PODCASTER PR ON P.email_podcaster = PR.email
@@ -154,7 +155,7 @@ def show_dashboard(request):
             songs = []
             if 'artist' in roles:
                 query_artist = """
-                    SELECT K.judul AS song_title
+                    SELECT K.judul AS song_title, K.id AS song_id
                     FROM KONTEN K
                     JOIN SONG S ON K.id = S.id_konten
                     JOIN ARTIST A ON S.id_artist = A.id
@@ -167,7 +168,7 @@ def show_dashboard(request):
             if 'songwriter' in roles:
                 print(request.COOKIES.get('email'))
                 query_sw = """
-                    SELECT K.judul AS song_title
+                    SELECT K.judul AS song_title, K.id AS song_id
                     FROM KONTEN K
                     JOIN SONGWRITER_WRITE_SONG SWS ON K.id = SWS.id_song
                     JOIN SONGWRITER SW ON SWS.id_songwriter = SW.id
@@ -180,7 +181,7 @@ def show_dashboard(request):
 
         if 'biasa' in roles or 'premium' in roles:
             query = """
-                SELECT judul AS playlist_title
+                SELECT judul, id_playlist
                 FROM USER_PLAYLIST
                 WHERE email_pembuat = %s"""
             with connection.cursor() as cursor:

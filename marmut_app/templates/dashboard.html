@@ -235,7 +235,8 @@
                                                 <h6>{{ album.0 }}</h6>
                                                 <p>{{ album.1 }} lagu</p>
                                             </div>
-                                        </div><form method="post" action="{% url 'marmut_album:show_lagu_di_album' type=album.0 %}">
+                                        </div>
+                                        <form method="post" action="{% url 'marmut_album:show_lagu_di_album' type=album.0 %}">
                                             {% csrf_token %}
                                             <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
                                         </form>
@@ -274,7 +275,10 @@
                                                 <h6>{{ song.0 }}</h6>
                                             </div>
                                         </div>
-                                        <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        <form method="post" action="{% url 'marmut_playlist:detail-song' song.1 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
                                     </div>
                                 {% endfor %}
                             {% endif %}
@@ -310,7 +314,10 @@
                                                 <h6>{{ playlist.0 }}</h6>
                                             </div>
                                         </div>
-                                        <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        <form method="post" action="{% url 'marmut_playlist:playlist_detail' playlist.1 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
                                     </div>
                                 {% endfor %}
                             {% endif %}
@@ -345,7 +352,10 @@
                                                 <h6>{{ podcast.0 }}</h6>
                                             </div>
                                         </div>
-                                        <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        <form method="post" action="{% url 'marmut_podcast:play_podcast' type=podcast.1 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
                                     </div>
                                 {% endfor %}
                             {% endif %}
