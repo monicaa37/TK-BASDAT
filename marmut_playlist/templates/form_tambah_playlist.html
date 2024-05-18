@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +13,10 @@
     <title>MARMUT</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
@@ -30,8 +31,8 @@
         </div>
     </div>
 
-     <!-- ##### Navbar Area Start ##### -->
-     <header class="header-area">
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
         <!-- Navbar Area -->
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">
@@ -49,51 +50,64 @@
 
                         <!-- Menu -->
                         <div class="classy-menu">
-                            <!-- Menu -->
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
                             <div class="classynav">
-                                
                                 <ul>
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="index.html">Dashboard</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Search Bar</a></li>
-                                            <li><a href="albums-store.html">Albums</a></li>
-                                            <li><a href="event.html">Kelola Playlist</a></li>
-                                            <li><a href="blog.html">Langganan Paket</a></li>
-                                        </ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
                                     </li>
-                                    <li><a href="#">Kelola</a>
-                                        <ul class="dropdown">
-                                            <li><a href="albums-store.html">Downloaded Songs</a></li>
-                                            <li><a href="event.html">Podcast</a></li>
-                                            <li><a href="blog.html">Album & Songs</a></li>
-                                            <li><a href="contact.html">Album</a></li>
-                                            <li><a href="contact.html">Cek Royalti</a></li>
-                                        </ul>
-                                    </li>    
+
+                                    <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                    {% else %}
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+
+                                        {% if 'podcaster' in request.COOKIES.role %}
+                                            <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        {% endif %}
+
+                                        {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                            <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                            <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        {% endif %}
+
+                                        {% if 'premium' in request.COOKIES.role %}
+                                            <li><a href="#">Manage Downloaded Songs</a>
+                                        {% else %}
+                                            <li><a href="#">Premium Plan</a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+
                                 </ul>
-
-                                <!-- Login/Register & Cart Button -->
-                                <div class="login-register-cart-button d-flex align-items-center">
-                                    <!-- Login/Register --> 
-                                     <!-- nanti link nya diganti --> 
-                                    <div class="login-register-btn mr-50">
-                                        <a href="login.html" id="loginBtn">Logout</a>
-                                    </div>
-
+                                </div>
                             </div>
                             <!-- Nav End -->
+
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ##### Navbar Area End ##### -->
+    <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
             <p>See what’s new</p>
             <!-- <h2>KELOLA PLAYLIST</h2> -->
@@ -111,14 +125,16 @@
                         <!-- Playlist Form -->
                         <div class="playlist-form">
                             <form action="#" method="post">
-                                <div class="form-group">
+                                {% csrf_token %}
+                                {% comment %} <div class="form-group">
                                     <label for="judulPlaylist">Judul</label>
                                     <input type="text" class="form-control" id="judulPlaylist" placeholder="Masukkan judul playlist">
                                 </div>
                                 <div class="form-group">
                                     <label for="deskripsiPlaylist">Deskripsi</label>
                                     <input type="text" class="form-control" id="deskripsiPlaylist" placeholder="Masukkan deskripsi playlist">
-                                </div>
+                                </div> {% endcomment %}
+                                {{ form.as_p }}
                                 <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
                             </form>
                         </div>
@@ -131,15 +147,15 @@
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="{% static 'js/active.js' %}"></script>
 </body>
 
 </html>

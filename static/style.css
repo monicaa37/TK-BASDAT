@@ -18,7 +18,18 @@
 body {
   font-family: "Archivo Narrow", sans-serif;
   font-size: 14px; }
+.row {
+    display: flex;
+    align-items: center;
+}
 
+.col-6 {
+    flex: 0 0 50%; /* Each column takes up 50% of the row */
+}
+
+.text-right {
+    text-align: right; /* Align content to the right */
+}
 h1,
 h2,
 h3,
@@ -60,6 +71,10 @@ img {
   height: auto;
   max-width: 100%; }
 
+  .equal-width {
+    width: 150px; /* Adjust the width as needed */
+    margin-right: 5px; /* Adjust margin between buttons */
+}
 /* :: 3.1.0 Spacing */
 .mt-15 {
   margin-top: 15px !important; }
@@ -140,10 +155,6 @@ img {
 
 .section-padding-100-70 {
   padding-top: 100px;
-  padding-bottom: 70px; }
-
-.section-padding-50-70 {
-  padding-top: 50px;
   padding-bottom: 70px; }
 
 /* :: 3.4.0 Section Heading */
@@ -354,42 +365,12 @@ img {
       background-color: #fff;
       color: #232323; }
 
-/* small button */
-.small-button {
-  background-color: #fefefe;
-  border: 1px solid #5e5e5e;
-  border-radius: 4px;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  box-sizing: border-box;
-  color: #2c2d2d;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 32px;
-  padding: 0 10px 0 11px;
-  margin: 3px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  width: 135px; }
-  .small-button:hover {
-  background-color: #d9d9d9; }
-  .small-button:focus {
-  border-color: #3b3b3b;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  outline: 0; }
-
 /* :: 4.0 Header Area CSS */
 .header-area {
   position: absolute;
   z-index: 1000;
   width: 100%;
-  top: 0px;
+  top: 20px;
   left: 0;
   z-index: 1000; }
   .header-area .oneMusic-main-menu {
@@ -1706,3 +1687,7 @@ img {
     font-size: 16px; }
   .single-web-icon:hover {
     box-shadow: 0 2px 50px 0 rgba(0, 0, 0, 0.15); }
+
+/* ====== The End ====== */
+
+/*# sourceMappingURL=style.css.map */

@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,14 +10,13 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Royalti</title>
+    <title>LIST PODCAST</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
-
 </head>
 
 <body>
@@ -31,7 +29,6 @@
             <div></div>
         </div>
     </div>
-
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -94,7 +91,7 @@
                                     {% endif %}
 
                                     <li><a href="{% url 'auth:logout' %}">Logout</a></li>
-
+                                    
                                 </ul>
                                 </div>
                             </div>
@@ -107,53 +104,69 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-    
+
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
-            <h2>Cek Royalti</h2>
+            <p>Lihat yang terbaru</p>
+            <h2>Podcast</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
+    <div style="margin-bottom: 50px;"></div>
 
-
-    <!-- ##### List Royalti Area Start ##### -->
-    <div class="oneMusic-buy-now-area mt-50 mb-50">
+    <!-- ##### Daftar Episode Area Start ##### -->
+    <section class="daftar-episode-area section-padding-100">
         <div class="container">
-            <h3>Daftar Royalti</h3>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="20%">Judul Lagu</th>
-                            <th width="20%">Judul Album</th>
-                            <th width="20%">Total Play</th>
-                            <th width="20%">Total Download</th>
-                            <th width="20%">Total Royalti Didapat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if not royaltis %}
-                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
-                                <h5>Belum Memiliki Royalti</h5>
-                            </div>
-                            {% else %}
-                                {% for royalti in royaltis %}
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="episode-table-content">
+                        <h2>DAFTAR PODCAST MARMUT</h2>
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>{{ royalti.0 }}</td>
-                                    <td>{{ royalti.1 }}</td>
-                                    <td>{{ royalti.2 }}</td>
-                                    <td>{{ royalti.3 }}</td>
-                                    <td style="font-weight: 600;">Rp{{ royalti.4 }}</td>
+                                    <th scope="col">Judul</th>
+                                    <th scope="col">Jumlah Episode</th>
+                                    <th scope="col">Total Durasi</th>
+                                    <th scope="col">Actions</th>
                                 </tr>
-                                {% endfor %}
-                            {% endif %}
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody>
+                                {% for podcast in podcasts %}
+                                <tr>
+                                    <td><a href="{% url 'marmut_podcast:play_podcast' type=podcast.0 %}">{{ podcast.1 }}</a></td>
+                                    <td>{{ podcast.2 }}</td>
+                                    <td>{{ podcast.3|default_if_none:"0" }} menit</td>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Episode Actions">
+                                            <a href="{% url 'marmut_podcast:show_list_episode_podcast' type=podcast.0 %}" class="btn btn-primary">Lihat Daftar Episode</a>
+                                            <a href="{% url 'marmut_podcast:show_create_episode' type=podcast.0 %}" class="btn btn-success">Tambah Episode</a>
+                                            <form method="post" action="{% url 'marmut_podcast:delete_podcast' type=podcast.0 %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}                
+                                <!-- Tambahkan baris lain sesuai kebutuhan -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <a href="{% url 'marmut_podcast:show_create_podcast' %}" class="btn oneMusic-btn mt-30">Tambah Podcast</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- ##### List Album Area End ##### -->
+    </section>
+    
+    <!-- ##### Daftar Episode Area End ##### -->
+    
+
+
+    
+    <!-- ##### Buy Now Area End ##### -->
 
 
     <!-- ##### All Javascript Script ##### -->
@@ -170,5 +183,3 @@
 </body>
 
 </html>
-
-{% load static %}

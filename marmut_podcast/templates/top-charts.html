@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,13 +10,12 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Royalti</title>
-
+    <title>TOP CHARTS</title>
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css'%}">
 
 </head>
 
@@ -31,7 +29,6 @@
             <div></div>
         </div>
     </div>
-
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -107,54 +104,83 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-    
+
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
-            <h2>Cek Royalti</h2>
+            <p>Lihat yang terbaru</p>
+            <h2>CHART LIST</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
 
+    <!-- Add space here -->
+    <div style="margin-bottom: 50px;"></div>
 
-    <!-- ##### List Royalti Area Start ##### -->
-    <div class="oneMusic-buy-now-area mt-50 mb-50">
+    <!-- ##### Add Area Start ##### -->
+    <div class="add-area mb-100">
         <div class="container">
-            <h3>Daftar Royalti</h3>
             <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="20%">Judul Lagu</th>
-                            <th width="20%">Judul Album</th>
-                            <th width="20%">Total Play</th>
-                            <th width="20%">Total Download</th>
-                            <th width="20%">Total Royalti Didapat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if not royaltis %}
-                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
-                                <h5>Belum Memiliki Royalti</h5>
-                            </div>
-                            {% else %}
-                                {% for royalti in royaltis %}
-                                <tr>
-                                    <td>{{ royalti.0 }}</td>
-                                    <td>{{ royalti.1 }}</td>
-                                    <td>{{ royalti.2 }}</td>
-                                    <td>{{ royalti.3 }}</td>
-                                    <td style="font-weight: 600;">Rp{{ royalti.4 }}</td>
-                                </tr>
-                                {% endfor %}
-                            {% endif %}
-                    </tbody>
-                </table>
+                <div class="col-12">
+                    <div class="adds">
+                        <!-- Text added on top of the image -->
+                        <div class="text-overlay">
+                            <h3>Daily Top 20, Weekly Top 20, Monthly Top 20, Yearly Top 20.</h3>
+                            <p>Lihat lagu favorit kita!</p>
+                        </div>
+                        <!-- Image with link -->
+                        <a href="#"><img src="{% static 'img/bg-img/bg-1.jpg' %}" alt=""></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- ##### List Album Area End ##### -->
+    <!-- ##### Add Area End ##### -->
 
+    <!-- ##### Chart List Area Start ##### -->
+    <div class="chart-list-area mb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Chart List</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tipe</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Daily Top 20</td>
+                                <td><a href="{% url 'marmut_podcast:chart_detail' type='daily' %}" class="btn oneMusic-btn">Lihat Daftar Lagu</a></td>
+                            </tr>
+                            <tr>
+                                <td>Weekly Top 20</td>
+                                <td><a href="{% url 'marmut_podcast:chart_detail' type='weekly' %}" class="btn oneMusic-btn">Lihat Daftar Lagu</a></td>
+                            </tr>
+                            <tr>
+                                <td>Monthly Top 20</td>
+                                <td><a href="{% url 'marmut_podcast:chart_detail' type='monthly' %}" class="btn oneMusic-btn">Lihat Daftar Lagu</a></td>
+                            </tr>
+                            <tr>
+                                <td>Yearly Top 20</td>
+                                <td><a href="{% url 'marmut_podcast:chart_detail' type='yearly' %}" class="btn oneMusic-btn">Lihat Daftar Lagu</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Chart List Area End ##### -->
+
+
+    <div class="text-center">
+        <a href="#" class="btn oneMusic-btn mt-30">Kembali</a>
+    </div>
+
+    <div style="margin-bottom: 50px;"></div>
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
@@ -170,5 +196,3 @@
 </body>
 
 </html>
-
-{% load static %}

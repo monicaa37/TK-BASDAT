@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Royalti</title>
+    <title>CREATE EPISODE</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
@@ -31,7 +30,6 @@
             <div></div>
         </div>
     </div>
-
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -67,7 +65,7 @@
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </li>
-
+                                    
                                     <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
 
                                     {% if request.COOKIES.role == 'label' %}
@@ -107,53 +105,51 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-    
+
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
-            <h2>Cek Royalti</h2>
+            <p>Mari tambahkan episode baru!</p>
+            <h2>CREATE EPISODE</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
 
-
-    <!-- ##### List Royalti Area Start ##### -->
-    <div class="oneMusic-buy-now-area mt-50 mb-50">
+    <!-- ##### Login Area Start ##### -->
+    <section class="login-area section-padding-100">
         <div class="container">
-            <h3>Daftar Royalti</h3>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="20%">Judul Lagu</th>
-                            <th width="20%">Judul Album</th>
-                            <th width="20%">Total Play</th>
-                            <th width="20%">Total Download</th>
-                            <th width="20%">Total Royalti Didapat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if not royaltis %}
-                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
-                                <h5>Belum Memiliki Royalti</h5>
-                            </div>
-                            {% else %}
-                                {% for royalti in royaltis %}
-                                <tr>
-                                    <td>{{ royalti.0 }}</td>
-                                    <td>{{ royalti.1 }}</td>
-                                    <td>{{ royalti.2 }}</td>
-                                    <td>{{ royalti.3 }}</td>
-                                    <td style="font-weight: 600;">Rp{{ royalti.4 }}</td>
-                                </tr>
-                                {% endfor %}
-                            {% endif %}
-                    </tbody>
-                </table>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="login-content">
+                        <!-- Login Form -->
+                        <div class="login-form">
+                            <form action="{% url 'marmut_podcast:create_episode' type=podcast_id %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="judulInput">Podcast: {{ podcast_detail.0 }}</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="judulInput">Judul</label>
+                                    <input type="text" class="form-control" name="judulInput" id="judulInput" placeholder="Masukkan Judul" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deskripsiInput">Deskripsi:</label>
+                                    <input type="text" class="form-control" name="deskripsiInput" id="deskripsiInput" placeholder="Masukkan Deskripsi" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="durasiInput">Durasi:</label>
+                                    <input type="text" class="form-control" name="durasiInput" id="durasiInput" placeholder="Masukkan Durasi" required>
+                                </div>       
+                                <button type="submit" class="btn oneMusic-btn mt-30">Submit</button>
+                            </form>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- ##### List Album Area End ##### -->
+    </section>
+    <!-- ##### Login Area End ##### -->
 
 
     <!-- ##### All Javascript Script ##### -->
@@ -170,5 +166,3 @@
 </body>
 
 </html>
-
-{% load static %}

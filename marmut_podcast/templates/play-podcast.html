@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +10,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Royalti</title>
+    <title>PLAY PODCAST</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
@@ -31,7 +30,6 @@
             <div></div>
         </div>
     </div>
-
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
@@ -107,54 +105,85 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-    
+
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
         <div class="bradcumbContent">
-            <h2>Cek Royalti</h2>
+            <h2>PLAY PODCAST</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
 
-
-    <!-- ##### List Royalti Area Start ##### -->
-    <div class="oneMusic-buy-now-area mt-50 mb-50">
+    <!-- ##### Podcast Detail Area Start ##### -->
+    <section class="podcast-detail-area section-padding-100">
         <div class="container">
-            <h3>Daftar Royalti</h3>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th width="20%">Judul Lagu</th>
-                            <th width="20%">Judul Album</th>
-                            <th width="20%">Total Play</th>
-                            <th width="20%">Total Download</th>
-                            <th width="20%">Total Royalti Didapat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% if not royaltis %}
-                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
-                                <h5>Belum Memiliki Royalti</h5>
-                            </div>
-                            {% else %}
-                                {% for royalti in royaltis %}
-                                <tr>
-                                    <td>{{ royalti.0 }}</td>
-                                    <td>{{ royalti.1 }}</td>
-                                    <td>{{ royalti.2 }}</td>
-                                    <td>{{ royalti.3 }}</td>
-                                    <td style="font-weight: 600;">Rp{{ royalti.4 }}</td>
-                                </tr>
-                                {% endfor %}
-                            {% endif %}
-                    </tbody>
-                </table>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="podcast-detail-content text-center">
+                        <h2>PODCAST DETAIL</h2>
+                    </div>
+                    <div class="podcast-image text-center">
+                        <!-- Ganti sumber gambar dengan data yang diterima dari view -->
+                        <img src="{% static 'img/core-img/Podcast-blog-6.jpg' %}" alt="Podcast Image" style="max-width: 200px; max-height: 200px;">
+                    </div>        
+                    <div class="podcast-info">
+                        <!-- Ganti konten dengan data yang diterima dari view -->
+                        <p><strong>Judul:</strong> {{ podcast_detail.podcast_title }}</p>
+                        <p><strong>Genre(s):</strong></p>
+                        <ul>
+                            <!-- Loop untuk menampilkan genre -->
+                            {% for genre in genres_list %}
+                                <li>{{ genre }}</li>
+                            {% endfor %}
+                        </ul>
+                        <p><strong>Podcaster:</strong> {{ podcast_detail.podcaster_name }}</p>
+                        <p><strong>Total Durasi:</strong> {{ podcast_detail.total_duration }} menit</p>
+                        <p><strong>Tanggal Rilis:</strong> {{ podcast_detail.release_date }}</p>
+                        <p><strong>Tahun:</strong> {{ podcast_detail.release_year }}</p>
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="btn oneMusic-btn mt-30">Kembali</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- ##### List Album Area End ##### -->
+    </section>
+    
+    <!-- ##### Podcast Detail Area End ##### -->
 
+        <!-- ##### Daftar Episode Area Start ##### -->
+        <section class="daftar-episode-area section-padding-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8">
+                        <div class="episode-table-content">
+                            <h2>DAFTAR EPISODE</h2>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Judul Episode</th>
+                                        <th scope="col">Deskripsi</th>
+                                        <th scope="col">Durasi</th>
+                                        <th scope="col">Tanggal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for episode in episodes %}
+                                    <tr>
+                                        <td>{{ episode.Judul_Episode }}</td>
+                                        <td>{{ episode.Deskripsi }}</td>
+                                        <td>{{ episode.Durasi }} menit</td>
+                                        <td>{{ episode.Tanggal|date:"d/m/Y" }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ##### Daftar Episode Area End ##### -->
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
@@ -170,5 +199,3 @@
 </body>
 
 </html>
-
-{% load static %}

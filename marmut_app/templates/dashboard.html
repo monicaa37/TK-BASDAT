@@ -1,0 +1,368 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <!-- Title -->
+    <title>Marmut</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader d-flex align-items-center justify-content-center">
+        <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area">
+        <!-- Navbar Area -->
+        <div class="oneMusic-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="oneMusicNav">
+
+                        <!-- Nav brand -->
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+
+                                    <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                    {% else %}
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+
+                                        {% if 'podcaster' in request.COOKIES.role %}
+                                            <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        {% endif %}
+
+                                        {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                            <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                            <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        {% endif %}
+
+                                        {% if 'premium' in request.COOKIES.role %}
+                                            <li><a href="#">Manage Downloaded Songs</a>
+                                        {% else %}
+                                            <li><a href="#">Premium Plan</a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+
+                                </ul>
+                                </div>
+                            </div>
+                            <!-- Nav End -->
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+
+    <!-- ##### Hero Area Start ##### -->
+    <section class="hero-area" style="height: 600px;">
+        <div class="hero-slides owl-carousel" style="height: 600px;">
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide d-flex align-items-center justify-content-center" style="height: 600px;">
+                <!-- Slide Img -->
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-1.jpg);"></div>
+                <!-- Slide Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hero-slides-content text-center">
+                                <h6 data-animation="fadeInUp" data-delay="100ms">Welcome to</h6>
+                                <h2 data-animation="fadeInUp" data-delay="300ms">MARMUT <span>MARMUT</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Hero Slide -->
+            <div class="single-hero-slide d-flex align-items-center justify-content-center" style="height: 600px;">
+                <!-- Slide Img -->
+                <div class="slide-img bg-img" style="background-image: url(static/img/bg-img/bg-2.jpg);"></div>
+                <!-- Slide Content -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="hero-slides-content text-center">
+                                <h6 data-animation="fadeInUp" data-delay="100ms">Welcome to</h6>
+                                <h2 data-animation="fadeInUp" data-delay="300ms">MARMUT<span>MARMUT</span></h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Hero Area End ##### -->
+
+    <!-- ##### Profile Area Start ##### -->
+    <section class="latest-albums-area mt-70">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    {% if request.COOKIES.role == 'label' %}
+                        <div class="section-heading style-2" style="margin-bottom: 35px;">
+                            <h2>Label Profile</h2>
+                            <h4 style="margin-top:45px;">{{ request.COOKIES.nama }}</h4>
+                            <h6>{{ request.COOKIES.email }}</h6>
+                            <h6>{{ request.COOKIES.kontak }}</h6>
+                        </div> 
+
+                    {% else %}
+                        <div class="section-heading style-2" style="margin-bottom: 35px;">
+                            <h2>My Profile</h2>
+                            <h4 style="margin-top:45px;">{{ request.COOKIES.nama }} - {{ request.COOKIES.email }}</h4>
+                            {% if 'biasa' in request.COOKIES.role %}
+                                <h5>Pengguna biasa</h5>
+                            {% elif 'premium' in request.COOKIES.role %}
+                                <h5>Pengguna premium</h5>
+                            {% else %}
+                                <h5>{{ request.COOKIES.role }}</h5>
+                            {% endif %}
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="">
+                                <div class="ablums-text text-center" style="margin-bottom: 2px;">
+                                    <p style="margin-bottom: 2px;">Lives in {{ request.COOKIES.kota_asal }}</p>
+                                    {% if request.COOKIES.gender == "0" %}
+                                        <p style="margin-bottom: 2px;">Female</p>
+                                    {% endif %}
+                                    {% if request.COOKIES.gender == "1" %}
+                                        <p style="margin-bottom: 2px;">Male</p>
+                                    {% endif %}
+                                    <p>Born in {{ request.COOKIES.tempat_lahir }}, {{ request.COOKIES.tanggal_lahir }}</p>
+                                </div>
+                            </div>
+                        </div> 
+                    {% endif %} 
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Profile Area End ##### -->
+
+
+    {% if request.COOKIES.role == 'label' %}
+        <!-- ##### Album Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Album ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>Albums</h2>
+                            </div>
+
+                            {% if not albums %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memproduksi Album</h5>
+                            </div>
+                            {% else %}
+                                {% for album in albums %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ album.0 }}</h6>
+                                                <p>{{ album.1 }} lagu</p>
+                                            </div>
+                                        </div>
+                                        <form method="post" action="{% url 'marmut_album:show_lagu_di_album' type=album.0 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Album Area End ##### -->
+    {% endif %}
+
+
+    {% if 'artist' in request.COOKIES.role or 'songwriter' in request.COOKIES.role %}
+        <!-- ##### Song Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Song ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>My Songs</h2>
+                            </div>
+
+                            {% if not songs %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Lagu</h5>
+                            </div>
+                            {% else %}
+                                {% for song in songs %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ song.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <form method="post" action="{% url 'marmut_playlist:detail-song' song.1 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Song Area End ##### -->
+    {% endif %}
+
+
+    {% if 'biasa' in request.COOKIES.role or 'premium' in request.COOKIES.role %}
+        <!-- ##### Playlist Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Playlist ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>My Playlists</h2>
+                            </div>
+
+                            {% if not playlists %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Playlist</h5>
+                            </div>
+                            {% else %}
+                                {% for playlist in playlists %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ playlist.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <form method="post" action="{% url 'marmut_playlist:playlist_detail' playlist.1 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Playlist Area End ##### -->         
+    {% endif %}
+
+    {% if 'podcaster' in request.COOKIES.role %}
+        <!-- ##### Podcast Area Start ##### -->
+        <section class="miscellaneous-area mt-50">
+            <div class="container">
+
+                    <!-- ***** Daftar Podcast ***** -->
+                    <div class="mb-50" style="min-width: auto;">
+                        <div class="new-hits-area mb-30" style="padding-bottom: 30px; padding-top: 35px;">
+                            <div class="section-heading text-left mb-30 wow fadeInUp" data-wow-delay="50ms">
+                                <h2>My Podcasts</h2>
+                            </div>
+
+                            {% if not podcasts %}
+                            <div class="section-heading text-center mb-15 wow fadeInUp" data-wow-delay="50ms">
+                                <h5>Belum Memiliki Podcast</h5>
+                            </div>
+                            {% else %}
+                                {% for podcast in podcasts %}
+                                    <div class="single-new-item d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="100ms">
+                                        <div class="first-part d-flex align-items-center">
+                                            <div class="content-">
+                                                <h6>{{ podcast.0 }}</h6>
+                                            </div>
+                                        </div>
+                                        <form method="post" action="{% url 'marmut_podcast:play_podcast' type=podcast.1 %}">
+                                            {% csrf_token %}
+                                            <button class="btn button-primary" preload="auto" style="font-weight: 500;">Detail</button>
+                                        </form>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <!-- ##### Podcast Area End ##### -->
+    {% endif %}
+
+
+    <!-- ##### All Javascript Script ##### -->
+    <!-- jQuery-2.2.4 js -->
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
+    <!-- Popper js -->
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
+    <!-- All Plugins js -->
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
+    <!-- Active js -->
+    <script src="{% static 'js/active.js' %}"></script>
+</body>
+
+</html>

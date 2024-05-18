@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'marmut_podcast',
     'marmut_album',
     'marmut_paket_download_song',
+    'authentikasi',
 ]
 
 MIDDLEWARE = [

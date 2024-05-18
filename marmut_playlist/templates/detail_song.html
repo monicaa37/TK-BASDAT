@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,15 +13,15 @@
     <title>MARMUT</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 
 </head>
 
 <body>
-    <!-- ##### Navbar Area Start ##### -->
+    <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <!-- Navbar Area -->
         <div class="oneMusic-main-menu">
@@ -30,50 +31,72 @@
                     <nav class="classy-navbar justify-content-between" id="oneMusicNav">
 
                         <!-- Nav brand -->
-                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt=""
-                                style="width: 100px; height: auto; margin-right: 10px;"></a>
+                        <a href="#" class="nav-brand"><img src="https://i.ibb.co/CnpX8kL/marmutt.jpg" alt="" style="width: 100px; height: auto; margin-right: 10px;"></a>
 
-
-                         <!-- Navbar Toggler -->
-                         <div class="classy-navbar-toggler">
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
                             <span class="navbarToggler"><span></span><span></span><span></span></span>
                         </div>
+
                         <!-- Menu -->
                         <div class="classy-menu">
-                            <!-- Menu -->
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
                             <div class="classynav">
-                                <!-- Menu -->
                                 <ul>
-                                    <!-- Search Bar -->
                                     <li>
                                         <form class="search-form" action="#" method="get">
-                                            <input type="text" name="search" id="search"
-                                                placeholder="Search...">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </li>
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="index.html">Dashboard</a></li>
-                                    <li><a href="#">Chart</a>
-                                    <li><a href="kelola_playlist.html">Manage Playlist</a></li>
-                                    <li><a href="#">Manage Album & Song</a>
-                                    <li><a href="#">Royalti</a>
-                                    <li><a href="#">Premium Plan</a></li>
-                                    <li><a href="#">Logout</a></li>
+                                    <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                    {% else %}
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+
+                                        {% if 'podcaster' in request.COOKIES.role %}
+                                            <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        {% endif %}
+
+                                        {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                            <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                            <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        {% endif %}
+
+                                        {% if 'premium' in request.COOKIES.role %}
+                                            <li><a href="#">Manage Downloaded Songs</a>
+                                        {% else %}
+                                            <li><a href="#">Premium Plan</a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+
                                 </ul>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Nav End -->
+                            <!-- Nav End -->
+
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ##### Navbar Area End ##### -->
+    <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg);">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg);">
     </section>
     <!-- ##### Breadcumb Area End ##### -->
 
@@ -87,26 +110,28 @@
                         SONG DETAIL
                     </h3>
                     <ul>
-                        <li>Judul: Song1</li>
+                        <li>Judul: {{ song_data.Judul }}</li>
                         <li>Genre(s):
                             <ul>
-                                <li>Genre1</li>
-                                <li>Genre2</li>
+                                {% for genre in song_data.Genre %}
+                                    <li>{{ genre }}</li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li>Artist: Artist1</li>
+                        <li>Artist: {{ song_data.Artist }}</li>
                         <li>Songwriter(s):
                             <ul>
-                                <li>Songwriter1</li>
-                                <li>Songwriter2</li>
+                                {% for songwriter in song_data.Songwriter %}
+                                    <li>{{ songwriter }}</li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li>Durasi: 3 menit</li>
-                        <li>Tanggal Rilis: 18/03/24</li>
-                        <li>Tahun: 2024</li>
-                        <li>Total Play: 0</li>
-                        <li>Total Downloads: 0</li>
-                        <li>Album: Album1</li>
+                        <li>Durasi: {{ song_data.Durasi }}</li>
+                        <li>Tanggal Rilis: {{ song_data.Tanggal_Rilis }}</li>
+                        <li>Tahun: {{ song_data.Tahun }}</li>
+                        <li>Total Play: {{ song_data.Total_Play }}</li>
+                        <li>Total Downloads: {{ song_data.Total_Downloads }}</li>
+                        <li>Album: {{ song_data.Album }}</li>
                     </ul>
                     <!-- Tombol download hanya muncul jika pengguna memiliki akun premium -->
                     <div class="login-buttons">
@@ -123,15 +148,15 @@
 
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <script src="{% static 'js/jquery/jquery-2.2.4.min.js' %}"></script>
     <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
+    <script src="{% static 'js/bootstrap/popper.min.js' %}"></script>
     <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
+    <script src="{% static 'js/plugins/plugins.js' %}"></script>
     <!-- Active js -->
-    <script src="js/active.js"></script>
+    <script src="{% static 'js/active.js' %}"></script>
 </body>
 
 </html>

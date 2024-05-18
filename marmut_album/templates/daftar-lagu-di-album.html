@@ -11,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Album1</title>
+    <title>{{ judul_album }}</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{% static 'img/core-img/favicon.ico' %}">
@@ -60,12 +60,40 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                
-                                    <!-- nanti link nya diganti -->
-                                    <li><a href="index.html">Dashboard</a></li>
-                                    <li><a href="#">Manage Album</a>
-                                    <li><a href="#">Royalti</a>
-                                    <li><a href="login.html" id="loginBtn">Logout</a></li>
+                                    <li>
+                                        <form class="search-form" action="#" method="get">
+                                            <input type="text" name="search" id="search" placeholder="Search...">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                    </li>
+
+                                    <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
+
+                                    {% if request.COOKIES.role == 'label' %}
+                                        <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
+                                        <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
+                                    {% else %}
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+
+                                        {% if 'podcaster' in request.COOKIES.role %}
+                                            <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        {% endif %}
+
+                                        {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                            <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                            <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        {% endif %}
+
+                                        {% if 'premium' in request.COOKIES.role %}
+                                            <li><a href="#">Manage Downloaded Songs</a>
+                                        {% else %}
+                                            <li><a href="#">Premium Plan</a>
+                                        {% endif %}
+                                    {% endif %}
+
+                                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+
                                 </ul>
                                 </div>
                             </div>
@@ -80,9 +108,9 @@
     <!-- ##### Header Area End ##### -->
 
     <!-- ##### Breadcumb Area Start ##### -->
-    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/breadcumb3.jpg); height: 180px;">
+    <section class="breadcumb-area bg-img bg-overlay" style="background-image: url(static/img/bg-img/breadcumb3.jpg); height: 180px;">
         <div class="bradcumbContent">
-            <h2>Album1</h2>
+            <h2>{{ judul_album }}</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
@@ -104,26 +132,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for song in songs %}
                         <tr>
-                            <td>Lagu1</td>
-                            <td>2 menit</td>
-                            <td>3</td>
-                            <td>0</td>
+                            <td>{{ song.0 }}</td>
+                            <td>{{ song.1 }} menit</td>
+                            <td>{{ song.2 }}</td>
+                            <td>{{ song.3 }}</td>
                             <td>
-                                <button class="small-button" style="margin-bottom: 3px;">Lihat Detail</button><br>
-                                <button class="small-button">Hapus</button>
+                                <form method="post" action="{% url 'marmut_playlist:detail-song' song.4 %}">
+                                    {% csrf_token %}
+                                    <button class="btn button-primary" preload="auto" style="font-weight: 500; margin-bottom: 5px;">Lihat Detail</button>
+                                </form>
+                                <form method="post" action="{% url 'marmut_album:delete_song' song.4 %}">
+                                    {% csrf_token %}
+                                    <button class="btn button-primary" preload="auto" style="font-weight: 500;">Hapus</button>
+                                </form>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Lagu 2</td>
-                            <td>3 menit</td>
-                            <td>3</td>
-                            <td>2</td>
-                            <td>
-                                <button class="small-button" style="margin-bottom: 3px;">Lihat Detail</button><br>
-                                <button class="small-button">Hapus</button>
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
