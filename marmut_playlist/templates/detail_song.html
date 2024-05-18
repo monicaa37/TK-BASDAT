@@ -126,26 +126,28 @@
                         SONG DETAIL
                     </h3>
                     <ul>
-                        <li>Judul: {{song_data.Judul}}</li>
+                        <li>Judul: {{ song_data.Judul }}</li>
                         <li>Genre(s):
                             <ul>
-                                <li>Genre1</li>
-                                <li>Genre2</li>
+                                {% for genre in song_data.Genre %}
+                                    <li>{{ genre }}</li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li>Artist: Artist1</li>
+                        <li>Artist: {{ song_data.Artist }}</li>
                         <li>Songwriter(s):
                             <ul>
-                                <li>Songwriter1</li>
-                                <li>Songwriter2</li>
+                                {% for songwriter in song_data.Songwriter %}
+                                    <li>{{ songwriter }}</li>
+                                {% endfor %}
                             </ul>
                         </li>
-                        <li>Durasi: 3 menit</li>
-                        <li>Tanggal Rilis: 18/03/24</li>
-                        <li>Tahun: 2024</li>
-                        <li>Total Play: 0</li>
-                        <li>Total Downloads: 0</li>
-                        <li>Album: Album1</li>
+                        <li>Durasi: {{ song_data.Durasi }}</li>
+                        <li>Tanggal Rilis: {{ song_data.Tanggal_Rilis }}</li>
+                        <li>Tahun: {{ song_data.Tahun }}</li>
+                        <li>Total Play: {{ song_data.Total_Play }}</li>
+                        <li>Total Downloads: {{ song_data.Total_Downloads }}</li>
+                        <li>Album: {{ song_data.Album }}</li>
                     </ul>
                     <!-- Tombol download hanya muncul jika pengguna memiliki akun premium -->
                     <div class="login-buttons">
