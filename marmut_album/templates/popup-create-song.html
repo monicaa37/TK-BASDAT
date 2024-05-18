@@ -26,7 +26,7 @@
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
         <!-- Navbar Area -->
-        <div class="oneMusic-main-menu">
+        <div class="oneMusic-main-menu" style="background-color: black;">
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
                     <!-- Menu -->
@@ -122,16 +122,15 @@
                         <h3>Create Song</h3>
                         <!-- Login Form -->
                         <div class="login-form">
-                            <form action="#" method="post">
-                                <form action="submit_album.php" method="post">
+                            <form action="{% url 'marmut_album:insert_song' %}" method="post">
+                                {% csrf_token %}
                                     <div class="form-group" style="margin-bottom: 20px;">
                                         <h5 for="album">Album:</h5>
                                         <div class="contact-form-area">
                                             <select class="form-control" id="album" name="album" required>
-                                                <!-- Populate options from database if available -->
-                                                <option value="album1">Album 1</option>
-                                                <option value="album2">Album 2</option>
-                                                <option value="album3">Album 3</option>
+                                                {% for album in albums %}
+                                                    <option value="{{ album.0 }}">{{ album.1 }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -145,9 +144,9 @@
                                         <h5 for="artist">Artist:</h5>
                                         <div class="contact-form-area">
                                             <select class="form-control" id="artist" name="artist" required>
-                                                <option value="artist1">Artist 1</option>
-                                                <option value="artist2">Artist 2</option>
-                                                <option value="artist3">Artist 3</option>
+                                                {% for artist in artists %}
+                                                    <option value="{{ artist.0 }}">{{ artist.1 }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -156,11 +155,9 @@
                                         <h5 for="songwriter">Songwriter:</h5>
                                         <div class="contact-form-area">
                                             <select multiple class="form-control" id="songwriter" name="songwriter[]" required>
-                                                <option value="songwriter1">Songwriter 1</option>
-                                                <option value="songwriter2">Songwriter 2</option>
-                                                <option value="songwriter3">Songwriter 3</option>
-                                                <option value="songwriter4">Songwriter 4</option>
-                                                <option value="songwriter5">Songwriter 5</option>
+                                                {% for songwriter in songwriters %}
+                                                    <option value="{{ songwriter.0 }}">{{ songwriter.1 }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>
@@ -170,12 +167,9 @@
                                         <h5 for="genre">Genre:</h5>
                                         <div class="contact-form-area">
                                             <select multiple class="form-control" id="genre" name="genre[]" required>
-                                                <option value="genre1">Genre 1</option>
-                                                <option value="genre2">Genre 2</option>
-                                                <option value="genre3">Genre 3</option>
-                                                <option value="genre4">Genre 4</option>
-                                                <option value="genre5">Genre 5</option>
-                                                <option value="genre6">Genre 6</option>
+                                                {% for genre in genres_list %}
+                                                    <option value="{{ genre }}">{{ genre }}</option>
+                                                {% endfor %}
                                             </select>
                                         </div>
                                     </div>                    
@@ -192,7 +186,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </form>
                             </form>
                         </div>
                     </div>

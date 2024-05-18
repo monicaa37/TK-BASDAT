@@ -33,7 +33,7 @@
     </div>
 
     <!-- ##### Header Area Start ##### -->
-    <header class="header-area">
+    <header class="header-area" style="background-color: black;">
         <!-- Navbar Area -->
         <div class="oneMusic-main-menu">
             <div class="classy-nav-container breakpoint-off">
@@ -131,7 +131,8 @@
                         <h3>Create Album</h3>
                         <!-- Login Form -->
                         <div class="login-form">
-                            <form action="#" method="post">
+                            <form action="{% url 'marmut_album:insert_album' %}" method="post">
+                                {% csrf_token %}
                                 <div class="form-group" style="margin-bottom: 20px;">
                                     <h5 for="judul">Judul:</h5>
                                     <div class="contact-form-area">
@@ -141,13 +142,10 @@
                                 <div class="form-group">
                                     <h5 for="label">Label:</h5>
                                     <div class="contact-form-area">
-                                        <select class="form-control" id="label" name="label" required>
-                                            <!-- Option 1: Hardcoded Options -->
-                                            <option value="label1">Label 1</option>
-                                            <option value="label2">Label 2</option>
-                                            <option value="label3">Label 3</option>
-                                            <!-- Option 2: Populate from Database (if available) -->
-                                            <!-- <option value="label_id">Label Name</option> -->
+                                        <select class="form-control" id="label" name="label">
+                                            {% for label in labels %}
+                                                <option value="{{ label.0 }}">{{ label.1 }}</option>
+                                            {% endfor %}
                                         </select>
                                     </div>
                                 </div>
