@@ -241,24 +241,30 @@
                 <div class="col-12 col-lg-8">
                     <div class="song-detail-content">
                         <!-- Tidak menampilkan judul dan artist -->
-                        <h5>Judul: Song1</h2>
-                        <h5>Genre(s):</h3>
                         <ul>
-                            <li>Genre1</li>
-                            <li>Genre2</li>
+                            <li>Judul: {{ song_data.Judul }}</li>
+                            <li>Genre(s):
+                                <ul>
+                                    {% for genre in song_data.Genre %}
+                                        <li>{{ genre }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li>Artist: {{ song_data.Artist }}</li>
+                            <li>Songwriter(s):
+                                <ul>
+                                    {% for songwriter in song_data.Songwriter %}
+                                        <li>{{ songwriter }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li>Durasi: {{ song_data.Durasi }}</li>
+                            <li>Tanggal Rilis: {{ song_data.Tanggal_Rilis }}</li>
+                            <li>Tahun: {{ song_data.Tahun }}</li>
+                            <li>Total Play: {{ song_data.Total_Play }}</li>
+                            <li>Total Downloads: {{ song_data.Total_Downloads }}</li>
+                            <li>Album: {{ song_data.Album }}</li>
                         </ul>
-                        <h5>Artist: Artist1</h3>
-                        <53>Songwriter(s):</h3>
-                        <ul>
-                            <li>Songwriter1</li>
-                            <li>Songwriter2</li>
-                        </ul>
-                        <h5>Durasi: 3 menit</h3>
-                        <h5>Tanggal Rilis: 18/03/24</h3>
-                        <h5>Tahun: 2024</h3>
-                        <h5>Total Play: 0</h3>
-                        <h5>Total Downloads: 0</h3>
-                        <h5>Album: Album1</h3>
                         <div class="separator">
                             <hr>
                             <span>▬▬▬▬▬▬▬▬▬▬▬▬⚫-----------------------------------------</span>

@@ -124,12 +124,12 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
                     <div class="user-playlist-detail-content mb-50">
-                        <p><strong>Judul:</strong> {{ playlist_detail.judul }}</p>
-                        <p><strong>Pembuat:</strong> {{ playlist_detail.pembuat }}</p>
-                        <p><strong>Jumlah Lagu:</strong> {{ playlist_detail.jumlah_lagu }}</p>
-                        <p><strong>Total Durasi:</strong> {{ playlist_detail.total_durasi }}</p>
-                        <p><strong>Tanggal Dibuat:</strong> {{ playlist_detail.tanggal_dibuat }}</p>
-                        <p><strong>Deskripsi:</strong> {{ playlist_detail.deskripsi }}</p>
+                        <p><strong>Judul:</strong> Playlist1</p>
+                        <p><strong>Pembuat:</strong> Pembuat1</p>
+                        <p><strong>Jumlah Lagu:</strong> 12</p>
+                        <p><strong>Total Durasi:</strong> 8 jam 20 menit</p>
+                        <p><strong>Tanggal Dibuat:</strong> 18/03/24</p>
+                        <p><strong>Deskripsi:</strong> Lorem Ipsum ….</p>
                         <button class="btn btn-primary">Shuffle Play</button>
                         <button class="btn btn-primary">Kembali</button>
                     </div>
@@ -147,17 +147,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for song in songs %}
-                                    <tr>
-                                        <td>{{ song.judul }}</td>
-                                        <td>{{ song.oleh }}</td>
-                                        <td>{{ song.durasi }}</td>
-                                        <td class="action-column">
-                                            <button class="btn btn-primary" onclick="playSong('{{ song.judul }}')">Play</button>
-                                            <button class="btn btn-secondary" onclick="viewSong('{{ song.judul }}')">Lihat</button>
-                                        </td>
-                                    </tr>
-                                {% endfor %}
+                                <tr>
+                                    <td>Song1</td>
+                                    <td>Artist1</td>
+                                    <td>2 menit</td>
+                                    <td class="action-column">
+                                        <button class="btn btn-secondary" onclick="viewSong('Song1')">Lihat</button>
+                                        <button class="btn btn-primary" onclick="playSong('Song1')">Play</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Song2</td>
+                                    <td>Artist2</td>
+                                    <td>3 menit</td>
+                                    <td class="action-column">
+                                        <button class="btn btn-secondary" onclick="viewSong('Song2')">Lihat</button>
+                                        <button class="btn btn-primary" onclick="playSong('Song2')">Play</button>
+                                    </td>
+                                </tr>
+                                <!-- Tambahkan lagu lainnya di sini -->
                             </tbody>
                         </table>
                     </div>
