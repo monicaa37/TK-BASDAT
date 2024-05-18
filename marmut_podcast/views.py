@@ -66,7 +66,7 @@ def delete_podcast(request, type):
 
         except Exception as e:
             connection.rollback()
-            return HttpResponse('Terjadi kesalahan saat menghapus data dari database: {}'.format(str(e)))
+            return HttpResponse('Podcast tidak berhasil di delete karena terdapat episode, hapuslah episode terlebih dahulu!')
     else:
         return HttpResponseNotAllowed(['POST'])
 
@@ -105,42 +105,37 @@ def play_podcast(request, type):
     with connection.cursor() as cursor:
         # Query to fetch podcast details
         cursor.execute("""
-            SELECT 
-                K.judul AS podcast_title,
-                STRING_AGG(G.genre, ', ') AS genres,
-                A.nama AS podcaster_name,
-                SUM(E.durasi) AS total_duration,
-                K.tanggal_rilis AS release_date,
-                EXTRACT(YEAR FROM K.tanggal_rilis) AS release_year
-            FROM 
-                KONTEN K
-            JOIN 
-                PODCAST P ON K.id = P.id_konten
-            JOIN 
-                PODCASTER PD ON P.email_podcaster = PD.email
-            JOIN 
-                EPISODE E ON P.id_konten = E.id_konten_podcast
-            JOIN 
-                GENRE G ON K.id = G.id_konten
-            JOIN 
-                AKUN A ON PD.email = A.email
-            WHERE 
-                K.id = %s
-            GROUP BY 
-                K.judul, A.nama, K.tanggal_rilis
+            SELECT K.judul, A.nama, K.durasi, K.tanggal_rilis, K.tahun
+            FROM KONTEN K
+            JOIN PODCAST P ON K.id = P.id_konten
+            JOIN AKUN A ON A.email = P.email_podcaster
+            WHERE K.ID = %s
         """, [id_konten])
         
         row = cursor.fetchone()
         if row:
             podcast_detail = {
                 'podcast_title': row[0],
-                'genres': row[1].split(', '),  # Split genres into a list
-                'podcaster_name': row[2],
-                'total_duration': row[3],
-                'release_date': row[4].strftime('%Y-%m-%d'),  # Format date as string
-                'release_year': row[5]
+                'podcaster_name': row[1],
+                'total_duration': row[2],
+                'release_date': row[3].strftime('%Y-%m-%d'),  # Format date as string
+                'release_year': row[4]
             }
-            genres_list = podcast_detail['genres']
+
+        cursor.execute("""
+            SELECT G.GENRE
+            FROM KONTEN K
+            JOIN GENRE G ON G.id_konten = K.id
+            WHERE K.ID = %s
+        """, [id_konten])
+
+        genre = cursor.fetchall()
+
+        string = ""
+        for row in genre:
+            string += row[0] + ", "
+        
+        genres_list = string[:-2]
     
     # Eksekusi query SQL
     with connection.cursor() as cursor:

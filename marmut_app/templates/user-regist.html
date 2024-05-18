@@ -73,6 +73,12 @@
     </section>
     <!-- ##### Breadcumb Area End ##### -->
 
+    {% if error_message %}
+    <div class="alert alert-danger">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
     <!-- ##### Login Area Start ##### -->
     <section class="login-area section-padding-100">
         <div class="container">
@@ -140,7 +146,6 @@
         </div>
     </section>
     <!-- ##### Login Area End ##### -->
-
 
 
     <!-- ##### All Javascript Script ##### -->
