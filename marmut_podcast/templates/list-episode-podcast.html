@@ -66,48 +66,32 @@
                                             <button type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </li>
-
-                                    {% if request.COOKIES.role == 'podcaster' %}
-                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
-                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
-                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
-                                        <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
-                                        <li><a href="#">Premium Plan</a>
-                                        <li><a href="{% url 'auth:logout' %}" id="loginBtn">Logout</a></li>
-                                    {% endif %}
-
-                                    {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
-                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
-                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
-                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
-                                        <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
-                                        <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
-                                        <li><a href="#">Premium Plan</a></li>
-                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
-                                    {% endif %}
-
-                                    {% if request.COOKIES.role == 'premium' %}
-                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
-                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
-                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
-                                        <li><a href="#">Premium Plan</a>
-                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
-                                    {% endif %}
-
-                                    {% if request.COOKIES.role == 'biasa' %}
-                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
-                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
-                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
-                                        <li><a href="#">Premium Plan</a>
-                                        <li><a href="{% url 'auth:logout' %}">Logout</a>
-                                    {% endif %}
+                                    <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
 
                                     {% if request.COOKIES.role == 'label' %}
-                                        <li><a href="{% url 'marmut_app:show_dashboard' %}">Dashboard</a></li>
                                         <li><a href="{% url 'marmut_album:show_kelola_album_label' %}">Manage Album</a>
                                         <li><a href="{% url 'marmut_album:show_cek_royalti_label' %}">Royalti</a>
-                                        <li><a href="{% url 'auth:logout' %}">Logout</a></li>
+                                    {% else %}
+                                        <li><a href="{% url 'marmut_podcast:show_top_charts' %}">Chart</a>
+                                        <li><a href="{% url 'marmut_playlist:kelola-playlist' %}">Manage Playlist</a></li>
+
+                                        {% if 'podcaster' in request.COOKIES.role %}
+                                            <li><a href="{% url 'marmut_podcast:show_list_podcast'%}">Manage Podcast</a>
+                                        {% endif %}
+
+                                        {% if request.COOKIES.role == 'artist' or request.COOKIES.role == 'songwriter' %}
+                                            <li><a href="{% url 'marmut_album:show_kelola_album_artis_sw' %}">Manage Song & Album</a>
+                                            <li><a href="{% url 'marmut_album:show_cek_royalti_artis_sw' %}">Royalti</a>
+                                        {% endif %}
+
+                                        {% if 'premium' in request.COOKIES.role %}
+                                            <li><a href="#">Manage Downloaded Songs</a>
+                                        {% else %}
+                                            <li><a href="#">Premium Plan</a>
+                                        {% endif %}
                                     {% endif %}
+
+                                    <li><a href="{% url 'auth:logout' %}">Logout</a></li>
 
                                 </ul>
                                 </div>

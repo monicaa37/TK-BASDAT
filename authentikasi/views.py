@@ -83,6 +83,7 @@ def login(request):
                 roles.append('biasa')
             sleep(1)
             response.set_cookie('role', ', '.join(roles))
+            print(request.COOKIES.get('role'))
             return response
 
         elif label:
