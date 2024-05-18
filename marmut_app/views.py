@@ -16,9 +16,10 @@ def insert_label(request):
             try:
                 cursor.execute("INSERT INTO LABEL (id, nama, email, password, kontak, id_pemilik_hak_cipta) VALUES (%s, %s, %s, %s, %s, NULL)", [id, nama, email, password, kontak])
             except Exception as e:
-                return HttpResponse("Error: {}".format(str(e)))
+                error_message = f"Registration failed ! Check your data"
+                return render(request, 'label-regist.html', {'error_message': error_message})
 
-        return HttpResponse("Label successfully registered.")
+        return render(request, 'auth_login.html')
     else:
         return HttpResponse("Invalid request method.")
     
@@ -60,13 +61,12 @@ def register(request):
                                 VALUES (%s, %s, NULL)
                             """, [songwriter_id, email])
 
-            return redirect('marmut_podcast:show_list_podcast')
+            return render(request, 'auth_login.html')
         except Exception as e:
-            print("Error:", e)
-            # Handle error, for example, show an error message
-            return render(request, 'user-regist.html', {'error_message': 'Registration failed, please try again.'})
+            error_message = f"Registration failed ! Check your data"
+            return render(request, 'user-regist.html', {'error_message': error_message})
 
-    return HttpResponse("User successfully registered.")
+    return render(request, 'auth_login.html')
 
 
 # Create your views here.
