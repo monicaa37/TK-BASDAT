@@ -14,4 +14,5 @@ urlpatterns = [
     path('delete-album/<type>/', delete_album, name='delete_album'),
     path('insert-album/', insert_album, name='insert_album'),
     path('insert-song/', insert_song, name='insert_song'),
+    path('delete-song/<type>/', delete_song, name='delete_song'),
 ]

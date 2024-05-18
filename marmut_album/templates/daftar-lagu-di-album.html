@@ -139,8 +139,14 @@
                             <td>{{ song.2 }}</td>
                             <td>{{ song.3 }}</td>
                             <td>
-                                <button class="btn button-primary" preload="auto" style="margin-bottom: 3px; font-weight: 500;">Lihat Detail</button>
-                                <button class="btn button-primary" preload="auto" style="font-weight: 500;">Hapus</button>
+                                <form method="post" action="{% url 'marmut_playlist:detail-song' song.4 %}">
+                                    {% csrf_token %}
+                                    <button class="btn button-primary" preload="auto" style="font-weight: 500; margin-bottom: 5px;">Lihat Detail</button>
+                                </form>
+                                <form method="post" action="{% url 'marmut_album:delete_song' song.4 %}">
+                                    {% csrf_token %}
+                                    <button class="btn button-primary" preload="auto" style="font-weight: 500;">Hapus</button>
+                                </form>
                             </td>
                         </tr>
                         {% endfor %}

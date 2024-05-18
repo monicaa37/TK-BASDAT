@@ -88,7 +88,8 @@ def show_lagu_di_album(request, type):
         SELECT K.judul AS "Judul Lagu",
                K.durasi AS "Durasi Lagu",
                S.total_play AS "Total Play",
-               S.total_download AS "Total Download"
+               S.total_download AS "Total Download",
+               K.id AS "ID Lagu"
         FROM KONTEN K
         JOIN SONG S ON K.id = S.id_konten
         JOIN ALBUM A ON S.id_album = A.id
@@ -232,6 +233,28 @@ def delete_album(request, type):
                 connection.commit()
             
             return redirect('marmut_album:show_kelola_album_label',)
+
+        except Exception as e:
+            connection.rollback()
+            return HttpResponse('Terjadi kesalahan saat menghapus data dari database: {}'.format(str(e)))
+    else:
+        return HttpResponseNotAllowed(['POST'])
+
+
+@csrf_exempt
+def delete_song(request, type):
+    id_lagu = type
+    if request.method == 'POST':
+        try:
+            # Delete the podcast and cascade delete episodes
+            with connection.cursor() as cursor:
+                cursor.execute("DELETE FROM SONGWRITER_WRITE_SONG WHERE id_song = %s", [id_lagu])
+                cursor.execute("DELETE FROM GENRE WHERE id_konten = %s", [id_lagu])
+                cursor.execute("DELETE FROM SONG WHERE id_konten = %s", [id_lagu])
+                cursor.execute("DELETE FROM KONTEN WHERE id = %s", [id_lagu])
+                connection.commit()
+            
+            return redirect('marmut_album:show_kelola_album_artis_sw',)
 
         except Exception as e:
             connection.rollback()
